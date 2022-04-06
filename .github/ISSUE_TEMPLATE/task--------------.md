@@ -2,7 +2,7 @@
 name: Task 이슈카드 마크다운 템플릿
 about: Task Issue Card
 title: ''
-labels: copy&paste
+labels: 
 assignees: ''
 
 ---
