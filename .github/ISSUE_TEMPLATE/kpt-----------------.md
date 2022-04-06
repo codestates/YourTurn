@@ -2,7 +2,7 @@
 name: KPT 회고 이슈카드 마크다운 템플릿
 about: KPT
 title: ''
-labels: copy&paste, retrospect
+labels: retrospect
 assignees: ''
 
 ---
