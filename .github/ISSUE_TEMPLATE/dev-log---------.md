@@ -2,7 +2,7 @@
 name: Dev-Log 마크다운 템플릿
 about: Dev-log
 title: ''
-labels: copy&paste, dev-log
+labels: dev-log
 assignees: ''
 
 ---
