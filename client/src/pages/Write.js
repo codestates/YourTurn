@@ -2,13 +2,13 @@ import React from "react";
 import "../App.css";
 import Navbar from "../components/Navbar";
 
-function Signup() {
+function Write() {
   return (
     <div>
       <Navbar />
-      <h1>Signup</h1>
+      <h1>Write</h1>
     </div>
   );
 }
 
-export default Signup;
+export default Write;
