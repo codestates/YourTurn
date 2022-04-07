@@ -2,7 +2,7 @@
 name: KPT 회고 템플릿
 about: KPT
 title: ''
-labels: ''
+labels: retrospect
 assignees: ''
 
 ---

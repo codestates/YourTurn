@@ -2,7 +2,7 @@
 name: Task 이슈카드 템플릿
 about: Task
 title: ''
-labels: ''
+labels: backend, frontend, In Progress
 assignees: ''
 
 ---
@@ -16,7 +16,7 @@ assignees: ''
 - [ ] Job1
 
 ### Estimated time
-
+>시간을 수정하세요 
 `0.5h`
 
 ### Labels

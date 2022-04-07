@@ -2,7 +2,7 @@
 name: Dev-Log 템플릿
 about: 'Dev-Log '
 title: ''
-labels: ''
+labels: dev-log
 assignees: ''
 
 ---
