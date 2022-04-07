@@ -1,0 +1,33 @@
+{
+  "name": "yourturn",
+  "version": "1.0.0",
+  "description": "- 면접 기출 질문은 많고 모든 답변을 다 준비하기는 어려운가요?  - 토익스피킹 답변 아이디어가 고갈되었나요? <br><br>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codestates/YourTurn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codestates/YourTurn/issues"
+  },
+  "homepage": "https://github.com/codestates/YourTurn#readme",
+  "devDependencies": {
+    "axios": "^0.26.1",
+    "cookie-parser": "^1.4.6",
+    "eslint": "^8.12.0",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.2",
+    "react": "^18.0.0",
+    "sequelize": "^6.18.0",
+    "sequelize-cli": "^6.4.1"
+  }
+}
