@@ -1,28 +1,31 @@
-require('dotenv').config();
-const { sign, verify } = require('jsonwebtoken');
+require("dotenv").config();
+const { sign, verify } = require("jsonwebtoken");
 
 module.exports = {
-  generateAccessToken: data => {
-    // Access token으로 sign합니다. / 토큰을 리턴
-    return sign(data, process.env.ACCESS_SECRET, { expiresIn: '1h' });
+  generateAccessToken: (data) => {
+    // Access token으로 sign / 토큰을 리턴 (공식 문서의 Synchronous한 방법)
+    return sign(data, process.env.ACCESS_SECRET, { expiresIn: "30s" });
   },
   sendAccessToken: (res, accessToken) => {
-    // JWT 토큰을 쿠키로 전달합니다.
-    res.cookie('jwt', accessToken, {
-      httpOnly: true,
-    });
+    // JWT 토큰을 쿠키로 전달
+    return res
+      .status(200)
+      .cookie("jwt", accessToken, { httpOnly: true, secure: true, sameSite: "none" })
+      .json({ data: { accessToken }, message: "ok" });
   },
-  isAuthorized: req => {
-    // JWT 토큰 정보를 받아서 검증합니다.
+  isAuthorized: (req) => {
+    // JWT 토큰 정보를 받아서 검증
+    const authorization = req.headers.cookie;
 
-    // console.log('req.cookies.jwt---------', req.cookies.jwt);
-    const token = req.cookies.jwt;
+    if (!authorization) {
+      return null;
+    }
+    const token = authorization.split(";")[0].split("=")[1];
+
     try {
-      const decoded = verify(token, process.env.ACCESS_SECRET);
-      // console.log('decoded.email------------', decoded.email);
-      return { userInfo: decoded.email };
+      return verify(token, process.env.ACCESS_SECRET);
     } catch (err) {
-      console.log('err----------', err);
+      console.log(err);
     }
   },
 };

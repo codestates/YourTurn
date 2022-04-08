@@ -1,15 +1,16 @@
-const { user } = require('../../models');
-const { isAuthorized } = require('../tokenFunctions');
+const { user } = require("../../models");
+const { isAuthorized } = require("../tokenFunctions");
 
 module.exports = (req, res) => {
-    const accessTokenData = isAuthorized(req);
-    console.log('accessTokenData-----------', accessTokenData);
-    if (!accessTokenData) {
-        res.status(401).send({ data: null, message: 'not authorized' });
-    } else {
-        res.status(200).send({
-            data: accessTokenData,
-            message: 'auth success',
-        });
-    }
+  const accessTokenData = isAuthorized(req);
+  // TODO: 로그인 여부를 판단하고, Access token payload를 이용하여 응답을 제공하세요.
+  console.log("accessTokenData-----------", accessTokenData);
+  if (!accessTokenData) {
+    res.status(401).send({ data: null, message: "not authorized" });
+  } else {
+    res.status(200).send({
+      data: accessTokenData,
+      message: "auth success",
+    });
+  }
 };
