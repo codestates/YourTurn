@@ -27,7 +27,7 @@ export default function Modal({ open, children, onClose }) {
       <div style={OVERLAY_STYLES} />
       <div style={MODAL_STYLES}>
         <button className="close-button" onClick={onClose}>
-          아이디가 있으신가요?
+          &times;
         </button>
         {children}
       </div>

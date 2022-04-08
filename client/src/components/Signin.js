@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 
-function Signin() {
+function Signin({ onClose }) {
   return (
     <Fragment>
       <div>
@@ -17,12 +17,16 @@ function Signin() {
               <span>비밀번호</span>
               <input type="password" />
             </div>
-            <div>
+            <div onClick={onClose}>
               <Link to="/signup">아직 아이디가 없으신가요?</Link>
             </div>
-            <button className="btn btn-login" type="submit">
-              로그인
-            </button>
+            <div>
+              <Link to="/">
+                <button className="btn btn-login" type="submit" onClick={onClose}>
+                  로그인
+                </button>
+              </Link>
+            </div>
             <div className="alert-box"></div>
           </form>
         </center>

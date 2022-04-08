@@ -30,7 +30,7 @@ function Navbar() {
             로그인
           </button>
           <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-            <Signin />
+            <Signin onClose={() => setIsOpen(false)} />
           </Modal>
         </li>
       </ul>
