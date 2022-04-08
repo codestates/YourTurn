@@ -1,4 +1,3 @@
-
 "use strict";
 
 module.exports = {
@@ -8,23 +7,23 @@ module.exports = {
       [
         {
           id: 1,
-          name: "React"
+          interest_name: "React",
         },
         {
           id: 2,
-          name: "Javascript"
+          interest_name: "Javascript",
         },
         {
           id: 3,
-          name: "node js"
+          interest_name: "node js",
         },
         {
           id: 4,
-          name: "AWS"
+          interest_name: "AWS",
         },
         {
           id: 5,
-          name: "mysql"
+          interest_name: "mysql",
         },
       ],
       {}
