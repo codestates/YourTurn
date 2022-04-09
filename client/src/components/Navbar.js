@@ -1,41 +1,76 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "../App.css";
-import Modal from "./Modal";
-import Signin from "./Signin";
+import React from "react";
+import { Link } from "react-router-dom"
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
 
-  const BUTTON_WRAPPER_STYLES = {
-    position: "relative",
-    zIndex: 1,
-  };
+const Nav = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index:500;
+  width:100%;
+  background-color: yellow ;
+`
+const LogoWrap = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  `
+
+const Logo = styled.div`
+  margin: 15px;
+`
+
+const MenuWrap = styled.div`
+  display: flex;
+  justify-content: space-around ;
+  width: 30%;
+`
+
+
+const Menu = styled.button`
+  border: none;
+  background-color: transparent;
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  cursor: pointer;
+`
+
+const Navbar = ({isLogin, setShowModal})=> {
+
+  const navigate = useNavigate();
+
+  const changePageToWrite = () => {
+    if(isLogin){
+      navigate("/write");
+    }else{
+      setShowModal(true);
+    }
+  }
+
+  const changePageToMypage = () => {
+    navigate("/mypage");
+  }
+ 
   return (
-    <nav>
-      <Link to="/">
-        <h3>YourTurn</h3>
-      </Link>
-      <ul>
-        <Link to="/write">
-          <li>새 글 쓰기</li>
-        </Link>
-
-        <li style={BUTTON_WRAPPER_STYLES}>
-          <button
-            onClick={() => {
-              setIsOpen(true);
-            }}
-          >
-            로그인
-          </button>
-          <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-            <Signin />
-          </Modal>
-        </li>
-      </ul>
-    </nav>
+    <Nav>
+      <LogoWrap to="/">
+        <Logo>
+          YourTurn
+        </Logo>
+        </LogoWrap>
+        <MenuWrap>
+          <Menu onClick={changePageToWrite}>새 글 쓰기</Menu>
+          {isLogin ? <Menu onClick={changePageToMypage}>마이페이지</Menu>:
+          <Menu onClick={()=>{setShowModal(true)}}>로그인</Menu> } 
+        </MenuWrap>
+    </Nav>
   );
 }
+  
 
 export default Navbar;
