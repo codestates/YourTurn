@@ -14,7 +14,7 @@ function Home() {
     <>
       <div style={OTHER_CONTENT_STYLES}>소개글</div>
       <div style={OTHER_CONTENT_STYLES}>
-        <Link to="/group">그룹 목록</Link>
+        <Link to="/team">그룹 목록</Link>
       </div>
     </>
   );

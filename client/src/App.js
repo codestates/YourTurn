@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import "./App.css";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Write from "./pages/Write";
-import Group from "./pages/Group";
+import Team from "./pages/Team";
 import MyPost from "./pages/MyPost";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
@@ -56,7 +56,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/write" element={isLogin ? <Write /> : <SigninModal />} />
-          <Route path="/group" element={isLogin ? <Group /> : <SigninModal />} />
+          <Route path="/Team" element={isLogin ? <Team /> : <SigninModal />} />
           <Route path="/mypost" element={<MyPost />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<Profile />} />
