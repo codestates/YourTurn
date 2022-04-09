@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import "../App.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
-function Signin({ onClose, handleResponseSuccess }) {
+// function Signin({ onClose, handleResponseSuccess }) {
+function Signin({setShowModal}) {
+    console.log("check");
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -13,27 +14,33 @@ function Signin({ onClose, handleResponseSuccess }) {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
   const handleLogin = async () => {
-    const { email, password } = loginInfo;
+    // const { email, password } = loginInfo;
 
     if (Object.values(loginInfo).includes("")) {
       setErrorMessage("이메일과 비밀번호를 입력하세요");
       return;
     }
 
-    await axios
-      .post(
-        "https://localhost:4000/signin",
-        { email, password },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      )
-      .then(() => {
-        handleResponseSuccess();
-      })
-      .catch((err) => console.log(err));
+    // await axios
+    //   .post(
+    //     "https://localhost:4000/signin",
+    //     { email, password },
+    //     {
+    //       headers: { "Content-Type": "application/json" },
+    //       withCredentials: true,
+    //     }
+    //   )
+    //   .then(() => {
+    //     handleResponseSuccess();
+    //   })
+    //   .catch((err) => console.log(err));
   };
+
+  const closeModal = () => {
+    console.log("닫힘");
+    setShowModal(false);
+    console.log("여기까지내려오나")
+  }
 
   return (
     <>
@@ -53,7 +60,7 @@ function Signin({ onClose, handleResponseSuccess }) {
                 onChange={handleInputValue("password")}
               />
             </div>
-            <div onClick={onClose}>
+            <div onClick={closeModal}>
               <Link to="/signup">아직 아이디가 없으신가요?</Link>
             </div>
             <div>
