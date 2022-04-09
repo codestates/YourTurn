@@ -15,13 +15,13 @@ module.exports = (sequelize, DataTypes) => {
         through: "user_group",
         foreignKey: "group_id",
       })
-      models.group.hasToMany(models.post, {
+      models.group.hasMany(models.post, {
         foreignKey: "group_id",
         sourceKey: "id"
       })
       models.group.belongsTo(models.interest, {
-        foreignKey: "id",
-        sourceKey: "interest_id"
+        foreignKey: "interest_id",
+        sourceKey: "id"
       })
     }
   }
