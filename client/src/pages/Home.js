@@ -1,19 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
 
 const OTHER_CONTENT_STYLES = {
   position: "relative",
   zIndex: "2",
-  backgroundColor: "pink",
+  backgroundColor: "gray",
   padding: "10px",
 };
 
 function Home() {
   return (
-    <div>
+    <>
       <div style={OTHER_CONTENT_STYLES}>소개글</div>
-      <div style={OTHER_CONTENT_STYLES}>그룹 목록</div>
-    </div>
+      <div style={OTHER_CONTENT_STYLES}>
+        <Link to="/group">그룹 목록</Link>
+      </div>
+    </>
   );
 }
 

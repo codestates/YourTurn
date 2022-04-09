@@ -23,7 +23,7 @@ const OVERLAY_STYLES = {
 export default function Modal({ open, children, onClose }) {
   if (!open) return null;
   return ReactDOM.createPortal(
-    <Fragment>
+    <>
       <div style={OVERLAY_STYLES} />
       <div style={MODAL_STYLES}>
         <button className="close-button" onClick={onClose}>
@@ -31,7 +31,7 @@ export default function Modal({ open, children, onClose }) {
         </button>
         {children}
       </div>
-    </Fragment>,
+    </>,
     document.getElementById("portal")
   );
 }
