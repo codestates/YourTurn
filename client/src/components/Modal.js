@@ -23,15 +23,15 @@ const OVERLAY_STYLES = {
 export default function Modal({ open, children, onClose }) {
   if (!open) return null;
   return ReactDOM.createPortal(
-    <Fragment>
+    <>
       <div style={OVERLAY_STYLES} />
       <div style={MODAL_STYLES}>
         <button className="close-button" onClick={onClose}>
-          아이디가 있으신가요?
+          &times;
         </button>
         {children}
       </div>
-    </Fragment>,
+    </>,
     document.getElementById("portal")
   );
 }

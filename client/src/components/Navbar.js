@@ -1,40 +1,37 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
-import Modal from "./Modal";
-import Signin from "./Signin";
+import SigninModal from "./SigninModal";
 
-function Navbar() {
+function Navbar({ isLogin, handleResponseSuccess }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const BUTTON_WRAPPER_STYLES = {
-    position: "relative",
-    zIndex: 1,
-  };
   return (
-    <nav>
-      <Link to="/">
-        <h3>YourTurn</h3>
-      </Link>
-      <ul>
-        <Link to="/write">
-          <li>새 글 쓰기</li>
+    <>
+      <nav>
+        <Link to="/">
+          <h3>YourTurn</h3>
         </Link>
+        <ul>
+          <Link to="/write">
+            <li>새 글 쓰기</li>
+          </Link>
 
-        <li style={BUTTON_WRAPPER_STYLES}>
-          <button
+          <li
             onClick={() => {
               setIsOpen(true);
             }}
           >
-            로그인
-          </button>
-          <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-            <Signin />
-          </Modal>
-        </li>
-      </ul>
-    </nav>
+            {isLogin ? `nickname` : <button>로그인</button>}
+          </li>
+          <SigninModal
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
+            handleResponseSuccess={handleResponseSuccess}
+          />
+        </ul>
+      </nav>
+    </>
   );
 }
 
