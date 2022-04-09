@@ -1,12 +1,12 @@
 import React from "react";
 import "../App.css";
 
-function Write() {
+function Team() {
   return (
     <div>
-      <h1>Write</h1>
+      <h1>Team</h1>
     </div>
   );
 }
 
-export default Write;
+export default Team;

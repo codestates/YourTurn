@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
   }
 
   const [ data, created ] = await user.findOrCreate({
-    where: { email: email }
+    where: { email: email, password: password, nickname: nickname }
   })
 
   if(!created){
@@ -22,5 +22,6 @@ module.exports = async (req, res) => {
     return res.status(201).cookie('jwt', accessToken).json({ message: 'ok' })
   } catch(err){
     console.log(err)
+
   }
 };

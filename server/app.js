@@ -8,7 +8,6 @@ const app = express();
 
 const controllers = require('./controllers');
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
@@ -19,10 +18,16 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.get('/auth', controllers.auth);
-app.post('/signup', controllers.signup);
-app.post('/signin', controllers.signin);
-app.post('/signout', controllers.signout);
+app.get('/user/auth', controllers.auth);
+app.post('/user/signup', controllers.signup);
+app.post('/user/signin', controllers.signin);
+app.post('/user/signout', controllers.signout);
+app.get('/user/profile', controllers.profile);
+app.patch('/user/profile', controllers.profile);
+app.get('/user/mygroup', controllers.mygroup);
+app.post('/group/write', controllers.write);
+app.get('/group/main', controllers.main);
+app.get('/group/article', controllers.article);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
@@ -36,9 +41,8 @@ if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
   const credentials = { key: privateKey, cert: certificate };
 
   server = https.createServer(credentials, app);
-  server.listen(HTTPS_PORT, () => console.log('https server runnning' + `listening on port ${HTTPS_PORT}`));
+  server.listen(HTTPS_PORT, () => console.log('https server runnning'));
 } else {
   server = app.listen(HTTPS_PORT, () => console.log('http server runnning'));
 }
-
 module.exports = server;
