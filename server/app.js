@@ -13,8 +13,7 @@ const profileRouter = require("./router/profile");
 const signinRouter = require("./router/signin");
 const signoutRouter = require("./router/signout");
 const signupRouter = require("./router/signup");
-
-const controllers = require("./controllers");
+const teamMainRouter = require("./router/main");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -26,12 +25,13 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use("/auth", authRouter);
-app.use("/mypost", mypostRouter);
-app.use("/profile", profileRouter);
-app.use("/signin", signinRouter);
-app.use("/signout", signoutRouter);
-app.use("/signup", signupRouter);
+app.use("/user/auth", authRouter);
+app.use("/user/mypost", mypostRouter);
+app.use("/user/profile", profileRouter);
+app.use("/user/signin", signinRouter);
+app.use("/user/signout", signoutRouter);
+app.use("/user/signup", signupRouter);
+app.use("/team/main", teamMainRouter);
 
 // getUser updateNickname
 // app.get("/profile", controllers.getUser);
