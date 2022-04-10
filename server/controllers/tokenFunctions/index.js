@@ -11,8 +11,6 @@ module.exports = {
   sendAccessToken: (res, accessToken) => {
     // TODO: JWT 토큰을 쿠키로 전달합니다.
     return res.status(200).cookie('jwt', accessToken, { httpOnly: true, secure: true, sameSite: 'none'}).json({ data: { accessToken }, message: 'ok'})
-
-
   },
   isAuthorized: (req) => {
     // TODO: JWT 토큰 정보를 받아서 검증합니다.

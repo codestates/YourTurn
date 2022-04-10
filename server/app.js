@@ -18,16 +18,18 @@ app.use(
   })
 );
 app.use(cookieParser());
+app.get('/', (req, res) => {
+  res.status(200).send('hello world')
+})
 app.get('/user/auth', controllers.auth);
 app.post('/user/signup', controllers.signup);
 app.post('/user/signin', controllers.signin);
 app.post('/user/signout', controllers.signout);
 app.get('/user/profile', controllers.profile);
 app.patch('/user/profile', controllers.profile);
-app.get('/user/mygroup', controllers.mygroup);
-app.post('/group/write', controllers.write);
-app.get('/group/main', controllers.main);
-app.get('/group/article', controllers.article);
+app.post('/team/write', controllers.write);
+app.get('/team/main', controllers.main);
+app.get('/team/article', controllers.article);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 

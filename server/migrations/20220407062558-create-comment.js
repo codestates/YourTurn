@@ -1,17 +1,20 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('groups', {
+    await queryInterface.createTable('comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      group_name: {
-        type: Sequelize.STRING
+      post_id: {
+        type: Sequelize.INTEGER
       },
-      group_description: {
+      user_id: {
+        type: Sequelize.INTEGER
+      },
+      content: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -25,6 +28,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('groups');
+    await queryInterface.dropTable('comments');
   }
 };
