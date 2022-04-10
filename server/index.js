@@ -22,6 +22,9 @@ app.get("/auth", controllers.auth);
 app.post("/signup", controllers.signup);
 app.post("/signin", controllers.signin);
 app.post("/signout", controllers.signout);
+// getUser updateNickname
+app.get("/profile", controllers.getUser);
+app.patch("/profile", controllers.updateNickname);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
