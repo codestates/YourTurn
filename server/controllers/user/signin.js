@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     where: { email: req.body.email, password: req.body.password },
   });
   if (!userInfo) {
-    res.status(404).send("Invalid user or Wrong password");
+    return res.status(404).send("Invalid user or Wrong password");
   }
   try {
     const { email, password } = userInfo;
