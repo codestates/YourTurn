@@ -50,6 +50,7 @@ const TeamInfo = styled.div`
   border-radius: 20px ;
   margin:40px;
   padding: 32px;
+  cursor: pointer;
 `
 const InterestWrap = styled.div`
   display: flex;
@@ -145,7 +146,6 @@ function Home({isLogin , setShowModal}) {
   ]
 
     
-  const randomTeam = teamData.slice(0,3);
 
   const navigate = useNavigate();
   const changePageToTeam = (el) => {
@@ -176,7 +176,7 @@ function Home({isLogin , setShowModal}) {
       })}</Interest>
 
       <TeamWrap>
-        {randomTeam.map((el, i)=> {
+        {teamData.map((el, i)=> {
           return <TeamInfo onClick={()=> {changePageToTeam(el)}}  key={i}>
            <div>{el.name}</div>
            <div>{el.desc}</div> 

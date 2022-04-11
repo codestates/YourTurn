@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: 0,
       },
       user_id: DataTypes.INTEGER,
-      group_id: DataTypes.INTEGER,
+      team_id: DataTypes.INTEGER,
     },
     {
       sequelize,

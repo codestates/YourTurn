@@ -1,4 +1,4 @@
 module.exports = (req, res) => {
-  // 로그아웃 로직을 작성합니다.
-  res.status(205).send("Logged out successfully");
+  // 로그아웃 로직
+  res.status(205).cookie("jwt", null).send("Logged out successfully");
 };
