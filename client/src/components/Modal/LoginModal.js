@@ -39,18 +39,25 @@ const CloseButton = styled.div`
  display: flex;
  width: 100%;
  cursor: pointer;
+ border: 1px solid red;
 `
 const Icon = styled.i`
   margin: 10px;
   padding: 10px;
 `
 
+
 const LoginModal = ({showModal, setShowModal}) => {
+
+  const test = () => {
+    setShowModal(false);
+  }
+
   return(
     <ModalContiaer showModal={showModal}>
     <ModalBackdrop>
       <ModalView>
-        <CloseButton onClick={()=>{setShowModal(false)}}>
+        <CloseButton onClick={test}>
           <Icon className="fa-solid fa-xmark"></Icon>
         </CloseButton>
         <Signin setShowModal={setShowModal}/>
