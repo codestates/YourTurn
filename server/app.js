@@ -13,7 +13,7 @@ const profileRouter = require("./router/profile");
 const signinRouter = require("./router/signin");
 const signoutRouter = require("./router/signout");
 const signupRouter = require("./router/signup");
-const teamMainRouter = require("./router/main");
+const teamRouter = require("./router/team");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -31,11 +31,7 @@ app.use("/user/profile", profileRouter);
 app.use("/user/signin", signinRouter);
 app.use("/user/signout", signoutRouter);
 app.use("/user/signup", signupRouter);
-app.use("/team/main", teamMainRouter);
-
-// getUser updateNickname
-// app.get("/profile", controllers.getUser);
-// app.patch("/profile", controllers.updateNickname);
+app.use("/team/", teamRouter);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
