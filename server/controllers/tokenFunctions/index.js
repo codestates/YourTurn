@@ -4,7 +4,7 @@ const { sign, verify } = require("jsonwebtoken");
 module.exports = {
   generateAccessToken: (data) => {
     // Access token으로 sign / 토큰을 리턴 (공식 문서의 Synchronous한 방법)
-    return sign(data, process.env.ACCESS_SECRET, { expiresIn: "30s" });
+    return sign(data, process.env.ACCESS_SECRET, { expiresIn: "1h" });
   },
   sendAccessToken: (res, accessToken) => {
     // JWT 토큰을 쿠키로 전달
