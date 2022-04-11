@@ -1,6 +1,5 @@
 const express = require("express");
 const teamController = require("../controllers/team");
-const authController = require("../controllers/user/auth");
 const isAuth = require("../middleware/verifyToken");
 const router = express.Router();
 
@@ -9,5 +8,6 @@ const router = express.Router();
 
 router.get("/:id", isAuth, teamController.getTeamMain);
 router.get("/article/:id", isAuth, teamController.getArticle);
+router.post("/write-article", isAuth, teamController.getArticle);
 
 module.exports = router;

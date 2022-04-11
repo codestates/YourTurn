@@ -47,4 +47,16 @@ module.exports = {
       res.status(500).send("Internal Server Error");
     }
   },
+  writeArticle: async (req, res) => {
+    const { title, content } = req.body;
+    try {
+      const writedArticle = await post.create({
+        title: title,
+        content: content,
+      });
+      return res.status(201).json({ articleInfo: writedArticle });
+    } catch (err) {
+      res.status(500).send("Internal Server Error");
+    }
+  },
 };
