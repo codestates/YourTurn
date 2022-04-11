@@ -2,6 +2,6 @@ const express = require("express");
 const mypostController = require("../controllers/user/mypost");
 const router = express.Router();
 
-router.get("/", mypostController);
+router.get("/:id", mypostController);
 
 module.exports = router;
