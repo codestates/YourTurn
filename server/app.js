@@ -18,6 +18,19 @@ const teamRouter = require("./router/team");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(
+  cors({
+    origin: true,
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
+    credentials: true,
+    cookie: {
+      maxAge: 24 * 6 * 60 * 10000,
+      httpOnly: false,
+      secure: true,
+      sameSite: "None",
+    },
+  })
+);
 app.use(cookieParser());
 app.use("/user/auth", authRouter);
 app.use("/user/mypost", mypostRouter);
