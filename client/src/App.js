@@ -7,19 +7,27 @@ import Team from "./pages/Team";
 import GlobalStyles from "./GlobalStyles";
 import LoginModal from "./components/Modal/LoginModal";
 import Signup from "./pages/Signup";
+import Profile from "./pages/Profile"
+import MyPageModal from "./components/Modal/MyPageModal";
+import MyArticle from "./pages/MyArticle"
 
 const App = () => {
-  const [isLogin, setIsLogin] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showMyModal, setShowMyModal] = useState(true);
   const [entry, setEntry] = useState("");
   const [writeDefault, setWriteDefault] = useState("");
+
+  console.log("showmodal현재상태", showModal);
+
+
   return (
     <BrowserRouter>
       <GlobalStyles></GlobalStyles>
-      <Navbar isLogin={isLogin} setShowModal={setShowModal} setEntry={setEntry} />
+      <Navbar setShowModal={setShowModal} setEntry={setEntry} setShowMyModal={setShowMyModal} />
       <LoginModal showModal={showModal} setShowModal={setShowModal} />
+      <MyPageModal showMyModal={showMyModal} setShowMyModal={setShowMyModal}/>
       <Routes>
-        <Route path="/" element={<Home isLogin={isLogin} setShowModal={setShowModal} />} />
+        <Route path="/" element={<Home setShowModal={setShowModal} />} />
         <Route
           path="/write"
           element={
@@ -31,6 +39,8 @@ const App = () => {
           element={<Team setEntry={setEntry} setWriteDefault={setWriteDefault} />}
         />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile/>} />
+        <Route path="/myarticle" element={<MyArticle/>} />
       </Routes>
     </BrowserRouter>
   );

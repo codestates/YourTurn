@@ -1,22 +1,18 @@
 import axios from "axios"
 
-export const URL = "http://localhost.com/4000"
+// export const URL = "http://localhost.com/4000"
 
-const cookieOption = {
-    headers: {
-      Accept: "application/json",
-  
-      "Content-Type": "application/json",
-  
-      Cache: "no-cache",
-    },
-  
-    withCredentials: true,
-  };
+const cookieOption =  {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
 
   export const postSignIn = async (body) => {
     try{
-        const data = await axios.post(`${URL}/user/signin`, body, cookieOption)
+        console.log("입성")
+        const data = await axios.post("http://localhost:4000/user/signin", body, cookieOption);
+        console.log('2차입성')
+        return data;
     }catch(e){
         throw(e)
     }
