@@ -1,11 +1,12 @@
 const { post } = require("../../models");
 
 module.exports = async (req, res) => {
-  const user_id = req.userId;
+  const userId = req.params.id;
+  console.log("userId::", userId);
   try {
     const userPost = await post.findAll({
-      attributes: ["post_id", "title", "content", "total_likes"],
-      where: { id: user_id },
+      attributes: ["id", "title", "content", "total_likes"],
+      where: { user_id: userId },
     });
     console.log("userPost::", userPost);
 

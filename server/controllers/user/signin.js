@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     const payload = { email, password };
     const accessToken = generateAccessToken(payload);
     sendAccessToken(res, accessToken);
-    return res.status(200).send({ message: "ok" });
+    // return res.status(200).send({ message: "ok" });
   } catch (err) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
