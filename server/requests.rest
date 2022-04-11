@@ -1,0 +1,4 @@
+post https://localhost:4000/signup
+Content-Type: application/json
+
+{"email":"somi@codestates.com","password":"1234","nickname":"somij"}
