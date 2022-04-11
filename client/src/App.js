@@ -9,7 +9,7 @@ import LoginModal from "./components/Modal/LoginModal";
 import Signup from "./pages/Signup";
 
 const App = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [entry, setEntry] = useState("");
   const [writeDefault, setWriteDefault] = useState("");
