@@ -6,19 +6,15 @@ module.exports = async (req, res) => {
   const { email, password, nickname } = req.body;
 
   if (!email || !password || !nickname) {
-    return res.status(422).send("Wrong request");
+    return res.status(422).send("잘못 입력하셨습니다.");
   }
 
   const [data, created] = await user.findOrCreate({
-    where: {
-      email: email,
-      password: password,
-      nickname: nickname,
-    },
+    where: { email: email },
   });
 
   if (!created) {
-    return res.status(409).send("Email Exists");
+    return res.status(409).send("이미 가입된 이메일입니다.");
   }
 
   try {

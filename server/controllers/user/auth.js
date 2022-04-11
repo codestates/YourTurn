@@ -3,7 +3,7 @@ const { isAuthorized } = require("../tokenFunctions");
 
 module.exports = (req, res) => {
   const accessTokenData = isAuthorized(req);
-  // 로그인 여부 확인 후 AccesstokenData 응답에 추가하기
+  // TODO: 로그인 여부를 판단하고, Access token payload를 이용하여 응답을 제공하세요.
   console.log("accessTokenData-----------", accessTokenData);
   if (!accessTokenData) {
     res.status(401).send({ data: null, message: "not authorized" });

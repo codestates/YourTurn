@@ -8,15 +8,12 @@ module.exports = async (req, res) => {
     where: { email: req.body.email, password: req.body.password },
   });
   if (!userInfo) {
-    res.status(404).send("Invalid user or Wrong password");
-  }
-  try {
+    res.status(404).send("invalid user");
+  } else {
     const { email, password } = userInfo;
     const payload = { email, password };
     const accessToken = generateAccessToken(payload);
     sendAccessToken(res, accessToken);
-    return res.status(200).send({ message: "ok" });
-  } catch (err) {
-    return res.status(500).json({ message: "Internal Server Error" });
+    res.status(200).send({ message: "ok" });
   }
 };

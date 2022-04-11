@@ -1,64 +1,63 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import styled from "styled-components";
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 100px;
-  max-width: 1400px;
-  margin: 80px auto 0 auto;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  border-radius: 5px;
-`;
+display: flex;
+flex-direction: column;
+margin-top: 100px;
+max-width: 1400px;
+margin: 80px auto 0 auto;
+border: 1px solid rgba(0,0,0,0.1);
+padding: 20px;
+border-radius: 5px ;
+`
 
-const Head = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-`;
+const Head =styled.div`
+display:flex;
+justify-content:space-between ;
+align-items: center ;
+margin-bottom: 20px ;
+`
 
 const Title = styled.input`
-  border: none;
-  text-decoration: none;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-  &:focus {
-    outline: none;
-  }
-  font-size: 25px;
-`;
+border: none;
+text-decoration:none;
+border-bottom: 2px solid rgba(0,0,0,0.1);
+&:focus{ 
+  outline:none;
+}
+font-size: 25px ;
+`
 const Content = styled.textarea`
-  height: 500px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  &:focus {
-    outline: none;
-  }
-`;
+height: 500px;
+border: 1px solid rgba(0,0,0,0.1);
+&:focus{
+  outline:none;
+}
+`
 
 const TeamWrap = styled.div`
-  border: 1px solid black;
-`;
+
+`
 const Team = styled.select`
-  font-size: 20px;
-`;
+font-size: 20px ;
+`
 const ButtonWrap = styled.div`
-  display: flex;
-  justify-content: flex-end; ;
-`;
+display:flex;
+justify-content: flex-end ;
+;
+`
 const Button = styled.button`
-  font-size: 17px;
-  margin: 10px;
-  padding: 5px;
-`;
+font-size:17px;
+margin:10px;
+padding:5px;
+`
 
-const TeamNameDefault = styled.div`
-  font-size: 25px;
-`;
 
-const Write = ({ entry, writeDefault, setWriteDefault }) => {
-  console.log("hi", entry);
+
+const Write = () => {
+
   const TeamData = [
     {
       id: 1,
@@ -100,57 +99,49 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
       createdAt: "2022-04-08 00:00:00",
       updatedAt: "2022-04-08 01:00:00",
     },
-  ];
+  ]
   //제목을 위한 로직
   const [title, setTitle] = useState("");
+  
+    console.log(title);
+
 
   //그룹 선택을 위한 로직
   const [choice, setChoice] = useState("");
-  const options = TeamData.map((TeamData, i) => {
-    return (
-      <option key={i} value={TeamData.name}>
-        {TeamData.name}
-      </option>
-    );
-  });
+  const options = TeamData.map((TeamData,i) => {
+    return <option key={i} value={TeamData.name}>{TeamData.name}</option>
+  })
 
+  console.log(choice)
+  
   const selectTeam = (event) => {
-    setChoice(event.target.value);
-  };
+    setChoice(event.target.value)
+  }
   //본문을 위한 로직
   const [text, setText] = useState("");
 
-  useEffect(() => {
-    if (writeDefault === "") {
-      setWriteDefault(sessionStorage.getItem("name"));
-    }
-  }, []);
+  console.log(text)
+  
+  
 
   return (
+    
     <Container>
       <Head>
-        <Title
-          type="text"
-          placeholder="제목을 작성하세요"
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-        ></Title>
-        {entry === "navClick" || sessionStorage.getItem("entry") === "navClick" ? (
-          <TeamWrap>
-            <Team onChange={selectTeam}>{options}</Team>
-          </TeamWrap>
-        ) : (
-          <TeamNameDefault>{writeDefault}</TeamNameDefault>
-        )}
+       <Title type="text" placeholder="제목을 작성하세요" onChange={(e)=>{setTitle(e.target.value)}}></Title>
+       <TeamWrap>
+        <Team onChange={selectTeam}>
+          {options}
+        </Team>
+        </TeamWrap>
       </Head>
-      <Content onChange={(e) => setText(e.target.value)} />
-      <ButtonWrap>
-        <Button>취소</Button>
-        <Button>등록</Button>
+      <Content onChange={(e)=>(setText(e.target.value))}/>
+        <ButtonWrap>
+          <Button>취소</Button>
+          <Button>등록</Button>
       </ButtonWrap>
     </Container>
   );
-};
+}
 
 export default Write;
