@@ -32,9 +32,7 @@ function Signin({setShowModal}) {
   }
 
   const closeModal = () => {
-    console.log("닫힘");
     setShowModal(false);
-    console.log("여기까지내려오나")
   }
 
   return (

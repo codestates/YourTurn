@@ -6,6 +6,7 @@ const ModalContiaer = styled.div`
   width: 100%;
   height: 100%;
   display: ${(props) => (props.showModal ? "block" : "none")};
+  border: 10px solid red;
 `
 
 const ModalBackdrop = styled.div`
@@ -20,8 +21,10 @@ const ModalBackdrop = styled.div`
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  backdrop-filter: blur(4px);
+  border: 10px solid black;
+  /* backdrop-filter: blur(4px); */
 `
+
 const ModalView = styled.div`
   display: flex;
   align-items: center;
@@ -65,7 +68,7 @@ const LoginModal = ({showModal, setShowModal}) => {
     </ModalBackdrop>
   </ModalContiaer>
   )
-  
+
 }
 
 export default LoginModal

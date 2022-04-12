@@ -48,7 +48,7 @@ const Navbar = ({setShowModal, setEntry, setShowMyModal }) => {
 
   const changePageToWrite = () => {
     if (isLogin === "true") {
-      setEntry("navClick");
+      // setEntry("navClick");
       sessionStorage.setItem("entry", "navClick");
       navigate("/write");
     } else {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import styled from "styled-components";
 import Comments from "../components/Comments";
@@ -8,7 +8,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  border: 1px solid green;
+  border: 10px solid green;
   height: 500px;
   max-width: 1400px;
   align-items: center;
@@ -33,6 +33,9 @@ const Content = styled.div`
 const CommentWrap = styled.div``;
 
 function Article() {
+
+  
+
   return (
     <Container>
       <TeamName>팀네임</TeamName>
