@@ -33,35 +33,21 @@ module.exports = {
     }
   },
 
-  getArticle: async (req, res) => {
-    try{    
-      const postInfo = await post.findOne({ 
-        attributes: ["title", "content", "total_likes", "user_id"],
-        where: { id: req.params.id },
-        include: [{
-          model: comment
-        }]
-      })
-      return res.status(200).json({ postInfo: postInfo })
-    } catch(err){
-      res.status(500).send("Internal Server Error");
-    }
-  },
   postArticle: async (req, res) => {
-    const articleInfo = isAuthorized(req)
-    try{
-      if(!articleInfo){
-        return res.status(404).send('error')
+    const articleInfo = isAuthorized(req);
+    try {
+      if (!articleInfo) {
+        return res.status(404).send("error");
       } else {
-        const postArticle = await post.create({ 
+        const postArticle = await post.create({
           title: req.body.title,
           content: req.body.content,
-          user_id: articleInfo.id
-        })
-        return res.status(200).json({ postArticle })
-        }
-    } catch(err){
-      return res.status(500).send("Internal Server Error")
+          user_id: articleInfo.id,
+        });
+        return res.status(200).json({ postArticle });
+      }
+    } catch (err) {
+      return res.status(500).send("Internal Server Error");
     }
-  }
+  },
 };
