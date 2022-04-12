@@ -59,10 +59,9 @@ const BoardCreatedDate = styled.div`
 const BoardButton = styled.button``;
 
 function Team({ setEntry, setWriteDefault }) {
+  const [teamData, setTeamData] = useState([]);
 
-  const [postData, setPostData] = useState([]);
-
-  const { id } = useParams(); //App.js
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
@@ -71,26 +70,28 @@ function Team({ setEntry, setWriteDefault }) {
     sessionStorage.setItem("entry", "teamClick");
     navigate("/write");
   };
-  
+
   const changePageToArticle = () => {
-    navigate(`/article/${id}`)
-  }
+    navigate(`/article/${id}`);
+  };
 
-  useEffect( async () => {
+  useEffect(() => {
+    async function fetchData() {
+      let { data } = await axios.get(`https://localhost:4000/team/${id}`);
+      setTeamData(data.teamData);
 
-    let { data } = await axios.get(`http://localhost:4000/team/${id}`)
-    setPostData(data.teamData);
-
-    setWriteDefault(name);
-    sessionStorage.setItem("name", name);
+      setWriteDefault(name);
+      sessionStorage.setItem("name", name);
+    }
+    fetchData();
   }, []);
 
   return (
     <Container>
-      <TeamName>{postData[0]?.team_name}</TeamName>
-      <TeamIntro>{postData[0]?.team_description}</TeamIntro>
+      <TeamName>{teamData[0]?.team_name}</TeamName>
+      <TeamIntro>{teamData[0]?.team_description}</TeamIntro>
       <ContentsPage>
-        {postData[0]?.posts.map((teamPost, i) => {
+        {teamData[0]?.posts.map((teamPost, i) => {
           return (
             <BoardWrap key={i}>
               <BoardNum>{i + 1}</BoardNum>
