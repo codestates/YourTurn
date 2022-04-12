@@ -10,6 +10,8 @@ const cookieOption = {
 export const postSignIn = async (body) => {
   try {
     console.log("입성");
+    console.log("body", body);
+
     const data = await axios.post("https://localhost:4000/user/signin", body, cookieOption);
     console.log("2차입성");
     return data;
