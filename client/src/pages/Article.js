@@ -3,6 +3,7 @@ import "../App.css";
 import styled from "styled-components";
 import Comments from "../components/Comments";
 import { useParams } from "react-router-dom";
+
 import axios from "axios";
 
 // Article Page
@@ -51,6 +52,7 @@ function Article() {
     // setWriteDefault(name);
     // sessionStorage.setItem("name", name);
   }, []);
+
 
   return (
     <Container>
