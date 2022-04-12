@@ -34,7 +34,12 @@ module.exports = {
   },
 
   postArticle: async (req, res) => {
+    console.log("들어오니");
+
     const articleInfo = isAuthorized(req);
+    console.log("hihi");
+    console.log("articleInfo", articleInfo);
+
     try {
       if (!articleInfo) {
         return res.status(404).send("error");

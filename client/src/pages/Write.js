@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import styled from "styled-components";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -56,9 +57,12 @@ const Button = styled.button`
 
 const TeamNameDefault = styled.div`
   font-size: 25px;
+  border: 2px solid black;
 `;
 
 const Write = ({ entry, writeDefault, setWriteDefault }) => {
+  const navigate = useNavigate();
+
   console.log("hi", entry);
   const TeamData = [
     {
@@ -128,17 +132,19 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   }, []);
 
   const handleSubmitButton = async () => {
+    console.log("event:::");
+
     await axios
       .post(
         "https://localhost:4000/team/write-article",
-        { title, text },
+        { title, content: text },
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       )
       .then((res) => {
-        console.log("res:::", res);
+        navigate(-1);
       });
   };
 
@@ -158,7 +164,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
             <Team onChange={selectTeam}>{options}</Team>
           </TeamWrap>
         ) : (
-          <TeamNameDefault>{writeDefault}</TeamNameDefault>
+          <TeamNameDefault>123</TeamNameDefault>
         )}
       </Head>
       <Content onChange={(e) => setText(e.target.value)} />
