@@ -25,6 +25,7 @@ const Comments = () => {
       title: "new Comment",
       content: msg,
     };
+    console.log("test");
 
     const newComments = [comment, ...comments];
     setComments(newComments);
