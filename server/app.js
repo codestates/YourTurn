@@ -14,6 +14,7 @@ const signinRouter = require("./router/signin");
 const signoutRouter = require("./router/signout");
 const signupRouter = require("./router/signup");
 const teamRouter = require("./router/team");
+const articleRouter = require("./router/article");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,8 +29,10 @@ app.use(
       httpOnly: false,
       secure: true,
       sameSite: "None",
-    }}))
-    
+    },
+  })
+);
+
 app.use(cookieParser());
 app.use("/user/auth", authRouter);
 app.use("/user/mypost", mypostRouter);
@@ -38,6 +41,7 @@ app.use("/user/signin", signinRouter);
 app.use("/user/signout", signoutRouter);
 app.use("/user/signup", signupRouter);
 app.use("/team/", teamRouter);
+app.use("/article/", articleRouter);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
