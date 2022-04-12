@@ -137,13 +137,14 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     await axios
       .post(
         "https://localhost:4000/team/write-article",
-        { title, content: text },
+        { title: title, content: text },
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       )
       .then((res) => {
+        console.log("res:", res);
         navigate(-1);
       });
   };
