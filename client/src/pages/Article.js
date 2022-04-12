@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useParams } from "react";
 import "../App.css";
 import styled from "styled-components";
 import Comments from "../components/Comments";
+import axios from "axios";
 
 // Article Page
 const Container = styled.div`
@@ -34,7 +35,19 @@ const CommentWrap = styled.div``;
 
 function Article() {
 
+  const { id } = useParams();
+  const [ fetchArticle , setFetchArticle ] = useStates();
   
+  useEffect( async () => {
+  
+    let {data} = await axios.get(`http://localhost:4000/article/${id}`)
+    setFetchArticle(data.);
+
+  // setWriteDefault(name);
+  // sessionStorage.setItem("name", name);
+
+}, []);
+
 
   return (
     <Container>
