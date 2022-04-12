@@ -14,7 +14,7 @@ const ModalContiaer = styled.div`
   height: 30%;
   margin-top: 70px;
   border: 10px solid red;
-`
+`;
 const ModalView = styled.div`
   display: flex;
   align-items: center;
@@ -22,31 +22,31 @@ const ModalView = styled.div`
   width: 15%;
   background-color: white;
   height: 30%;
-  justify-content: space-around ;
+  justify-content: space-around;
   font-size: 18px;
   font-weight: bold;
-`
-const MyPost = styled(Link)`
+`;
+const MyPost = styled(Link)``;
+const Setting = styled(Link)``;
+const LogOut = styled.div``;
 
-`
-const Setting = styled(Link)`
-
-`
-const LogOut = styled.div`
-
-`
-
-
-const MyPageModal = ({showMyModal, setShowMyModal}) => {
-  return(
+const MyPageModal = () => {
+  //로그인 모달이랑 다른데 왜 내려주지?
+  return (
     <ModalContiaer>
       <ModalView>
-      <MyPost to="/myarticle">내 작성글</MyPost>
-      <Setting to="/profile" >설정</Setting>
-      <LogOut onClick={()=>{sessionStorage.removeItem("isLogin")}}>로그아웃</LogOut>  
+        <MyPost to="/myarticle">내 작성글</MyPost>
+        <Setting to="/profile">설정</Setting>
+        <LogOut
+          onClick={() => {
+            sessionStorage.removeItem("isLogin");
+          }}
+        >
+          로그아웃
+        </LogOut>
       </ModalView>
-  </ModalContiaer>
-  )  
-}
+    </ModalContiaer>
+  );
+};
 
-export default MyPageModal
+export default MyPageModal;

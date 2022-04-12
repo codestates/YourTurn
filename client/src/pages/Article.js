@@ -1,7 +1,9 @@
-import React, { useEffect, useParams } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import styled from "styled-components";
 import Comments from "../components/Comments";
+import { useParams } from "react-router-dom";
+
 import axios from "axios";
 
 // Article Page
@@ -9,7 +11,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  border: 10px solid green;
+  border: 1px solid green;
   height: 500px;
   max-width: 1400px;
   align-items: center;
@@ -31,30 +33,36 @@ const Content = styled.div`
     outline: none;
   }
 `;
+const ContentTitle = styled.div``;
+const ContentContent = styled.div``;
 const CommentWrap = styled.div``;
 
 function Article() {
-
   const { id } = useParams();
-  const [ fetchArticle , setFetchArticle ] = useStates();
-  
-  useEffect( async () => {
-  
-    let {data} = await axios.get(`http://localhost:4000/article/${id}`)
-    setFetchArticle(data.);
+  const [fetchArticle, setFetchArticle] = useState({});
 
-  // setWriteDefault(name);
-  // sessionStorage.setItem("name", name);
+  useEffect(() => {
+    async function fetchData() {
+      let { data } = await axios.get(`https://localhost:4000/article/${id}`);
+      // console.log("data:::", data);
+      setFetchArticle(data.postInfo);
+    }
+    fetchData();
 
-}, []);
+    // setWriteDefault(name);
+    // sessionStorage.setItem("name", name);
+  }, []);
 
 
   return (
     <Container>
       <TeamName>팀네임</TeamName>
-      <Content />
+      <Content>
+        <ContentTitle>{fetchArticle.title}</ContentTitle>
+        <ContentContent>{fetchArticle.content}</ContentContent>
+      </Content>
       <CommentWrap>
-        <Comments />
+        <Comments fetchArticle={fetchArticle} />
       </CommentWrap>
     </Container>
   );

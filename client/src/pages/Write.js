@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import styled from "styled-components";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -126,11 +127,27 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     }
   }, []);
 
+  const handleSubmitButton = async () => {
+    await axios
+      .post(
+        "https://localhost:4000/team/write-article",
+        { title, text },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log("res:::", res);
+      });
+  };
+
   return (
     <Container>
       <Head>
         <Title
           type="text"
+          value={title}
           placeholder="제목을 작성하세요"
           onChange={(e) => {
             setTitle(e.target.value);
@@ -147,7 +164,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
       <Content onChange={(e) => setText(e.target.value)} />
       <ButtonWrap>
         <Button>취소</Button>
-        <Button>등록</Button>
+        <Button onClick={handleSubmitButton}>등록</Button>
       </ButtonWrap>
     </Container>
   );
