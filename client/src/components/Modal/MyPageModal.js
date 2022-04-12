@@ -46,8 +46,7 @@ const MyPageModal = ({showMyModal, setShowMyModal}) => {
       <LogOut onClick={()=>{sessionStorage.removeItem("isLogin")}}>로그아웃</LogOut>  
       </ModalView>
   </ModalContiaer>
-  )
-  
+  )  
 }
 
 export default MyPageModal

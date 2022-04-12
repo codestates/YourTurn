@@ -31,22 +31,6 @@ app.use(
     }}))
     
 app.use(cookieParser());
-<<<<<<< HEAD
-app.get('/', (res, req) => {
-  console.log('hello world')
-})
-app.use("/auth", authRouter);
-app.use("/mypost", mypostRouter);
-app.use("/profile", profileRouter);
-app.use("/signin", signinRouter);
-app.use("/signout", signoutRouter);
-app.use("/signup", signupRouter);
-app.use("/team", teamRouter)
-
-// getUser updateNickname
-// app.get("/profile", controllers.getUser);
-// app.patch("/profile", controllers.updateNickname);
-=======
 app.use("/user/auth", authRouter);
 app.use("/user/mypost", mypostRouter);
 app.use("/user/profile", profileRouter);
@@ -54,7 +38,6 @@ app.use("/user/signin", signinRouter);
 app.use("/user/signout", signoutRouter);
 app.use("/user/signup", signupRouter);
 app.use("/team/", teamRouter);
->>>>>>> ad98617579016bba0eb08bfe6905fce0a798c04c
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
