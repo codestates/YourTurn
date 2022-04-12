@@ -16,6 +16,7 @@ const Comments = ({ fetchArticle }) => {
       createdAt: comments[0].createdAt,
       updatedAt: comments[0].updatedAt,
     };
+    console.log("test");
 
     const newComments = [comment, ...comments];
     setComments(newComments);
