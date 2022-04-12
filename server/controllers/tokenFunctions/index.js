@@ -8,19 +8,19 @@ module.exports = {
   },
   sendAccessToken: (res, accessToken) => {
     // JWT 토큰을 쿠키로 전달
-    return res
-      .status(200)
-      .cookie("jwt", accessToken, { httpOnly: true, secure: true, sameSite: "none" })
-      .json({ data: { accessToken }, message: "ok" });
+    return res.status(200).cookie("jwt", accessToken, { httpOnly: true, secure: true, sameSite: "none" }).json({ accessToken, message: "ok" });
   },
   isAuthorized: (req) => {
     // JWT 토큰 정보를 받아서 검증
-    const authorization = req.headers.cookie;
+    // const Authorization = req.headers.cookie;
 
-    if (!authorization) {
+    const Authorization = req.headers.authorization;
+    console.log(req.headers)
+
+    if (!Authorization) {
       return null;
     }
-    const token = authorization.split(";")[0].split("=")[1];
+    const token = Authorization.split(" ")[1]
 
     try {
       return verify(token, process.env.ACCESS_SECRET);

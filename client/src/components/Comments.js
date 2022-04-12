@@ -21,10 +21,11 @@ const Comments = () => {
   const handleButtonClick = (event) => {
     const comment = {
       id: shortid(),
-      nickname: nickname,
+      nickname: dummyComments.nickname,
       title: "new Comment",
       content: msg,
     };
+    console.log("test");
 
     const newComments = [comment, ...comments];
     setComments(newComments);

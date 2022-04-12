@@ -11,8 +11,11 @@ const Nav = styled.nav`
   top: 0;
   z-index: 500;
   width: 100%;
-  background-color: yellow;
+  background-color: white;
+  box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.1);
+  height: 70px;
 `;
+
 const LogoWrap = styled(Link)`
   text-decoration: none;
   color: black;
@@ -38,12 +41,14 @@ const Menu = styled.button`
   cursor: pointer;
 `;
 
-const Navbar = ({ isLogin, setShowModal, setEntry }) => {
+const Navbar = ({setShowModal, setEntry, setShowMyModal }) => {
+  let isLogin = sessionStorage.getItem("isLogin")
+
   const navigate = useNavigate();
 
   const changePageToWrite = () => {
-    if (isLogin) {
-      setEntry("navClick");
+    if (isLogin === "true") {
+      // setEntry("navClick");
       sessionStorage.setItem("entry", "navClick");
       navigate("/write");
     } else {
@@ -51,9 +56,7 @@ const Navbar = ({ isLogin, setShowModal, setEntry }) => {
     }
   };
 
-  const changePageToMypage = () => {
-    navigate("/mypage");
-  };
+
 
   return (
     <Nav>
@@ -62,8 +65,8 @@ const Navbar = ({ isLogin, setShowModal, setEntry }) => {
       </LogoWrap>
       <MenuWrap>
         <Menu onClick={changePageToWrite}>새 글 쓰기</Menu>
-        {isLogin ? (
-          <Menu onClick={changePageToMypage}>마이페이지</Menu>
+        {isLogin === "true" ? (
+          <Menu onClick={()=>{setShowMyModal(true)}}>마이페이지</Menu>
         ) : (
           <Menu
             onClick={() => {

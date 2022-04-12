@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect, useParams } from "react";
 import "../App.css";
 import styled from "styled-components";
 import Comments from "../components/Comments";
+import axios from "axios";
 
 // Article Page
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  border: 1px solid green;
+  border: 10px solid green;
   height: 500px;
   max-width: 1400px;
   align-items: center;
@@ -33,6 +34,21 @@ const Content = styled.div`
 const CommentWrap = styled.div``;
 
 function Article() {
+
+  const { id } = useParams();
+  const [ fetchArticle , setFetchArticle ] = useStates();
+  
+  useEffect( async () => {
+  
+    let {data} = await axios.get(`http://localhost:4000/article/${id}`)
+    setFetchArticle(data.);
+
+  // setWriteDefault(name);
+  // sessionStorage.setItem("name", name);
+
+}, []);
+
+
   return (
     <Container>
       <TeamName>팀네임</TeamName>
