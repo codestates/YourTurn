@@ -23,13 +23,13 @@ module.exports = {
     if (!Authorization) {
       return null;
     }
-    const token = Authorization.split(" ")[3].split("=")[1];
-    const realToken = token.slice(0, token.length - 1);
-    // console.log("token::", token);
-    // console.log("newtoken::", newtoken);
+    const token = Authorization.split("=")[1];
+    // const realToken = token.slice(0, token.length - 1);
+    console.log("token::", token);
+    // console.log("realToken::", realToken);
 
     try {
-      return verify(realToken, process.env.ACCESS_SECRET);
+      return verify(token, process.env.ACCESS_SECRET);
     } catch (err) {
       console.log(err);
     }
