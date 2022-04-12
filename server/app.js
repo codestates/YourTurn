@@ -17,13 +17,19 @@ const teamRouter = require("./router/team");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 app.use(
   cors({
-    origin: ["https://localhost:3000"],
+    origin: true,
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
     credentials: true,
-    methods: ["GET", "POST", "OPTIONS"],
-  })
-);
+    cookie: {
+      maxAge: 24 * 6 * 60 * 10000,
+      httpOnly: false,
+      secure: true,
+      sameSite: "None",
+    }}))
+    
 app.use(cookieParser());
 <<<<<<< HEAD
 app.get('/', (res, req) => {
