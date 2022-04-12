@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-const { team, post, comment } = require("../../server/models");
-=======
 const { team, post, comment } = require("../models");
->>>>>>> ad98617579016bba0eb08bfe6905fce0a798c04c
+const { isAuthorized } = require("./tokenFunctions");
 
 module.exports = {
   getTeamMain: async (req, res) => {
@@ -29,7 +26,6 @@ module.exports = {
       if (teamAndPostInfo) {
         res.status(200).json({ teamData: teamAndPostInfo });
       } else {
-<<<<<<< HEAD
         res.status(404).send("No team found");
       }
     } catch (err) {
@@ -50,30 +46,22 @@ module.exports = {
     } catch(err){
       res.status(500).send("Internal Server Error");
     }
+  },
+  postArticle: async (req, res) => {
+    const articleInfo = isAuthorized(req)
+    try{
+      if(!articleInfo){
+        return res.status(404).send('error')
+      } else {
+        const postArticle = await post.create({ 
+          title: req.body.title,
+          content: req.body.content,
+          user_id: articleInfo.id
+        })
+        return res.status(200).json({ postArticle })
+        }
+    } catch(err){
+      return res.status(500).send("Internal Server Error")
+    }
   }
 };
-=======
-        res.status(404).send(" No team found ");
-      }
-    } catch (err) {
-      res.status(500).send(" Internal Server Error ");
-    }
-  },
-  getArticle: async (req, res) => {
-    try {
-      const postInfo = await post.findOne({
-        attributes: ["title", "content", "total_likes", "user_id"],
-        where: { id: req.params.id },
-        include: [
-          {
-            model: comment,
-          },
-        ],
-      });
-      return res.status(200).json({ postInfo: postInfo });
-    } catch (err) {
-      res.status(500).send("Internal Server Error");
-    }
-  },
-};
->>>>>>> ad98617579016bba0eb08bfe6905fce0a798c04c

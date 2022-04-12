@@ -7,19 +7,12 @@ module.exports = async (req, res) => {
   // TODO: 로그인 여부를 판단하고, Access token payload를 이용하여 응답을 제공하세요.
   if (!accessTokenData) {
     return res.status(401).send({ data: null, message: "not authorized" });
-<<<<<<< HEAD
-  } else {
-    return res.status(200).send({
-      data: accessTokenData,
-      message: "auth success",
-=======
-  }
+  } 
 
   try {
     const userInfo = await user.findOne({
       where: { email: accessTokenData.email },
       attributes: ["id"],
->>>>>>> ad98617579016bba0eb08bfe6905fce0a798c04c
     });
 
     let data = userInfo.dataValues;
@@ -29,4 +22,4 @@ module.exports = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-};
+}
