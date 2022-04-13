@@ -8,23 +8,25 @@ import GlobalStyles from "./GlobalStyles";
 import LoginModal from "./components/Modal/LoginModal";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
-// import MyPageModal from "./components/Modal/MyPageModal";
+import MyPageModal from "./components/Modal/MyPageModal";
 import Article from "./pages/Article";
 
 const App = () => {
   const [showModal, setShowModal] = useState(false);
-  const [showMyModal, setShowMyModal] = useState(true);
+  const [showMyModal, setShowMyModal] = useState(false);
   const [entry, setEntry] = useState("");
   const [writeDefault, setWriteDefault] = useState("");
+  const [navDiv, setNavDiv] = useState();
 
+  
   console.log("showmodal현재상태", showModal);
 
   return (
     <BrowserRouter>
       <GlobalStyles></GlobalStyles>
-      <Navbar setShowModal={setShowModal} setEntry={setEntry} setShowMyModal={setShowMyModal} />
+      <Navbar setNavDiv={setNavDiv} showMyModal={showMyModal} setShowModal={setShowModal} setEntry={setEntry} setShowMyModal={setShowMyModal} />
       <LoginModal showModal={showModal} setShowModal={setShowModal} />
-      {/* <MyPageModal showMyModal={showMyModal} setShowMyModal={setShowMyModal} /> */}
+      <MyPageModal  navDiv={navDiv}  showMyModal={showMyModal} setShowMyModal={setShowMyModal} />
       <Routes>
         <Route path="/" element={<Home setShowModal={setShowModal} />} />
         <Route

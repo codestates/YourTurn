@@ -12,7 +12,7 @@ const ModalContiaer = styled.div`
 const ModalBackdrop = styled.div`
   position: fixed;
   display: flex;
-  z-index: 999;
+  z-index: 1;
   justify-content: center;
   align-items: center;
   left: 0;
@@ -43,6 +43,7 @@ const CloseButton = styled.div`
  width: 100%;
  cursor: pointer;
  border: 1px solid red;
+ z-index:9999;
 `
 const Icon = styled.i`
   margin: 10px;

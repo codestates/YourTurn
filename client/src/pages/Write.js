@@ -145,6 +145,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
         navigate(-1);
       });
   };
+  console.log("check", writeDefault)
 
   return (
     <Container>

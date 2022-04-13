@@ -31,6 +31,7 @@ const Comments = ({ fetchComments }) => {
     setBackendComments(restComments);
   };
 
+
   return (
     <div className="comments">
       <h3 className="comments-title">댓글 달기</h3>
