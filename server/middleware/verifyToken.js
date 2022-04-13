@@ -1,13 +1,14 @@
-const { user } = require("../../models");
-const { isAuthorized } = require("../tokenFunctions");
+const { user } = require("../models");
+const { isAuthorized } = require("../controllers/tokenFunctions");
+require("dotenv").config();
 
-module.exports = async (req, res) => {
+const isAuth = async (req, res, next) => {
   const accessTokenData = isAuthorized(req);
   console.log("accessTokenData::", accessTokenData);
   // TODO: 로그인 여부를 판단하고, Access token payload를 이용하여 응답을 제공하세요.
   if (!accessTokenData) {
     return res.status(401).send({ data: null, message: "not authorized" });
-  } 
+  }
 
   try {
     const userInfo = await user.findOne({
@@ -18,8 +19,10 @@ module.exports = async (req, res) => {
     let data = userInfo.dataValues;
     delete data.password;
 
-    return res.status(200).json({ data: { userInfo: data } });
+    return next();
   } catch (err) {
-    console.log(err);
+    return res.status(500).send("errrrrrr");
   }
-}
+};
+
+module.exports = isAuth;

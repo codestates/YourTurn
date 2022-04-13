@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import styled from "styled-components";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -55,10 +57,13 @@ const Button = styled.button`
 
 const TeamNameDefault = styled.div`
   font-size: 25px;
+  border: 2px solid black;
 `;
 
 const Write = ({ entry, writeDefault, setWriteDefault }) => {
-  console.log("hi", entry);
+  const navigate = useNavigate();
+
+  // console.log("entry", entry);
   const TeamData = [
     {
       id: 1,
@@ -101,11 +106,9 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
       updatedAt: "2022-04-08 01:00:00",
     },
   ];
-  //제목을 위한 로직
   const [title, setTitle] = useState("");
-
-  //그룹 선택을 위한 로직
   const [choice, setChoice] = useState("");
+
   const options = TeamData.map((TeamData, i) => {
     return (
       <option key={i} value={TeamData.name}>
@@ -126,11 +129,29 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     }
   }, []);
 
+  const handleSubmitButton = async () => {
+    console.log("event:::");
+
+    await axios
+      .post(
+        "https://localhost:4000/team/write-article",
+        { title: title, content: text, team_name: options },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then(() => {
+        navigate(-1);
+      });
+  };
+
   return (
     <Container>
       <Head>
         <Title
           type="text"
+          value={title}
           placeholder="제목을 작성하세요"
           onChange={(e) => {
             setTitle(e.target.value);
@@ -144,10 +165,10 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
           <TeamNameDefault>{writeDefault}</TeamNameDefault>
         )}
       </Head>
-      <Content onChange={(e) => setText(e.target.value)} />
+      <Content placeholder="내용을 작성하세요" onChange={(e) => setText(e.target.value)} />
       <ButtonWrap>
         <Button>취소</Button>
-        <Button>등록</Button>
+        <Button onClick={handleSubmitButton}>등록</Button>
       </ButtonWrap>
     </Container>
   );
