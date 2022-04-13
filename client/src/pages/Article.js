@@ -43,8 +43,9 @@ const ContentContent = styled.div`
 `;
 const CommentWrap = styled.div``;
 
-function Article() {
+function Article({ setWriteDefault }) {
   const { id } = useParams();
+
   // const [fetchArticle, setFetchArticle] = useState({
   //   title: "가장 잘 아는 개발 방법론은 무엇입니까",
   //   content:
@@ -64,11 +65,12 @@ function Article() {
   // });
   const [fetchArticle, setFetchArticle] = useState({});
 
-  // 댓글 보낼 라우터 필요
   // const postComment = async (comment) => {
-  //   let data = await axios.post(`https://localhost:4000/comment/${id}`)
-  //   if (data) {
-  //     return data.data
+  //   let data = await axios.post(`https://localhost:4000/comment/`, {post_id: post_id, content: text},  {
+  //     headers: { "Content-Type": "application/json" },
+  //     withCredentials: true,
+  //   })
+
   //   }
   // }
 
@@ -81,10 +83,9 @@ function Article() {
       // console.log("data:::", data);
 
       setFetchArticle(data.data.postInfo);
+      setWriteDefault(name);
+      sessionStorage.setItem("name", name);
     });
-
-    // setWriteDefault(name);
-    // sessionStorage.setItem("name", name);
   }, []);
 
   return (
