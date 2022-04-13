@@ -134,7 +134,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
 
     await axios
       .post(
-        "https://localhost:4000/team/write-article",
+        "http://localhost:4000/team/write-article",
         { title: title, content: text, team_name: options },
         {
           headers: { "Content-Type": "application/json" },
@@ -145,6 +145,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
         navigate(-1);
       });
   };
+  console.log("check", writeDefault)
 
   return (
     <Container>

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { postSignIn } from "../../Api";
+import axios from "axios";
+// import { postSignIn } from "../../Api";
+// import { useNavigate } from "react-router-dom";
 
 function Signin({ setShowModal }) {
-  console.log("check");
+  // const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -12,23 +14,60 @@ function Signin({ setShowModal }) {
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
+
+  const login = (email, password) => {
+    return axios
+      .post(
+        "http://localhost:4000/user/signin",
+        {
+          email,
+          password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        if (response.accessToken) {
+          localStorage.setItem("user", JSON.stringify(response));
+        }
+
+        return response.data;
+      });
+  };
+
   const handleLogin = async () => {
     const { email, password } = loginInfo;
 
     if (Object.values(loginInfo).includes("")) {
-      setErrorMessage("이메일과 비밀번호를 입력하세요");
+      setErrorMessage("모든 항목을 입력해 주세요.");
       return;
     }
-
-    let data = await postSignIn({ email, password });
-
-    if (data) {
-      console.log("user info data: ", data);
-      sessionStorage.setItem("isLogin", "true");
-      // sessionStorage.setItem("userInfo", data.data)
-      setShowModal(false);
+    try {
+      await login(email, password).then(
+        () => {
+          sessionStorage.setItem("isLogin", "true");
+          setShowModal(false);
+          window.location.reload();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (err) {
+      console.log(err);
     }
   };
+
+  // let data = await postSignIn({ email, password });
+
+  // if (data) {
+  //   console.log("user info data: ", data);
+  //   sessionStorage.setItem("isLogin", "true");
+  // sessionStorage.setItem("userInfo", data.data)
+  //   setShowModal(false);
+  // }
 
   const closeModal = () => {
     setShowModal(false);

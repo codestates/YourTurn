@@ -1,45 +1,81 @@
-import React from "react";
+import React,{ useRef , useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const ModalContiaer = styled.div`
   position: fixed;
-  display: flex;
-  z-index: 999;
+  display: ${(props) => (props.showMyModal ? "block" : "none")};
+  z-index: 1;
   justify-content: flex-end;
-  left: 0;
+  right: 0;
   top: 0;
   background: transparent;
-  width: 100%;
-  height: 30%;
+  width: 15%;
+  height: 20%;
   margin-top: 70px;
-  border: 10px solid red;
+  
 `;
 const ModalView = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 15%;
+  width: 100%;
   background-color: white;
-  height: 30%;
+  height: 100%;
   justify-content: space-around;
   font-size: 18px;
   font-weight: bold;
 `;
-const MyPost = styled(Link)``;
-const Setting = styled(Link)``;
-const LogOut = styled.div``;
+const MyPost = styled.div``;
+const Setting = styled.div``;
+const LogOut = styled.button`
+`;
 
-const MyPageModal = () => {
-  //로그인 모달이랑 다른데 왜 내려주지?
+
+
+const MyPageModal = ({navDiv, showMyModal , setShowMyModal}) => {
+
+  const navigate = useNavigate()
+
+  const moveToMyPage= () => {
+    setShowMyModal(false);
+    navigate("/myarticle");
+  }
+
+  const moveToMyProfile = () => {
+    setShowMyModal(false);
+    navigate("/profile");
+  }
+
+
+
+const modalContainer = useRef()
+  
+const handleCloseModal= ({target}) => {
+ if (showMyModal && !modalContainer?.current?.contains(target) && !navDiv?.current?.contains(target)){
+  setShowMyModal(false);
+ }
+}
+
+useEffect(() => {
+  window.addEventListener('click', handleCloseModal);
+  return () => {
+    window.removeEventListener('click', handleCloseModal);
+  };
+});
+
+
   return (
-    <ModalContiaer>
+    <ModalContiaer ref={modalContainer} showMyModal={showMyModal}>
       <ModalView>
-        <MyPost to="/myarticle">내 작성글</MyPost>
-        <Setting to="/profile">설정</Setting>
+        <MyPost onClick={moveToMyPage}>내 작성글</MyPost>
+        <Setting onClick={moveToMyProfile}>설정</Setting>
         <LogOut
           onClick={() => {
             sessionStorage.removeItem("isLogin");
+            navigate("/");
+            setShowMyModal(false);
           }}
         >
           로그아웃

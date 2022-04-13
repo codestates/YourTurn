@@ -1,51 +1,78 @@
 import React, { useEffect, useState } from "react";
-// import styled from "styled-components";
 import Comment from "./Comment";
-import CommentForm from "./CommentForm";
-// import "/.Comments.css";
 
-const Comments = ({ fetchComments }) => {
+const Comments = ({ fetchComments, postCommentHandler }) => {
   // console.log("fetchComments", fetchComments);
   // if (fetchComments == null) {
   //   return null;
   // }
   useEffect(() => {
-    setBackendComments(fetchComments);
+    setComments(fetchComments);
   }, [fetchComments]); // []면 comments 바뀔 때마다 리렌더가 안 됨
+  const [msg, setMsg] = useState("");
+  const [comments, setComments] = useState([]);
+  const isTextareaDisabled = msg.length === 0;
 
-  const [backendComments, setBackendComments] = useState([]);
-  const addComment = async (text) => {
-    const comment = {
-      content: text,
+  const handleButtonClick = async (event) => {
+    const commentData = {
+      content: msg,
     };
-    // postComment(comment)
-    // -- or --
-    // axios.post...
-    // let comment = await postCommentHandler(commentData);
-    const newComments = [comment, ...backendComments];
-    setBackendComments(newComments);
+    postCommentHandler(commentData);
+  };
+
+  const handleChangeMsg = (event) => {
+    setMsg(event.target.value);
   };
 
   const handleDeleteComment = (deleteIndex) => {
-    const restComments = backendComments.filter((comment, idx) => idx !== deleteIndex);
-    setBackendComments(restComments);
+    const restComments = comments.filter((comment, idx) => idx !== deleteIndex);
+    setComments(restComments);
   };
 
-  return (
-    <div className="comments">
-      <h3 className="comments-title">댓글 달기</h3>
-      <CommentForm submitLabel="입력" handleSubmit={addComment} />
+  const CommentsRenderer = (comment, idx) => {
+    return (
+      <Comment
+        key={comment.id}
+        comment={comment}
+        handleDeleteComment={handleDeleteComment}
+        idx={idx}
+      />
+    );
+  };
 
-      <div className="comments-container">
-        {backendComments?.map((backendComment) => (
-          <Comment
-            key={backendComment.id}
-            comment={backendComment}
-            handleDeleteComment={handleDeleteComment}
-          />
-        ))}
+
+  return (
+    <>
+      <div className="CommentForm__container">
+        <div className="CommentForm__wrapper">
+          <div className="CommentForm__inputContainer">
+            <div className="CommentForm__inputWrapper">
+              <div className="CommentForm__input">
+                <textarea
+                  value={msg}
+                  onChange={handleChangeMsg}
+                  placeholder="댓글을 입력해주세요."
+                  className="CommentForm__input--message"
+                ></textarea>
+              </div>
+            </div>
+            <div className="CommentForm__submit">
+              <div className="CommentForm__submitIcon">
+                <button
+                  className="CommentForm__submitButton"
+                  disabled={isTextareaDisabled}
+                  onClick={handleButtonClick}
+                >
+                  입력
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <ul className="Comments">{comments?.map(CommentsRenderer)}</ul>
+    </>
   );
 };
 
