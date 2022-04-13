@@ -17,6 +17,8 @@ const teamRouter = require("./router/team");
 const articleRouter = require("./router/article");
 
 app.use(express.json());
+app.use(helmet());
+app.use(morgan("tiny"));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(
@@ -43,7 +45,7 @@ app.use("/user/signup", signupRouter);
 app.use("/team", teamRouter);
 app.use("/article", articleRouter);
 
-const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
+const HTTPS_PORT = process.env.HTTPS_PORT || 80;
 
 // 인증서 파일들이 존재하는 경우에만 http 프로토콜을 사용하는 서버를 실행합니다.
 // 만약 인증서 파일이 존재하지 않는경우, http 프로토콜을 사용하는 서버를 실행합니다.
