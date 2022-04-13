@@ -37,8 +37,7 @@ module.exports = {
     console.log("들어오니");
 
     const userInfo = isAuthorized(req);
-    console.log("hihi");
-    console.log("userInfo", userInfo);
+
 
     try {
       if (!userInfo) {
