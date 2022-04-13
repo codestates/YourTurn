@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import MyPageModal from "./components/Modal/MyPageModal";
 import Article from "./pages/Article";
+import MyArticle from "./pages/MyArticle";
 
 const App = () => {
   const [showModal, setShowModal] = useState(false);
@@ -18,13 +19,18 @@ const App = () => {
   const [writeDefault, setWriteDefault] = useState("");
   const [navDiv, setNavDiv] = useState();
 
-
   return (
     <BrowserRouter>
       <GlobalStyles></GlobalStyles>
-      <Navbar setNavDiv={setNavDiv} showMyModal={showMyModal} setShowModal={setShowModal} setEntry={setEntry} setShowMyModal={setShowMyModal} />
+      <Navbar
+        setNavDiv={setNavDiv}
+        showMyModal={showMyModal}
+        setShowModal={setShowModal}
+        setEntry={setEntry}
+        setShowMyModal={setShowMyModal}
+      />
       <LoginModal showModal={showModal} setShowModal={setShowModal} />
-      <MyPageModal  navDiv={navDiv}  showMyModal={showMyModal} setShowMyModal={setShowMyModal} />
+      <MyPageModal navDiv={navDiv} showMyModal={showMyModal} setShowMyModal={setShowMyModal} />
       <Routes>
         <Route path="/" element={<Home setShowModal={setShowModal} />} />
         <Route
@@ -39,6 +45,7 @@ const App = () => {
         />
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/myarticle" element={<MyArticle />} />
         <Route path="/article/:id" element={<Article setWriteDefault={setWriteDefault} />} />
       </Routes>
     </BrowserRouter>
