@@ -5,9 +5,10 @@ module.exports = {
   getUser: async (req, res) => {
     // 사용자의 my profile 조회
     const userAuthInfo = isAuthorized(req);
+    console.log("userAuthInfo:", userAuthInfo);
     const userInfo = await user.findOne({
       attributes: ["id", "email", "nickname"],
-      where: { email: userAuthInfo.email },
+      where: { id: userAuthInfo.id },
     });
     try {
       if (userInfo) {
