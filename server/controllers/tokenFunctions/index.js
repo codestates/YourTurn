@@ -17,16 +17,14 @@ module.exports = {
     // JWT 토큰 정보를 받아서 검증
     // const Authorization = req.headers.cookie;
 
-    const Authorization = req.headers.cookie;
-    console.log("req.headers:::", req.headers);
+    const Authorization = req.headers.authorization;
+    //const Authorization = req.headers.cookie;
 
     if (!Authorization) {
       return null;
     }
-    const token = Authorization.split("=")[1];
-    // const realToken = token.slice(0, token.length - 1);
-    console.log("token::", token);
-    // console.log("realToken::", realToken);
+    const token = Authorization.split(" ")[1];
+    // const token = Authorization.split("=")[1];
 
     try {
       return verify(token, process.env.ACCESS_SECRET);
