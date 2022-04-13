@@ -3,7 +3,6 @@ import "../App.css";
 import Navbar from "../components/Navbar";
 
 function Profile() {
-  console.log("test");
   return (
     <div>
       <Navbar />

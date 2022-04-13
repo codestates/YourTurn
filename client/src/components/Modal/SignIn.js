@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { postSignIn } from "../../Api";
+// import axios from "axios";
 
-function Signin({ setShowModal }) {
-  console.log("check");
+// function Signin({ onClose, handleResponseSuccess }) {
+function Signin({setShowModal}) {
+    console.log("check");
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -13,26 +14,33 @@ function Signin({ setShowModal }) {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
   const handleLogin = async () => {
-    const { email, password } = loginInfo;
+    // const { email, password } = loginInfo;
 
     if (Object.values(loginInfo).includes("")) {
       setErrorMessage("이메일과 비밀번호를 입력하세요");
       return;
     }
 
-    let data = await postSignIn({ email, password });
-
-    if (data) {
-      console.log("user info data: ", data);
-      sessionStorage.setItem("isLogin", "true");
-      // sessionStorage.setItem("userInfo", data.data)
-      setShowModal(false);
-    }
+    // await axios
+    //   .post(
+    //     "https://localhost:4000/signin",
+    //     { email, password },
+    //     {
+    //       headers: { "Content-Type": "application/json" },
+    //       withCredentials: true,
+    //     }
+    //   )
+    //   .then(() => {
+    //     handleResponseSuccess();
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   const closeModal = () => {
+    console.log("닫힘");
     setShowModal(false);
-  };
+    console.log("여기까지내려오나")
+  }
 
   return (
     <>

@@ -14,25 +14,16 @@ const signinRouter = require("./router/signin");
 const signoutRouter = require("./router/signout");
 const signupRouter = require("./router/signup");
 const teamRouter = require("./router/team");
-const articleRouter = require("./router/article");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 app.use(
   cors({
-    origin: true,
-    methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
+    origin: ["https://localhost:3000"],
     credentials: true,
-    cookie: {
-      maxAge: 24 * 6 * 60 * 10000,
-      httpOnly: false,
-      secure: true,
-      sameSite: "None",
-    },
+    methods: ["GET", "POST", "OPTIONS"],
   })
 );
-
 app.use(cookieParser());
 app.use("/user/auth", authRouter);
 app.use("/user/mypost", mypostRouter);
@@ -41,7 +32,6 @@ app.use("/user/signin", signinRouter);
 app.use("/user/signout", signoutRouter);
 app.use("/user/signup", signupRouter);
 app.use("/team/", teamRouter);
-app.use("/article/", articleRouter);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 

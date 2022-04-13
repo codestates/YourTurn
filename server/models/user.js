@@ -13,10 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         sourceKey: "id",
       });
-      models.user.hasMany(models.comment, {
-        foreignKey: "user_nickname",
-        sourceKey: "id",
-      });
       models.user.hasMany(models.post, {
         foreignKey: "user_id",
         sourceKey: "id",

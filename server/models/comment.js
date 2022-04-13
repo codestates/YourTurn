@@ -13,10 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         targetKey: "id",
       });
-      models.comment.belongsTo(models.user, {
-        foreignKey: "user_nickname",
-        targetKey: "id",
-      });
       models.comment.belongsTo(models.post, {
         foreignKey: "post_id",
         targetKey: "id",
@@ -28,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
       post_id: DataTypes.INTEGER,
       user_id: DataTypes.INTEGER,
       content: DataTypes.STRING,
-      user_nickname: DataTypes.STRING,
     },
     {
       sequelize,

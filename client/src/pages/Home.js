@@ -69,12 +69,11 @@ const InterestImg = styled.img`
   width: 200px;
   height: 200px;
 `
+ 
 
-function Home({setShowModal}) {
+function Home({isLogin , setShowModal}) {
 
-  let isLogin = sessionStorage.getItem("isLogin");
-  console.log("isLogin? ->>", isLogin)
-  console.log(typeof isLogin)
+
   const ImageList = [ReactLogo, JSLogo, NodeJs, AWSLogo, MySQL]
 
   const interestList = [
@@ -149,9 +148,8 @@ function Home({setShowModal}) {
     
 
   const navigate = useNavigate();
-  
   const changePageToTeam = (el) => {
-    if(isLogin === "true") {
+    if(isLogin) {
       navigate(`/team/${el.id}`)
       } else{
         setShowModal(true);
@@ -179,12 +177,13 @@ function Home({setShowModal}) {
 
       <TeamWrap>
         {teamData.map((el, i)=> {
-          return <TeamInfo onClick={()=>{changePageToTeam(el)}}  key={i}>
+          return <TeamInfo onClick={()=> {changePageToTeam(el)}}  key={i}>
            <div>{el.name}</div>
            <div>{el.desc}</div> 
           </TeamInfo>
-         
         })}
+        
+        
       </TeamWrap>
     </Container>
   );

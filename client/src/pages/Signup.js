@@ -57,7 +57,7 @@ export default function Signup() {
         )
         .then((res) => {
           if (res) {
-            console.log("res:::", res.data); // ---> 뭐로 오지?
+            console.log("res:::", res.config.data); // ---> { "email":"2022-04-01T08:10:51.430Z@test.com","password":"1234","username":"test","mobile":"010-1234-5678" }
             // const { email, password, username, mobile } = res.config.data
             // setUserinfo(res.config.data);
             // setIsLogin(true);
@@ -65,7 +65,7 @@ export default function Signup() {
         })
         .catch((err) => console.log(err));
 
-      navigate("/"); // 이게 무조건 Home이 아니고 prev page 여야 하는데
+      navigate("/");
     }
   };
 
