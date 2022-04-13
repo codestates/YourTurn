@@ -40,8 +40,8 @@ app.use("/user/profile", profileRouter);
 app.use("/user/signin", signinRouter);
 app.use("/user/signout", signoutRouter);
 app.use("/user/signup", signupRouter);
-app.use("/team/", teamRouter);
-app.use("/article/", articleRouter);
+app.use("/team", teamRouter);
+app.use("/article", articleRouter);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
