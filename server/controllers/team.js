@@ -36,18 +36,18 @@ module.exports = {
   postArticle: async (req, res) => {
     console.log("들어오니");
 
-    const articleInfo = isAuthorized(req);
+    const userInfo = isAuthorized(req);
     console.log("hihi");
-    console.log("articleInfo", articleInfo);
+    console.log("userInfo", userInfo);
 
     try {
-      if (!articleInfo) {
+      if (!userInfo) {
         return res.status(404).send("error");
       } else {
         const postArticle = await post.create({
           title: req.body.title,
           content: req.body.content,
-          user_id: articleInfo.id,
+          user_id: userInfo.id,
         });
         return res.status(200).json({ postArticle });
       }
