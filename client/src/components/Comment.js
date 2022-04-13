@@ -1,21 +1,23 @@
 import React from "react";
+// import "/.Comments.css";
 
-const Comment = ({ comment, handleDeleteComment, idx }) => {
+const Comment = ({ comment, handleDeleteComment }) => {
+  console.log("comment", comment);
   return (
-    <li className="comment" id={comment.id}>
-      <div className="comment__content">
-        <div className="comment__userInfo--wrapper">
-          <span className="comment__nickname">{comment.nickname}</span>
-          <span className="comment__createdAt">{comment.createdAt}</span>
+    <div key={comment.id} className="comment">
+      <div className="comment-right-part">
+        <div className="comment-content">
+          <div className="comment-author">{comment.user_nickname}</div>
+          <div>{comment.createdAt}</div>
         </div>
-        <div className="comment__userInfo--buttonWrapper">
-          <button className="comment__deleteButton" onClick={() => handleDeleteComment(idx)}>
-            <i className="far fa-trash-alt"></i>
-          </button>
-        </div>
-        <div className="comment__message">{comment.content}</div>
+        <div className="comment-content">{comment.content}</div>
       </div>
-    </li>
+      <div className="comment-actions">
+        <button className="comment-action" onClick={() => handleDeleteComment(idx)}>
+          <i className="far fa-trash-alt"></i>
+        </button>
+      </div>
+    </div>
   );
 };
 

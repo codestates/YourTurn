@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { postSignIn } from "../../Api";
 
-
-function Signin({setShowModal}) {
-    console.log("check");
+function Signin({ setShowModal }) {
+  console.log("check");
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: "",
@@ -21,19 +20,19 @@ function Signin({setShowModal}) {
       return;
     }
 
-    let data = await postSignIn({email, password});
-    
-    if(data){
+    let data = await postSignIn({ email, password });
+
+    if (data) {
+      console.log("user info data: ", data);
       sessionStorage.setItem("isLogin", "true");
+      // sessionStorage.setItem("userInfo", data.data)
       setShowModal(false);
     }
-
-
-  }
+  };
 
   const closeModal = () => {
     setShowModal(false);
-  }
+  };
 
   return (
     <>
@@ -67,7 +66,6 @@ function Signin({setShowModal}) {
       </div>
     </>
   );
- }
-
+}
 
 export default Signin;
