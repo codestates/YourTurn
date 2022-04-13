@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
-axios.defaults.withCredentials = true;
-const SignupContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -14,90 +13,127 @@ const SignupContainer = styled.div`
   align-items: center;
   margin: 100px auto 0 auto;
 `;
+const SignupContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  max-width: 1400px;
+  margin: 80px auto 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 5px;
+`;
 
-const EMAIL_REGEX =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const InputWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+const Title = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+`;
 
-export default function Signup() {
-  const [userinfo, setUserinfo] = useState({
-    email: "",
-    password: "",
-    nickname: "",
-  });
-  const errRef = useRef();
+const ButtonWrap = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
+const Signup = () => {
   const [email, setEmail] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [matchPwd, setMatchPwd] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [password, setPassword] = useState("");
+  const [nickname, setNickname] = useState("");
+  const isTextareaDisabled = email.length === 0 || password.length === 0 || nickname.length === 0;
 
   const navigate = useNavigate();
 
-  const handleInputValue = (key) => (e) => {
-    setUserinfo({ ...userinfo, [key]: e.target.value });
-  };
-
-  useEffect(() => {
-    setErrorMessage("");
-  }, [email, pwd, matchPwd]);
-
-  const handleSignup = async (e) => {
-    if (Object.values(userinfo).includes("")) {
-      e.preventDefault();
-      const validated1 = EMAIL_REGEX.test(email);
-      const validated2 = PWD_REGEX.test(pwd);
-      if (!validated1 || !validated2) {
-        setErrorMessage("입력 정보를 다시 확인해 주세요.");
-        return;
-      }
-
-      setSuccess(true);
-      setEmail("");
-      setPwd("");
-
-      await axios.post(
+  const signup = async (email, password, nickname) => {
+    return await axios
+      .post(
         "http://localhost:4000/user/signup",
-        { ...userinfo },
+        {
+          email,
+          password,
+          nickname,
+        },
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
-      );
+      )
+      .then((response) => {
+        console.log("response::", response);
+        if (response.accessToken) {
+          localStorage.setItem("user", JSON.stringify(response));
+        }
 
-      navigate("/");
+        return response.data;
+      });
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      await signup(email, password).then(
+        (response) => {
+          navigate("/");
+          window.location.reload();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (err) {
+      console.log(err);
     }
   };
 
   return (
-    <SignupContainer>
-      <center>
-        <h1>회원가입</h1>
-        <div ref={errRef}>{errorMessage}</div>
-        <form>
-          <div>
+    <Container>
+      <SignupContainer>
+        <form onSubmit={handleSignup}>
+          <Title>
+            <h3>Sign up</h3>
+          </Title>
+          <InputWrap>
             <span>이메일</span>
-            <input type="email" placeholder="이메일" onChange={handleInputValue("email")} />
-          </div>
-          <div>
+            <input
+              type="text"
+              placeholder="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </InputWrap>
+          <InputWrap>
             <span>비밀번호</span>
-            <input type="password" placeholder="비밀번호" onChange={handleInputValue("password")} />
-          </div>
-          <div>
+            <input
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </InputWrap>
+          <InputWrap>
             <span>닉네임</span>
-            <input type="text" placeholder="닉네임" onChange={handleInputValue("nickname")} />
-          </div>
-
-          <div>
-            <Link to="/">이미 아이디가 있으신가요?</Link>
-          </div>
-          <button className="btn btn-signup" type="submit" onClick={handleSignup}>
-            회원가입
-          </button>
-          <div className="alert-box">{errorMessage}</div>
+            <input
+              type="text"
+              placeholder="nickname"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+            />
+          </InputWrap>
+          <ButtonWrap>
+            <button type="submit" disabled={isTextareaDisabled}>
+              등록
+            </button>{" "}
+          </ButtonWrap>
         </form>
-      </center>
-    </SignupContainer>
+      </SignupContainer>
+    </Container>
   );
-}
+};
+
+export default Signup;
