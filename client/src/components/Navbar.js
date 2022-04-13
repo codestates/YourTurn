@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -41,10 +41,14 @@ const Menu = styled.button`
   cursor: pointer;
 `;
 
-const Navbar = ({setShowModal, setEntry, setShowMyModal }) => {
+const Navbar = ({setNavDiv ,setShowModal, setShowMyModal, showMyModal }) => {
   let isLogin = sessionStorage.getItem("isLogin")
 
   const navigate = useNavigate();
+
+  const NavContainer = useRef();
+
+  console.log("네비게이션", NavContainer);
 
   const changePageToWrite = () => {
     if (isLogin === "true") {
@@ -56,21 +60,24 @@ const Navbar = ({setShowModal, setEntry, setShowMyModal }) => {
     }
   };
 
+  useEffect(()=>{
+    setNavDiv(NavContainer);
+  })
 
 
   return (
-    <Nav>
+    <Nav ref={NavContainer}>
       <LogoWrap to="/">
         <Logo>YourTurn</Logo>
       </LogoWrap>
       <MenuWrap>
         <Menu onClick={changePageToWrite}>새 글 쓰기</Menu>
         {isLogin === "true" ? (
-          <Menu onClick={()=>{setShowMyModal(true)}}>마이페이지</Menu>
+          <Menu onClick={()=>{setShowMyModal(!showMyModal)}}>마이페이지</Menu>
         ) : (
           <Menu
             onClick={() => {
-              setShowModal(true);
+              setShowModal(true)
             }}
           >
             로그인

@@ -73,8 +73,9 @@ const InterestImg = styled.img`
 function Home({setShowModal}) {
 
   let isLogin = sessionStorage.getItem("isLogin");
-  console.log("isLogin? ->>", isLogin)
-  console.log(typeof isLogin)
+  // console.log("isLogin? ->>", isLogin)
+  // console.log(typeof isLogin)
+  console.log("test")
   const ImageList = [ReactLogo, JSLogo, NodeJs, AWSLogo, MySQL]
 
   const interestList = [

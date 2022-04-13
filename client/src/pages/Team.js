@@ -80,8 +80,8 @@ function Team({ setEntry, setWriteDefault }) {
       let { data } = await axios.get(`https://localhost:4000/team/${id}`);
       setTeamData(data.teamData);
 
-      setWriteDefault(name);
-      sessionStorage.setItem("name", name);
+      setWriteDefault(data.teamData[0].team_name);
+      sessionStorage.setItem("name", data.teamData[0].team_name);
     }
     fetchData();
   }, []);
