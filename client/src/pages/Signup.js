@@ -1,8 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import styled from "styled-components";
 
 axios.defaults.withCredentials = true;
+const SignupContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  border: 1px solid green;
+  height: 500px;
+  max-width: 1400px;
+  align-items: center;
+  margin: 100px auto 0 auto;
+`;
 
 const EMAIL_REGEX =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -38,7 +49,7 @@ export default function Signup() {
       const validated1 = EMAIL_REGEX.test(email);
       const validated2 = PWD_REGEX.test(pwd);
       if (!validated1 || !validated2) {
-        setErrorMessage("잘못된 접근입니다");
+        setErrorMessage("입력 정보를 다시 확인해 주세요.");
         return;
       }
 
@@ -46,33 +57,23 @@ export default function Signup() {
       setEmail("");
       setPwd("");
 
-      await axios
-        .post(
-          "http://localhost:4000/signup",
-          { ...userinfo },
-          {
-            headers: { "Content-Type": "application/json" },
-            withCredentials: true,
-          }
-        )
-        .then((res) => {
-          if (res) {
-            console.log("res:::", res.data); // ---> 뭐로 오지?
-            // const { email, password, username, mobile } = res.config.data
-            // setUserinfo(res.config.data);
-            // setIsLogin(true);
-          }
-        })
-        .catch((err) => console.log(err));
+      await axios.post(
+        "http://localhost:4000/user/signup",
+        { ...userinfo },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
 
-      navigate("/"); // 이게 무조건 Home이 아니고 prev page 여야 하는데
+      navigate("/");
     }
   };
 
   return (
-    <div>
+    <SignupContainer>
       <center>
-        <h1>Sign Up</h1>
+        <h1>회원가입</h1>
         <div ref={errRef}>{errorMessage}</div>
         <form>
           <div>
@@ -97,6 +98,6 @@ export default function Signup() {
           <div className="alert-box">{errorMessage}</div>
         </form>
       </center>
-    </div>
+    </SignupContainer>
   );
 }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 // MyArticle Page
 const Container = styled.div`
@@ -38,13 +39,18 @@ const BoardCreatedDate = styled.div`
 `;
 
 function MyArticle() {
+  const navigate = useNavigate();
   const [articles, setArticles] = useState([]);
+
+  const changePageToArticle = () => {
+    navigate(`/article/1`);
+  };
+  console.log("articles data:: ", articles);
 
   useEffect(() => {
     async function fetchArticles() {
       let { data } = await axios.get(`http://localhost:4000/user/mypost`);
 
-      console.log("myarticle data:: ", data);
       setArticles(data.data);
     }
     fetchArticles();
@@ -52,12 +58,12 @@ function MyArticle() {
 
   return (
     <Container>
-      <h1>MyArticle</h1>
+      <h1>내 작성글</h1>
       {articles.map((article, i) => {
         return (
           <BoardWrap key={i}>
             <BoardNum>{i + 1}</BoardNum>
-            <BoardTitle>{article.title}</BoardTitle>
+            <BoardTitle onClick={changePageToArticle}>{article.title}</BoardTitle>
             <BoardCreatedDate>{article.createdAt}</BoardCreatedDate>
           </BoardWrap>
         );
