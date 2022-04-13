@@ -18,8 +18,6 @@ const App = () => {
   const [writeDefault, setWriteDefault] = useState("");
   const [navDiv, setNavDiv] = useState();
 
-  
-  console.log("showmodal현재상태", showModal);
 
   return (
     <BrowserRouter>
