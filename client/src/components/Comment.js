@@ -12,7 +12,7 @@ const Comment = ({ comment, handleDeleteComment, idx }) => {
           <div className="comment__userInfo--buttonWrapper">
             <button
               className="comment__deleteButton"
-              onClick={() => handleDeleteComment(comment.nickname, idx)}
+              onClick={() => handleDeleteComment(comment.user_nickname, idx)}
             >
               <i className="far fa-trash-alt"></i>
             </button>

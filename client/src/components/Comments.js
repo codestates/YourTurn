@@ -1,28 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
 import shortid from "shortid";
 
-// comments axios.get으로 불러오기
-const dummyComments = [
-  {
-    id: 1,
-    nickname: "유어턴",
-    content: "이대로만 대답하면 면접 붙으실 것 같아요!",
-    interest_id: 1,
-    createdAt: "2022-04-08 00:00:00",
-    updatedAt: "2022-04-08 01:00:00",
-  },
-];
-
-const Comments = () => {
+const Comments = ({ fetchComments }) => {
+  // console.log("fetchComments", fetchComments);
+  // if (fetchComments == null) {
+  //   return null;
+  // }
+  useEffect(() => {
+    setComments(fetchComments);
+  }, [fetchComments]); // []면 comments 바뀔 때마다 리렌더가 안 됨
   const [msg, setMsg] = useState("");
-  const [comments, setComments] = useState(dummyComments);
+  const [comments, setComments] = useState([]);
 
   const handleButtonClick = (event) => {
     const comment = {
-      id: shortid(),
-      nickname: nickname,
-      title: "new Comment",
       content: msg,
     };
 
