@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
-import shortid from "shortid";
 
-const Comments = ({ fetchComments }) => {
+const Comments = ({ fetchComments, postCommentHandler }) => {
   // console.log("fetchComments", fetchComments);
   // if (fetchComments == null) {
   //   return null;
@@ -12,21 +11,20 @@ const Comments = ({ fetchComments }) => {
   }, [fetchComments]); // []면 comments 바뀔 때마다 리렌더가 안 됨
   const [msg, setMsg] = useState("");
   const [comments, setComments] = useState([]);
+  const isTextareaDisabled = msg.length === 0;
 
-  const handleButtonClick = (event) => {
-    const comment = {
+  const handleButtonClick = async (event) => {
+    const commentData = {
       content: msg,
     };
-
-    const newComments = [comment, ...comments];
-    setComments(newComments);
+    postCommentHandler(commentData);
   };
 
   const handleChangeMsg = (event) => {
     setMsg(event.target.value);
   };
 
-  const handleDeleteComment = (nickname, deleteIndex) => {
+  const handleDeleteComment = (deleteIndex) => {
     const restComments = comments.filter((comment, idx) => idx !== deleteIndex);
     setComments(restComments);
   };
@@ -59,8 +57,12 @@ const Comments = ({ fetchComments }) => {
             </div>
             <div className="CommentForm__submit">
               <div className="CommentForm__submitIcon">
-                <button className="CommentForm__submitButton" onClick={handleButtonClick}>
-                  댓글 입력
+                <button
+                  className="CommentForm__submitButton"
+                  disabled={isTextareaDisabled}
+                  onClick={handleButtonClick}
+                >
+                  입력
                 </button>
               </div>
             </div>
@@ -68,7 +70,7 @@ const Comments = ({ fetchComments }) => {
         </div>
       </div>
 
-      <ul className="Comments">{comments.map(CommentsRenderer)}</ul>
+      <ul className="Comments">{comments?.map(CommentsRenderer)}</ul>
     </>
   );
 };

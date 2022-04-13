@@ -48,7 +48,7 @@ export default function Signup() {
 
       await axios
         .post(
-          "https://localhost:4000/signup",
+          "http://localhost:4000/signup",
           { ...userinfo },
           {
             headers: { "Content-Type": "application/json" },
