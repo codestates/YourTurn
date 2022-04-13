@@ -77,7 +77,7 @@ function Team({ setEntry, setWriteDefault }) {
 
   useEffect(() => {
     async function fetchData() {
-      let { data } = await axios.get(`https://localhost:4000/team/${id}`);
+      let { data } = await axios.get(`http://localhost:4000/team/${id}`);
       setTeamData(data.teamData);
 
       setWriteDefault(data.teamData[0].team_name);

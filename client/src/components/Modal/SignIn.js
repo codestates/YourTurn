@@ -12,6 +12,7 @@ function Signin({ setShowModal }) {
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
+
   const handleLogin = async () => {
     const { email, password } = loginInfo;
 
