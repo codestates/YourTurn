@@ -78,10 +78,6 @@ function Article({ setWriteDefault }) {
     async function fetchData() {
       return await axios.get(`https://localhost:4000/article/${id}`);
       // console.log("data:::", data);
-<<<<<<< HEAD
-=======
-      setFetchArticle(data.data.postInfo);
->>>>>>> 40364fb (add : comments 주석)
     }
     fetchData().then((data) => {
       // console.log("data:::", data);
