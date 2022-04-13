@@ -1,8 +1,9 @@
 const express = require("express");
+const isAuth = require("../middleware/token");
 const profileController = require("../controllers/user/profile");
 const router = express.Router();
 
-router.get("/:id", profileController.getUser);
-router.patch("/:id", profileController.updateNickname);
+router.get("/", isAuth, profileController.getUser);
+router.patch("/", profileController.updateNickname);
 
 module.exports = router;

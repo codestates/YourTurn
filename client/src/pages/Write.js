@@ -63,7 +63,7 @@ const TeamNameDefault = styled.div`
 const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const navigate = useNavigate();
 
-  console.log("hi", entry);
+  // console.log("entry", entry);
   const TeamData = [
     {
       id: 1,
@@ -106,11 +106,9 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
       updatedAt: "2022-04-08 01:00:00",
     },
   ];
-  //제목을 위한 로직
   const [title, setTitle] = useState("");
-
-  //그룹 선택을 위한 로직
   const [choice, setChoice] = useState("");
+
   const options = TeamData.map((TeamData, i) => {
     return (
       <option key={i} value={TeamData.name}>
@@ -136,18 +134,18 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
 
     await axios
       .post(
-        "https://localhost:4000/team/write-article",
-        { title: title, content: text },
+        "http://localhost:4000/team/write-article",
+        { title: title, content: text, team_name: options },
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       )
-      .then((res) => {
-        console.log("res:", res);
+      .then(() => {
         navigate(-1);
       });
   };
+  console.log("check", writeDefault)
 
   return (
     <Container>
@@ -165,10 +163,10 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
             <Team onChange={selectTeam}>{options}</Team>
           </TeamWrap>
         ) : (
-          <TeamNameDefault>123</TeamNameDefault>
+          <TeamNameDefault>{writeDefault}</TeamNameDefault>
         )}
       </Head>
-      <Content onChange={(e) => setText(e.target.value)} />
+      <Content placeholder="내용을 작성하세요" onChange={(e) => setText(e.target.value)} />
       <ButtonWrap>
         <Button>취소</Button>
         <Button onClick={handleSubmitButton}>등록</Button>

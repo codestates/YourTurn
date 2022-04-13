@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
 
-const Comments = ({ fetchArticle }) => {
+const Comments = ({ fetchComments, postCommentHandler }) => {
+  // console.log("fetchComments", fetchComments);
+  // if (fetchComments == null) {
+  //   return null;
+  // }
+  useEffect(() => {
+    setComments(fetchComments);
+  }, [fetchComments]); // []면 comments 바뀔 때마다 리렌더가 안 됨
   const [msg, setMsg] = useState("");
+  const [comments, setComments] = useState([]);
+  const isTextareaDisabled = msg.length === 0;
 
-  const [comments, setComments] = useState(fetchArticle.comments);
-
-  console.log("data arrived", fetchArticle.comments);
-
-  const handleButtonClick = () => {
-    const comment = {
-      id: comments[0].user_id,
-      nickname: comments[0].user_id,
-      content: comments[0].content,
-      createdAt: comments[0].createdAt,
-      updatedAt: comments[0].updatedAt,
+  const handleButtonClick = async (event) => {
+    const commentData = {
+      content: msg,
     };
-    console.log("test");
-
-    const newComments = [comment, ...comments];
-    setComments(newComments);
+    postCommentHandler(commentData);
   };
 
   const handleChangeMsg = (event) => {
@@ -27,7 +25,7 @@ const Comments = ({ fetchArticle }) => {
   };
 
   const handleDeleteComment = (deleteIndex) => {
-    const restComments = comments.filter((idx) => idx !== deleteIndex);
+    const restComments = comments.filter((comment, idx) => idx !== deleteIndex);
     setComments(restComments);
   };
 
@@ -42,27 +40,38 @@ const Comments = ({ fetchArticle }) => {
     );
   };
 
+
   return (
     <>
-      <div className="commentForm__container">
-        <div className="commentForm__inputContainer">
-          <div className="commentForm__input">
-            <textarea
-              value={msg}
-              onChange={handleChangeMsg}
-              placeholder="댓글을 입력해주세요."
-              className="commentForm__input--message"
-            ></textarea>
-          </div>
-          <div className="commentForm__submitIcon">
-            <button className="commentForm__submitButton" onClick={handleButtonClick}>
-              댓글 입력
-            </button>
+      <div className="CommentForm__container">
+        <div className="CommentForm__wrapper">
+          <div className="CommentForm__inputContainer">
+            <div className="CommentForm__inputWrapper">
+              <div className="CommentForm__input">
+                <textarea
+                  value={msg}
+                  onChange={handleChangeMsg}
+                  placeholder="댓글을 입력해주세요."
+                  className="CommentForm__input--message"
+                ></textarea>
+              </div>
+            </div>
+            <div className="CommentForm__submit">
+              <div className="CommentForm__submitIcon">
+                <button
+                  className="CommentForm__submitButton"
+                  disabled={isTextareaDisabled}
+                  onClick={handleButtonClick}
+                >
+                  입력
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <ul className="comments">{comments && comments.map(CommentsRenderer)}</ul>
+      <ul className="Comments">{comments?.map(CommentsRenderer)}</ul>
     </>
   );
 };
