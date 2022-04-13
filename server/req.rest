@@ -1,0 +1,7 @@
+post https://localhost:4000/signup
+Content-Type: application/json
+
+{"email":"430Z@test.com","password":"test","nickname":"testNickname"}
+
+###
+get https://localhost:4000/article/1

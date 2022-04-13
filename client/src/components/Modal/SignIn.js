@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { postSignIn } from "../../Api";
 
-// function Signin({ onClose, handleResponseSuccess }) {
-function Signin({ setShowModal, handleResponseSuccess }) {
+function Signin({ setShowModal }) {
   console.log("check");
   const [loginInfo, setLoginInfo] = useState({
     email: "",
@@ -22,25 +21,18 @@ function Signin({ setShowModal, handleResponseSuccess }) {
       return;
     }
 
-    await axios
-      .post(
-        "https://localhost:4000/signin",
-        { email, password },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      )
-      .then(() => {
-        handleResponseSuccess();
-      })
-      .catch((err) => console.log(err));
+    let data = await postSignIn({ email, password });
+
+    if (data) {
+      console.log("user info data: ", data);
+      sessionStorage.setItem("isLogin", "true");
+      // sessionStorage.setItem("userInfo", data.data)
+      setShowModal(false);
+    }
   };
 
   const closeModal = () => {
-    console.log("닫힘");
     setShowModal(false);
-    console.log("여기까지내려오나");
   };
 
   return (
