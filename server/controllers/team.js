@@ -35,12 +35,16 @@ module.exports = {
 
   postArticle: async (req, res) => {
     console.log("들어오니");
+    // console.log(req.body);
 
+    console.log("위쪽");
     const userInfo = isAuthorized(req);
-
+    console.log("유저인포!",userInfo)
 
     try {
+      console.log("어디야")
       if (!userInfo) {
+        console.log("요놈")
         return res.status(404).send("error");
       } else {
         const postArticle = await post.create({

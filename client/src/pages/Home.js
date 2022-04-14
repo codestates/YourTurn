@@ -12,21 +12,30 @@ const Container = styled.div`
   margin: 48px auto 0 auto;
   border: 1px solid rgba(0,0,0,0.1);
   border-radius: 5px ;
-
+  position:relative;
 `
 const Intro = styled.div`
   display:flex;
   justify-content: space-around ;
 `
-const IntroText = styled.div`
-  font-size: 50px;
+const IntroText = styled.pre`
+  font-size: 20px;
   display:flex;
+  flex-direction: row ;
+  border:1px solid pink;
+  z-index: 999 ;
+  top: 15%;
+  left: 15%;
+  margin: 10px auto 10px auto;
+  position: absolute;
+  transform: translate( -50%, -50% );
+  word-wrap:break-word;
 `
 const IntroImgWrap = styled.div`
 `
 const IntroImg = styled.img`
   width:100%;
-
+  border:1px solid pink;
 `
 const Interest = styled.div`
   display:flex;
@@ -52,6 +61,14 @@ const TeamInfo = styled.div`
   padding: 32px;
   cursor: pointer;
 `
+const TeamInfoTitle = styled.div`
+ font-size : 19px;
+ font-weight: bold ;
+`
+const TeamInfoContent = styled.div`
+  word-break: normal;
+`
+
 const InterestWrap = styled.div`
   display: flex;
   justify-content: space-around;
@@ -162,7 +179,12 @@ function Home({setShowModal}) {
   return (
     <Container>
       <Intro>
-        <IntroText>환영합니다</IntroText>
+        <IntroText>
+          `면접 기출 질문은 많고 모든 답변을 다 준비하기는 어려운가요?
+          토익스피킹 답변 아이디어가 고갈되었나요?
+          YourTurn의 집단 지성을 이용하세요!
+          돌아가며 기여하고 다같이 잘 되는 그룹, YourTurn 입니다.`
+          </IntroText>
         <IntroImgWrap>
           <IntroImg src={MainImg}></IntroImg>
         </IntroImgWrap>
@@ -181,8 +203,8 @@ function Home({setShowModal}) {
       <TeamWrap>
         {teamData.map((el, i)=> {
           return <TeamInfo onClick={()=>{changePageToTeam(el)}}  key={i}>
-           <div>{el.name}</div>
-           <div>{el.desc}</div> 
+           <TeamInfoTitle>{el.name}</TeamInfoTitle>
+           <TeamInfoContent>{el.desc}</TeamInfoContent> 
           </TeamInfo>
          
         })}

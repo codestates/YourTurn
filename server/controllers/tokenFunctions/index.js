@@ -15,15 +15,18 @@ module.exports = {
   },
   isAuthorized: (req) => {
     // JWT 토큰 정보를 받아서 검증
+    console.log("여기도오나");
+    // const Authorization = req.headers.authorization;
 
-    const Authorization = req.headers.authorization;
-    // const Authorization = req.headers.cookie;
+    console.log("여기도오나");
+    const Authorization = req.headers.cookie;
 
     if (!Authorization) {
+      console.log("eeee");
       return null;
     }
-    const token = Authorization.split(" ")[1];
-    // const token = Authorization.split("=")[1];
+    // const token = Authorization.split(" ")[1];
+    const token = Authorization.split("=")[1];
 
     // const realToken = token.slice(0, token.length - 1);
     // console.log("realToken::", realToken);
