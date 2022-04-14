@@ -42,8 +42,8 @@ function MyArticle() {
   const navigate = useNavigate();
   const [articles, setArticles] = useState([]);
 
-  const changePageToArticle = () => {
-    navigate(`/article/1`);
+  const changePageToArticle = (article) => {
+    navigate(`/article/${article.id}`);
   };
   console.log("articles data:: ", articles);
 
@@ -63,7 +63,7 @@ function MyArticle() {
         return (
           <BoardWrap key={i}>
             <BoardNum>{i + 1}</BoardNum>
-            <BoardTitle onClick={changePageToArticle}>{article.title}</BoardTitle>
+            <BoardTitle onClick={()=>{changePageToArticle(article)}}>{article.title}</BoardTitle>
             <BoardCreatedDate>{article.createdAt}</BoardCreatedDate>
           </BoardWrap>
         );

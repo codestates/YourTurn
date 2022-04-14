@@ -11,7 +11,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  border: 1px solid green;
   height: 500px;
   max-width: 1400px;
   align-items: center;
@@ -20,7 +19,6 @@ const Container = styled.div`
 
 const TeamName = styled.div`
   width: 100%;
-  border: 1px solid red;
   height: 100px;
   padding: 10px;
   margin-bottom: 10px;

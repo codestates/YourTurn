@@ -7,9 +7,8 @@ import { useNavigate } from "react-router-dom";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
   max-width: 1400px;
-  margin: 80px auto 0 auto;
+  margin: 120px auto 0 auto;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px;
   border-radius: 5px;
@@ -40,10 +39,10 @@ const Content = styled.textarea`
 `;
 
 const TeamWrap = styled.div`
-  border: 1px solid black;
 `;
 const Team = styled.select`
   font-size: 20px;
+  width: 100%;
 `;
 const ButtonWrap = styled.div`
   display: flex;
@@ -53,18 +52,33 @@ const Button = styled.button`
   font-size: 17px;
   margin: 10px;
   padding: 5px;
+  cursor: pointer;
 `;
 
 const TeamNameDefault = styled.div`
   font-size: 25px;
-  border: 2px solid black;
 `;
 
 const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const navigate = useNavigate();
 
+  let postTeamName;
+  let clickEntry = sessionStorage.getItem("entry")
+  console.log("접근하는곳", clickEntry)
+
+ 
+
   // console.log("entry", entry);
   const TeamData = [
+    {
+      id: 0,
+      name: "관심사를 선택해주세요",
+      desc: "리액트 관련 프론트엔드 개발자를 위한 면접 질문",
+      interest_id: 1,
+      createdAt: "2022-04-08 00:00:00",
+      updatedAt: "2022-04-08 01:00:00",
+    },
+
     {
       id: 1,
       name: "리액트 면접 준비",
@@ -117,6 +131,14 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     );
   });
 
+  if(clickEntry === 'teamClick'){
+    postTeamName = sessionStorage.getItem('name')
+  }else{
+    postTeamName = choice
+  }
+
+  console.log("postTeam네임", postTeamName);
+
   const selectTeam = (event) => {
     setChoice(event.target.value);
   };
@@ -132,24 +154,27 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const handleSubmitButton = async () => {
     console.log("event:::");
 
-    await axios
+    let data = await axios
       .post(
         "http://localhost:80/team/write-article",
-        { title: title, content: text }, // 팀네임을 전달
+
+        { title: title, content: text, team_name: postTeamName },
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       )
-      .then(() => {
+      if(data.data){
         navigate(-1);
-      });
+    }
+
   };
 
   const handleCancelButton = () => {
     navigate(-1);
   };
   console.log("check", writeDefault);
+
 
   return (
     <Container>

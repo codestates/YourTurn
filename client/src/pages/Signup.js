@@ -89,6 +89,10 @@ const Signup = () => {
     } catch (err) {
       console.log(err);
     }
+    // setSuccess(true);
+    // setEmail("");
+    // setPwd("");
+
   };
 
   return (

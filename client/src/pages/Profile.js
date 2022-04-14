@@ -43,15 +43,18 @@ function Profile() {
 
   useEffect(() => {
     async function getNickName() {
+
       return await axios.get("http://localhost:80/user/profile/");
     }
     getNickName().then((data) => {
       console.log("data::", data);
     });
+
   }, []);
 
   const handleButtonClick = async () => {
     try {
+
       const response = await axios.patch(
         "http://localhost:80/user/profile/",
         {
@@ -63,6 +66,7 @@ function Profile() {
         //   },
         // }
       );
+
       console.log("👉 Returned data:", response);
     } catch (e) {
       console.log(`😱 Axios request failed: ${e}`);
