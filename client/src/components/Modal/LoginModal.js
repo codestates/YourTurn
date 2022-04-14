@@ -7,7 +7,7 @@ const ModalContiaer = styled.div`
   height: 100%;
   display: ${(props) => (props.showModal ? "block" : "none")};
   border: 10px solid red;
-`
+`;
 
 const ModalBackdrop = styled.div`
   position: fixed;
@@ -23,7 +23,7 @@ const ModalBackdrop = styled.div`
   margin: 0 auto;
   border: 10px solid black;
   /* backdrop-filter: blur(4px); */
-`
+`;
 
 const ModalView = styled.div`
   display: flex;
@@ -33,43 +33,39 @@ const ModalView = styled.div`
   background-color: white;
   border-radius: 10px;
   height: 432px;
-
-`
+`;
 
 const CloseButton = styled.div`
- font-size: 15px;
- justify-content: flex-end;
- display: flex;
- width: 100%;
- cursor: pointer;
- border: 1px solid red;
- z-index:9999;
-`
+  font-size: 15px;
+  justify-content: flex-end;
+  display: flex;
+  width: 100%;
+  cursor: pointer;
+  border: 1px solid red;
+  z-index: 9999;
+`;
 const Icon = styled.i`
   margin: 10px;
   padding: 10px;
-`
+`;
 
-
-const LoginModal = ({showModal, setShowModal}) => {
-
+const LoginModal = ({ showModal, setShowModal }) => {
   const test = () => {
     setShowModal(false);
-  }
+  };
 
-  return(
+  return (
     <ModalContiaer showModal={showModal}>
-    <ModalBackdrop>
-      <ModalView>
-        <CloseButton onClick={test}>
-          <Icon className="fa-solid fa-xmark"></Icon>
-        </CloseButton>
-        <Signin setShowModal={setShowModal}/>
-      </ModalView>
-    </ModalBackdrop>
-  </ModalContiaer>
-  )
+      <ModalBackdrop>
+        <ModalView>
+          <CloseButton onClick={test}>
+            <Icon className="fa-solid fa-xmark"></Icon>
+          </CloseButton>
+          <Signin setShowModal={setShowModal} />
+        </ModalView>
+      </ModalBackdrop>
+    </ModalContiaer>
+  );
+};
 
-}
-
-export default LoginModal
+export default LoginModal;

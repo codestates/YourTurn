@@ -157,6 +157,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     let data = await axios
       .post(
         "http://localhost:80/team/write-article",
+
         { title: title, content: text, team_name: postTeamName },
         {
           headers: { "Content-Type": "application/json" },
@@ -170,9 +171,10 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   };
 
   const handleCancelButton = () => {
-    console.log("evebt");
     navigate(-1);
-  }
+  };
+  console.log("check", writeDefault);
+
 
   return (
     <Container>

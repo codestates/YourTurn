@@ -43,18 +43,30 @@ function Profile() {
 
   useEffect(() => {
     async function getNickName() {
-      console.log("useEffect");
-      let { data } = await axios.get("http://localhost:80/user/profile");
-      console.log("데이터확인", data)
+
+      return await axios.get("http://localhost:80/user/profile/");
     }
-    getNickName();
+    getNickName().then((data) => {
+      console.log("data::", data);
+    });
+
   }, []);
 
   const handleButtonClick = async () => {
     try {
-      const response = await axios.patch("http://localhost:80/user/profile/", {
-        nickname: nickname,
-      });
+
+      const response = await axios.patch(
+        "http://localhost:80/user/profile/",
+        {
+          nickname: nickname,
+        }
+        // {
+        //   headers: {
+        //     authorization: accessToken,
+        //   },
+        // }
+      );
+
       console.log("👉 Returned data:", response);
     } catch (e) {
       console.log(`😱 Axios request failed: ${e}`);

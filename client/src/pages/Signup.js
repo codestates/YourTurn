@@ -132,7 +132,7 @@ const Signup = () => {
           <ButtonWrap>
             <button type="submit" disabled={isTextareaDisabled}>
               등록
-            </button>{" "}
+            </button>
           </ButtonWrap>
         </form>
       </SignupContainer>
