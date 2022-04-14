@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import styled from "styled-components";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -26,6 +27,7 @@ const ProfileImg = styled.div``;
 const NickNameContainer = styled.div``;
 
 const CurrentNickName = styled.div``;
+const FetchedtNickName = styled.div``;
 
 const NickNameChange = styled.button``;
 
@@ -36,6 +38,8 @@ const ButtonWrap = styled.div``;
 const Button = styled.button``;
 
 function Profile() {
+  const navigate = useNavigate();
+
   const [nickname, setNickname] = useState("");
   const handleChangeNickname = (event) => {
     setNickname(event.target.value);
@@ -43,18 +47,24 @@ function Profile() {
 
   useEffect(() => {
     async function getNickName() {
-
       return await axios.get("http://localhost:80/user/profile/");
     }
     getNickName().then((data) => {
-      console.log("data::", data);
+      // console.log("data::", data);
+      //   {
+      //     "data": {
+      //         "id": 1,
+      //         "email": "kimcoding@codestates.com",
+      //         "nickname": "Kimcoding"
+      //     }
+      // }
+      const currentNickname = data.data.nickname;
+      console.log("currentNickname", currentNickname); // 못 받아옴
     });
-
   }, []);
 
-  const handleButtonClick = async () => {
+  const handleModifyButtonClick = async () => {
     try {
-
       const response = await axios.patch(
         "http://localhost:80/user/profile/",
         {
@@ -73,22 +83,30 @@ function Profile() {
     }
   };
 
+  const handleCompletion = () => {
+    navigate("/");
+  };
+  const handlePermanentDeletion = () => {
+    navigate("/");
+  };
+
   return (
     <Container>
       <ProfileTitle>내 정보 수정</ProfileTitle>
-      <ProfileImg>이미지</ProfileImg>
       <NickNameContainer>
-        <CurrentNickName>현재 닉네임</CurrentNickName>
-        <NickNameChange onClick={handleButtonClick}>닉네임 변경</NickNameChange>
+        <CurrentNickName>Current Nickname:</CurrentNickName>
+        <FetchedtNickName>불러오기</FetchedtNickName>
+
         <NickNameInput
           onChange={handleChangeNickname}
           type="text"
           placeholder="변경할 닉네임"
         ></NickNameInput>
+        <NickNameChange onClick={handleModifyButtonClick}>닉네임 변경</NickNameChange>
       </NickNameContainer>
       <ButtonWrap>
-        <Button>회원 탈퇴</Button>
-        <Button>수정 완료</Button>
+        <Button onClick={handlePermanentDeletion}>회원 탈퇴</Button>
+        <Button onClick={handleCompletion}>수정 완료</Button>
       </ButtonWrap>
     </Container>
   );
