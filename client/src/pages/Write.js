@@ -40,8 +40,7 @@ const Content = styled.textarea`
   font-size : 25px;
 `;
 
-const TeamWrap = styled.div`
-`;
+const TeamWrap = styled.div``;
 const Team = styled.select`
   font-size: 25px;
   width: 100%;
@@ -69,6 +68,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   console.log("접근하는곳", clickEntry)
 
  
+
 
   // console.log("entry", entry);
   const TeamData = [
@@ -123,6 +123,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     },
   ];
   const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
   const [choice, setChoice] = useState("");
   const [text, setText] = useState("");
 
@@ -138,6 +139,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     postTeamId = sessionStorage.getItem("team_id");
   } else {
     postTeamId = choice;
+
   }
 
   console.log("postTeamId", postTeamId);
@@ -159,6 +161,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
       "http://localhost:80/team/write-article",
 
       { title: title, content: text, team_id: postTeamId },
+
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
@@ -167,6 +170,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     if (data.data) {
       navigate(-1);
       // 현재 글 목록에 추가되는 로직은 없음
+
     }
   };
 

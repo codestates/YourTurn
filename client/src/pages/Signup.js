@@ -60,12 +60,12 @@ const Signup = () => {
           nickname,
         },
         {
-          headers: { "Content-Type": "application/json" },
+          // headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       )
       .then((response) => {
-        console.log("response::", response);
+        console.log("signin res::", response);
         if (response.accessToken) {
           localStorage.setItem("user", JSON.stringify(response));
         }
@@ -77,8 +77,10 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await signup(email, password).then(
+      await signup(email, password, nickname).then(
         (response) => {
+          console.log("signup res::", response);
+
           navigate("/");
           window.location.reload();
         },
@@ -92,7 +94,6 @@ const Signup = () => {
     // setSuccess(true);
     // setEmail("");
     // setPwd("");
-
   };
 
   return (
@@ -132,7 +133,7 @@ const Signup = () => {
           <ButtonWrap>
             <button type="submit" disabled={isTextareaDisabled}>
               등록
-            </button>{" "}
+            </button>
           </ButtonWrap>
         </form>
       </SignupContainer>

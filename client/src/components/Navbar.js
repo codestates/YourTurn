@@ -13,7 +13,7 @@ const Nav = styled.nav`
   z-index: 500;
   width: 100%;
   background-color: white;
-  box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.1);
+  box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.1);
   height: 70px;
 `
 
@@ -47,8 +47,8 @@ const Menu = styled.button`
   cursor: pointer;
 `;
 
-const Navbar = ({setNavDiv ,setShowModal, setShowMyModal, showMyModal }) => {
-  let isLogin = sessionStorage.getItem("isLogin")
+const Navbar = ({ setNavDiv, setShowModal, setShowMyModal, showMyModal }) => {
+  let isLogin = sessionStorage.getItem("isLogin");
 
   const navigate = useNavigate();
 
@@ -66,10 +66,9 @@ const Navbar = ({setNavDiv ,setShowModal, setShowMyModal, showMyModal }) => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setNavDiv(NavContainer);
-  })
-
+  });
 
   return (
     <Nav ref={NavContainer}>
@@ -79,11 +78,17 @@ const Navbar = ({setNavDiv ,setShowModal, setShowMyModal, showMyModal }) => {
       <MenuWrap>
         <Menu onClick={changePageToWrite}>새 글 쓰기</Menu>
         {isLogin === "true" ? (
-          <Menu onClick={()=>{setShowMyModal(!showMyModal)}}>마이페이지</Menu>
+          <Menu
+            onClick={() => {
+              setShowMyModal(!showMyModal);
+            }}
+          >
+            마이페이지
+          </Menu>
         ) : (
           <Menu
             onClick={() => {
-              setShowModal(true)
+              setShowModal(true);
             }}
           >
             로그인

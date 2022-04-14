@@ -1,7 +1,6 @@
-import React,{ useRef , useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 
 const ModalContiaer = styled.div`
   position: fixed;
@@ -14,7 +13,6 @@ const ModalContiaer = styled.div`
   width: 15%;
   height: 20%;
   margin-top: 70px;
-  
 `;
 const ModalView = styled.div`
   display: flex;
@@ -29,42 +27,39 @@ const ModalView = styled.div`
 `;
 const MyPost = styled.div``;
 const Setting = styled.div``;
-const LogOut = styled.button`
-`;
+const LogOut = styled.button``;
 
+const MyPageModal = ({ navDiv, showMyModal, setShowMyModal }) => {
+  const navigate = useNavigate();
 
-
-const MyPageModal = ({navDiv, showMyModal , setShowMyModal}) => {
-
-  const navigate = useNavigate()
-
-  const moveToMyPage= () => {
+  const moveToMyPage = () => {
     setShowMyModal(false);
     navigate("/myarticle");
-  }
+  };
 
   const moveToMyProfile = () => {
     setShowMyModal(false);
     navigate("/profile");
-  }
-
-
-
-const modalContainer = useRef()
-  
-const handleCloseModal= ({target}) => {
- if (showMyModal && !modalContainer?.current?.contains(target) && !navDiv?.current?.contains(target)){
-  setShowMyModal(false);
- }
-}
-
-useEffect(() => {
-  window.addEventListener('click', handleCloseModal);
-  return () => {
-    window.removeEventListener('click', handleCloseModal);
   };
-});
 
+  const modalContainer = useRef();
+
+  const handleCloseModal = ({ target }) => {
+    if (
+      showMyModal &&
+      !modalContainer?.current?.contains(target) &&
+      !navDiv?.current?.contains(target)
+    ) {
+      setShowMyModal(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", handleCloseModal);
+    return () => {
+      window.removeEventListener("click", handleCloseModal);
+    };
+  });
 
   return (
     <ModalContiaer ref={modalContainer} showMyModal={showMyModal}>

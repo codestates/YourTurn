@@ -1,8 +1,52 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import styled from "styled-components";
+
 // import { postSignIn } from "../../Api";
 // import { useNavigate } from "react-router-dom";
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  border: 1px solid green;
+  height: 500px;
+  max-width: 1400px;
+  align-items: center;
+  margin: 100px auto 0 auto;
+`;
+const SigninContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  max-width: 1400px;
+  margin: 80px auto 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 5px;
+`;
+
+const InputWrap = styled.div`
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; */
+`;
+const Title = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const ButtonWrap = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const AlertBox = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 function Signin({ setShowModal }) {
   // const navigate = useNavigate();
@@ -29,6 +73,7 @@ function Signin({ setShowModal }) {
         }
       )
       .then((response) => {
+        console.log("login res::", response);
         if (response.accessToken) {
           localStorage.setItem("user", JSON.stringify(response));
         }
@@ -75,34 +120,38 @@ function Signin({ setShowModal }) {
 
   return (
     <>
-      <div>
-        <center>
-          <h1>Sign In</h1>
+      <Container>
+        <SigninContainer>
           <form onSubmit={(e) => e.preventDefault()}>
-            <div>
-              <span>이메일</span>
-              <input type="email" placeholder="이메일" onChange={handleInputValue("email")} />
-            </div>
-            <div>
-              <span>비밀번호</span>
-              <input
-                type="password"
-                placeholder="비밀번호"
-                onChange={handleInputValue("password")}
-              />
-            </div>
-            <div onClick={closeModal}>
-              <Link to="/signup">아직 아이디가 없으신가요?</Link>
-            </div>
-            <div>
+            <Title>
+              <h1>Sign In</h1>
+            </Title>
+            <InputWrap>
+              <div>
+                <span>이메일</span>
+                <input type="email" placeholder="이메일" onChange={handleInputValue("email")} />
+              </div>
+              <div>
+                <span>비밀번호</span>
+                <input
+                  type="password"
+                  placeholder="비밀번호"
+                  onChange={handleInputValue("password")}
+                />
+              </div>
+              <div onClick={closeModal}>
+                <Link to="/signup">아직 아이디가 없으신가요?</Link>
+              </div>
+            </InputWrap>
+            <ButtonWrap>
               <button className="btn btn-login" type="submit" onClick={handleLogin}>
                 로그인
               </button>
-            </div>
-            <div className="alert-box">{errorMessage}</div>
+            </ButtonWrap>
+            <AlertBox className="alert-box">{errorMessage}</AlertBox>
           </form>
-        </center>
-      </div>
+        </SigninContainer>
+      </Container>
     </>
   );
 }

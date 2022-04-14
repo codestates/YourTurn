@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import styled from "styled-components";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -41,6 +42,7 @@ const NickNameInput = styled.input`
 margin-right : 20px;
 font-size:20px;`
 
+
 const ButtonWrap = styled.div`
   display: flex;
   justify-content: flex-end; ;`;
@@ -54,6 +56,8 @@ const Button = styled.button`
 
 
 function Profile() {
+  const navigate = useNavigate();
+
   const [nickname, setNickname] = useState("");
   const handleChangeNickname = (event) => {
     setNickname(event.target.value);
@@ -61,22 +65,47 @@ function Profile() {
 
   useEffect(() => {
     async function getNickName() {
-      console.log("useEffect");
-      let { data } = await axios.get("http://localhost:80/user/profile");
-      console.log("데이터확인", data)
+      return await axios.get("http://localhost:80/user/profile/");
     }
-    getNickName();
+    getNickName().then((data) => {
+      // console.log("data::", data);
+      //   {
+      //     "data": {
+      //         "id": 1,
+      //         "email": "kimcoding@codestates.com",
+      //         "nickname": "Kimcoding"
+      //     }
+      // }
+      const currentNickname = data.data.nickname;
+      console.log("currentNickname", currentNickname); // 못 받아옴
+    });
   }, []);
 
-  const handleButtonClick = async () => {
+  const handleModifyButtonClick = async () => {
     try {
-      const response = await axios.patch("http://localhost:80/user/profile/", {
-        nickname: nickname,
-      });
+      const response = await axios.patch(
+        "http://localhost:80/user/profile/",
+        {
+          nickname: nickname,
+        }
+        // {
+        //   headers: {
+        //     authorization: accessToken,
+        //   },
+        // }
+      );
+
       console.log("👉 Returned data:", response);
     } catch (e) {
       console.log(`😱 Axios request failed: ${e}`);
     }
+  };
+
+  const handleCompletion = () => {
+    navigate("/");
+  };
+  const handlePermanentDeletion = () => {
+    navigate("/");
   };
 
   return (
@@ -85,16 +114,19 @@ function Profile() {
       {/* <ProfileImg>이미지</ProfileImg> */}
       <NickNameContainer>
         <CurrentNickName>현재 닉네임</CurrentNickName>
+
         <NickNameInput
           onChange={handleChangeNickname}
           type="text"
           placeholder="변경할 닉네임"
         ></NickNameInput>
-        <NickNameChange onClick={handleButtonClick}>닉네임 변경</NickNameChange>
+
+        <NickNameChange onClick={handleModifyButtonClick}>닉네임 변경</NickNameChange>
+
       </NickNameContainer>
       <ButtonWrap>
-        <Button>회원 탈퇴</Button>
-        <Button>수정 완료</Button>
+        <Button onClick={handlePermanentDeletion}>회원 탈퇴</Button>
+        <Button onClick={handleCompletion}>수정 완료</Button>
       </ButtonWrap>
     </Container>
   );
