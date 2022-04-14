@@ -9,34 +9,36 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  border: 1px solid green;
   height: 500px;
   max-width: 1400px;
   align-items: center;
-  margin: 100px auto 0 auto;
+  margin: auto;
 `;
 const SigninContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 100px;
   max-width: 1400px;
-  margin: 80px auto 0 auto;
+  margin: 40px auto 0 auto;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px;
   border-radius: 5px;
 `;
 
 const InputWrap = styled.div`
-  /* display: flex;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px; */
+  margin-bottom: 20px;
 `;
 const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+`;
+const Text = styled.div`
+  margin-right: 10px;
 `;
 
 const ButtonWrap = styled.div`
@@ -124,24 +126,23 @@ function Signin({ setShowModal }) {
         <SigninContainer>
           <form onSubmit={(e) => e.preventDefault()}>
             <Title>
-              <h1>Sign In</h1>
+              <h1 className="text-grey-600 underline">Sign In</h1>
             </Title>
             <InputWrap>
-              <div>
-                <span>이메일</span>
-                <input type="email" placeholder="이메일" onChange={handleInputValue("email")} />
-              </div>
-              <div>
-                <span>비밀번호</span>
-                <input
-                  type="password"
-                  placeholder="비밀번호"
-                  onChange={handleInputValue("password")}
-                />
-              </div>
-              <div onClick={closeModal}>
-                <Link to="/signup">아직 아이디가 없으신가요?</Link>
-              </div>
+              <Text>이메일</Text>
+              <input type="email" placeholder="이메일" onChange={handleInputValue("email")} />
+            </InputWrap>
+            <InputWrap>
+              <Text>비밀번호</Text>
+              <input
+                type="password"
+                placeholder="비밀번호"
+                onChange={handleInputValue("password")}
+              />
+            </InputWrap>
+
+            <InputWrap onClick={closeModal}>
+              <Link to="/signup">아직 아이디가 없으신가요?</Link>
             </InputWrap>
             <ButtonWrap>
               <button className="btn btn-login" type="submit" onClick={handleLogin}>

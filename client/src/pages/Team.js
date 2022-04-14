@@ -20,14 +20,14 @@ const TeamName = styled.div`
   padding: 10px;
   margin-bottom: 10px;
   font-weight: bold;
-  font-size : 30px;
+  font-size: 30px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 `;
 const TeamIntro = styled.div`
   width: 100%;
   height: 130px;
   padding: 10px;
-  font-size:25px;
+  font-size: 25px;
 `;
 
 const ContentsPage = styled.div`
@@ -39,7 +39,7 @@ const ContentsPage = styled.div`
 `;
 const BoardWrap = styled.div`
   width: 100%;
-  height: 20% ;
+  height: 20%;
   display: flex;
   justify-content: space-around;
   border: 1px solid black;
@@ -74,6 +74,7 @@ const BoardButton = styled.button`
   cursor: pointer;
 `;
 const ButtonWrap = styled.div`
+
 width:100%;
 display:flex;
 justify-content: flex-end;
@@ -159,6 +160,7 @@ function Team({ setEntry, setWriteDefault }) {
       <TeamName>{teamData[0]?.team_name}</TeamName>
       <TeamIntro>{teamData[0]?.team_description}</TeamIntro>
       <ContentsPage>
+
       <TitleWrap>
               <TopNum>번호</TopNum>
               <TopTitle>제목</TopTitle>
@@ -175,8 +177,8 @@ function Team({ setEntry, setWriteDefault }) {
         })}
       </ContentsPage>
       <ButtonWrap>
-          <BoardButton onClick={changePageToWrite}>글쓰기</BoardButton>
-        </ButtonWrap>  
+        <BoardButton onClick={changePageToWrite}>글쓰기</BoardButton>
+      </ButtonWrap>
     </Container>
   );
 }

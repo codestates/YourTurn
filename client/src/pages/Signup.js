@@ -36,6 +36,9 @@ const Title = styled.div`
   align-items: center;
   margin-bottom: 20px;
 `;
+const Text = styled.div`
+  margin-right: 10px;
+`;
 
 const ButtonWrap = styled.div`
   display: flex;
@@ -101,10 +104,10 @@ const Signup = () => {
       <SignupContainer>
         <form onSubmit={handleSignup}>
           <Title>
-            <h3>Sign up</h3>
+            <h3 className="font">Sign up</h3>
           </Title>
           <InputWrap>
-            <span>이메일</span>
+            <Text>이메일</Text>
             <input
               type="text"
               placeholder="email"
@@ -113,7 +116,7 @@ const Signup = () => {
             />
           </InputWrap>
           <InputWrap>
-            <span>비밀번호</span>
+            <Text>비밀번호</Text>
             <input
               type="password"
               placeholder="password"
@@ -122,7 +125,7 @@ const Signup = () => {
             />
           </InputWrap>
           <InputWrap>
-            <span>닉네임</span>
+            <Text>닉네임</Text>
             <input
               type="text"
               placeholder="nickname"

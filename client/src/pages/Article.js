@@ -12,7 +12,7 @@ const Container = styled.div`
   /* justify-content: center; */
   height: 500px;
   max-width: 1400px;
-  align-items: center;
+  align-items: left;
   margin: 100px auto 0 auto;
 `;
 

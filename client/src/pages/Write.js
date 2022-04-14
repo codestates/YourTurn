@@ -64,10 +64,8 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const navigate = useNavigate();
 
   let postTeamId;
-  let clickEntry = sessionStorage.getItem("entry")
-  console.log("접근하는곳", clickEntry)
-
- 
+  let clickEntry = sessionStorage.getItem("entry");
+  console.log("접근하는곳", clickEntry);
 
 
   // console.log("entry", entry);

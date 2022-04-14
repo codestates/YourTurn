@@ -6,7 +6,7 @@ const Comment = ({ comment, handleDeleteComment, idx }) => {
       <div className="comment__content">
         <div className="comment__userInfo">
           <div className="comment__userInfo--wrapper">
-            <span className="comment__nickname">{comment.user_nickname}</span>
+            <span className="text-xl">{comment.user_nickname}</span>
             <span className="comment__createdAt">{comment.createdAt}</span>
           </div>
           <div className="comment__userInfo--buttonWrapper">
