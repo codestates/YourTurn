@@ -134,8 +134,8 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
 
     await axios
       .post(
-        "http://localhost:4000/team/write-article",
-        { title: title, content: text, team_name: options },
+        "http://localhost:80/team/write-article",
+        { title: title, content: text }, // 팀네임을 전달
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
@@ -145,7 +145,11 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
         navigate(-1);
       });
   };
-  console.log("check", writeDefault)
+
+  const handleCancelButton = () => {
+    navigate(-1);
+  };
+  console.log("check", writeDefault);
 
   return (
     <Container>
@@ -168,7 +172,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
       </Head>
       <Content placeholder="내용을 작성하세요" onChange={(e) => setText(e.target.value)} />
       <ButtonWrap>
-        <Button>취소</Button>
+        <Button onClick={handleCancelButton}>취소</Button>
         <Button onClick={handleSubmitButton}>등록</Button>
       </ButtonWrap>
     </Container>

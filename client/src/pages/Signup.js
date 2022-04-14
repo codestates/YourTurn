@@ -53,7 +53,7 @@ const Signup = () => {
   const signup = async (email, password, nickname) => {
     return await axios
       .post(
-        "http://localhost:4000/user/signup",
+        "http://localhost:80/user/signup",
         {
           email,
           password,
@@ -128,7 +128,7 @@ const Signup = () => {
           <ButtonWrap>
             <button type="submit" disabled={isTextareaDisabled}>
               등록
-            </button>{" "}
+            </button>
           </ButtonWrap>
         </form>
       </SignupContainer>

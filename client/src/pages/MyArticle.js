@@ -49,7 +49,7 @@ function MyArticle() {
 
   useEffect(() => {
     async function fetchArticles() {
-      let { data } = await axios.get(`http://localhost:4000/user/mypost`);
+      let { data } = await axios.get(`http://localhost:80/user/mypost`);
 
       setArticles(data.data);
     }
