@@ -7,7 +7,7 @@ const GlobalStyles = createGlobalStyle`
       
         box-sizing: border-box;
     }
-    body,html,#root { font-family: 'Do Hyeon', sans-serif; width: 100%}; 
+    body,html,#root { font-family: 'IBM Plex Sans KR', sans-serif; width: 100%}; 
 
 `;
 

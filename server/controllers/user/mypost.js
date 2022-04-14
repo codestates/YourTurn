@@ -3,6 +3,7 @@ const { isAuthorized } = require("../tokenFunctions");
 
 module.exports = async (req, res) => {
   // const userId = req.params.id;
+  console.log("진입");
   const userAuthInfo = isAuthorized(req);
   console.log("userAuthInfo::", userAuthInfo);
   try {

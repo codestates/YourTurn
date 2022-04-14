@@ -3,7 +3,6 @@ import "../App.css";
 import styled from "styled-components";
 import Comments from "../components/Comments";
 import { useParams } from "react-router-dom";
-
 import axios from "axios";
 
 // Article Page
@@ -11,16 +10,15 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  border: 1px solid green;
   height: 500px;
   max-width: 1400px;
-  align-items: center;
+  align-items: left;
   margin: 100px auto 0 auto;
 `;
 
 const TeamName = styled.div`
+  font-size: 30px;
   width: 100%;
-  border: 1px solid red;
   height: 100px;
   padding: 10px;
   margin-bottom: 10px;
@@ -52,26 +50,17 @@ function Article({ setWriteDefault }) {
   //     "애자일 개발 방법론입니다. 애자일 방법론은 절차보다는 사람을, 문서보다는 작동하는 소프트웨어를, 미리 철저하게 계획하기 보다는 변화에 대한 민첩한 대응을, 계약과 협상에 얽매이기 보다는 고객과의 협력을 중요하게 생각합니다.",
   //   total_likes: 10,
   //   user_id: 1,
-  //   comments: [
-  //     {
-  //       id: 1,
-  //       post_id: 1,
-  //       user_id: 1,
-  //       content: "리액트로 useState를 활용해 봅시다",
-  //       createdAt: "2022-03-08T00:00:00.000Z",
-  //       updatedAt: "2022-03-08T10:00:00.000Z",
-  //     },
-  //   ],
+  //   comments: [{}, {}]
   // });
   const [article, setArticle] = useState({});
   const [comments, setComments] = useState([]);
 
   const postComment = async (commentData) => {
-    let { data } = await axios.post(`http://localhost:4000/article/${id}`, commentData, {
+    let { data } = await axios.post(`http://localhost:80/article/${id}`, commentData, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     });
-    console.log("data:::", data);
+    console.log("sent comment:::", data);
     // {
     //   commentInfo: {
     //     content: "last";
@@ -89,11 +78,11 @@ function Article({ setWriteDefault }) {
   };
 
   useEffect(() => {
-    async function fetchData() {
-      return await axios.get(`http://localhost:4000/article/${id}`);
+    async function fetchArticle() {
+      return await axios.get(`http://localhost:80/article/${id}`);
       // console.log("data:::", data);
     }
-    fetchData().then((data) => {
+    fetchArticle().then((data) => {
       // console.log("data:::", data);
       let newArticle = data.data.postInfo;
       setArticle(newArticle);
@@ -103,7 +92,7 @@ function Article({ setWriteDefault }) {
 
   return (
     <Container>
-      <TeamName>팀네임</TeamName>
+      <TeamName>{sessionStorage.getItem("name")}</TeamName>
       <Content>
         <ContentTitle>{article.title}</ContentTitle>
         <ContentContent>{article.content}</ContentContent>

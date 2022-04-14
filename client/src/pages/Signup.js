@@ -36,6 +36,9 @@ const Title = styled.div`
   align-items: center;
   margin-bottom: 20px;
 `;
+const Text = styled.div`
+  margin-right: 10px;
+`;
 
 const ButtonWrap = styled.div`
   display: flex;
@@ -53,19 +56,19 @@ const Signup = () => {
   const signup = async (email, password, nickname) => {
     return await axios
       .post(
-        "http://localhost:4000/user/signup",
+        "http://localhost:80/user/signup",
         {
           email,
           password,
           nickname,
         },
         {
-          headers: { "Content-Type": "application/json" },
+          // headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       )
       .then((response) => {
-        console.log("response::", response);
+        console.log("signin res::", response);
         if (response.accessToken) {
           localStorage.setItem("user", JSON.stringify(response));
         }
@@ -77,8 +80,10 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await signup(email, password).then(
+      await signup(email, password, nickname).then(
         (response) => {
+          console.log("signup res::", response);
+
           navigate("/");
           window.location.reload();
         },
@@ -89,6 +94,9 @@ const Signup = () => {
     } catch (err) {
       console.log(err);
     }
+    // setSuccess(true);
+    // setEmail("");
+    // setPwd("");
   };
 
   return (
@@ -96,10 +104,10 @@ const Signup = () => {
       <SignupContainer>
         <form onSubmit={handleSignup}>
           <Title>
-            <h3>Sign up</h3>
+            <h3 className="font">Sign up</h3>
           </Title>
           <InputWrap>
-            <span>이메일</span>
+            <Text>이메일</Text>
             <input
               type="text"
               placeholder="email"
@@ -108,7 +116,7 @@ const Signup = () => {
             />
           </InputWrap>
           <InputWrap>
-            <span>비밀번호</span>
+            <Text>비밀번호</Text>
             <input
               type="password"
               placeholder="password"
@@ -117,7 +125,7 @@ const Signup = () => {
             />
           </InputWrap>
           <InputWrap>
-            <span>닉네임</span>
+            <Text>닉네임</Text>
             <input
               type="text"
               placeholder="nickname"
@@ -126,9 +134,13 @@ const Signup = () => {
             />
           </InputWrap>
           <ButtonWrap>
-            <button type="submit" disabled={isTextareaDisabled}>
+            <button
+              className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+              type="submit"
+              disabled={isTextareaDisabled}
+            >
               등록
-            </button>{" "}
+            </button>
           </ButtonWrap>
         </form>
       </SignupContainer>

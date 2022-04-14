@@ -7,9 +7,8 @@ import { useNavigate } from "react-router-dom";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
   max-width: 1400px;
-  margin: 80px auto 0 auto;
+  margin: 120px auto 0 auto;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px;
   border-radius: 5px;
@@ -29,7 +28,7 @@ const Title = styled.input`
   &:focus {
     outline: none;
   }
-  font-size: 25px;
+  font-size: 30px;
 `;
 const Content = styled.textarea`
   height: 500px;
@@ -37,13 +36,13 @@ const Content = styled.textarea`
   &:focus {
     outline: none;
   }
+  font-size: 25px;
 `;
 
-const TeamWrap = styled.div`
-  border: 1px solid black;
-`;
+const TeamWrap = styled.div``;
 const Team = styled.select`
-  font-size: 20px;
+  font-size: 25px;
+  width: 100%;
 `;
 const ButtonWrap = styled.div`
   display: flex;
@@ -53,18 +52,31 @@ const Button = styled.button`
   font-size: 17px;
   margin: 10px;
   padding: 5px;
+  cursor: pointer;
 `;
 
 const TeamNameDefault = styled.div`
   font-size: 25px;
-  border: 2px solid black;
 `;
 
 const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const navigate = useNavigate();
 
+  let postTeamId;
+  let clickEntry = sessionStorage.getItem("entry");
+  console.log("접근하는곳", clickEntry);
+
   // console.log("entry", entry);
   const TeamData = [
+    {
+      id: 0,
+      name: "관심사를 선택해주세요",
+      desc: "리액트 관련 프론트엔드 개발자를 위한 면접 질문",
+      interest_id: 1,
+      createdAt: "2022-04-08 00:00:00",
+      updatedAt: "2022-04-08 01:00:00",
+    },
+
     {
       id: 1,
       name: "리액트 면접 준비",
@@ -107,21 +119,28 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     },
   ];
   const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
   const [choice, setChoice] = useState("");
 
   const options = TeamData.map((TeamData, i) => {
     return (
-      <option key={i} value={TeamData.name}>
+      <option key={i} value={TeamData.id}>
         {TeamData.name}
       </option>
     );
   });
 
+  if (clickEntry === "teamClick") {
+    postTeamId = sessionStorage.getItem("team_id");
+  } else {
+    postTeamId = choice;
+  }
+
+  console.log("postTeamId", postTeamId);
+
   const selectTeam = (event) => {
     setChoice(event.target.value);
   };
-  //본문을 위한 로직
-  const [text, setText] = useState("");
 
   useEffect(() => {
     if (writeDefault === "") {
@@ -132,20 +151,26 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const handleSubmitButton = async () => {
     console.log("event:::");
 
-    await axios
-      .post(
-        "http://localhost:4000/team/write-article",
-        { title: title, content: text, team_name: options },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      )
-      .then(() => {
-        navigate(-1);
-      });
+    let data = await axios.post(
+      "http://localhost:80/team/write-article",
+
+      { title: title, content: text, team_id: postTeamId },
+
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+    if (data.data) {
+      navigate(-1);
+      // 현재 글 목록에 추가되는 로직은 없음
+    }
   };
-  console.log("check", writeDefault)
+
+  const handleCancelButton = () => {
+    navigate(-1);
+  };
+  console.log("check", writeDefault);
 
   return (
     <Container>
@@ -168,8 +193,18 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
       </Head>
       <Content placeholder="내용을 작성하세요" onChange={(e) => setText(e.target.value)} />
       <ButtonWrap>
-        <Button>취소</Button>
-        <Button onClick={handleSubmitButton}>등록</Button>
+        <Button
+          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          onClick={handleCancelButton}
+        >
+          취소
+        </Button>
+        <Button
+          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          onClick={handleSubmitButton}
+        >
+          등록
+        </Button>
       </ButtonWrap>
     </Container>
   );
