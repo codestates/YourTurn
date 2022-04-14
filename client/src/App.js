@@ -44,7 +44,7 @@ const App = () => {
           element={<Team setEntry={setEntry} setWriteDefault={setWriteDefault} />}
         />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" setShowMyModal={setShowMyModal} element={<Profile />} />
         <Route path="/myarticle" element={<MyArticle />} />
         <Route path="/article/:id" element={<Article setWriteDefault={setWriteDefault} />} />
       </Routes>
