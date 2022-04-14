@@ -11,34 +11,40 @@ const Container = styled.div`
   flex-direction: column;
   /* justify-content: center; */
   height: 500px;
-  max-width: 1400px;
+  max-width: 800px;
   align-items: left;
   margin: 100px auto 0 auto;
+  /* border: 1px solid black; */
 `;
 
 const TeamName = styled.div`
   font-size: 30px;
   width: 100%;
-  height: 100px;
+  height: 60px;
   padding: 10px;
   margin-bottom: 10px;
 `;
 
 const Content = styled.div`
-  height: 500px;
+  height: 400px;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   &:focus {
     outline: none;
   }
 `;
 const ContentTitle = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   padding: 10px;
 `;
 const ContentContent = styled.div`
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* border: 1px solid rgba(0, 0, 0, 0.1); */
   padding: 10px;
 `;
+const ArticleWrap = styled.div``;
+const Author = styled.div``;
 const CommentWrap = styled.div``;
 
 function Article({ setWriteDefault }) {
@@ -84,21 +90,23 @@ function Article({ setWriteDefault }) {
     }
     fetchArticle().then((data) => {
       // console.log("data:::", data);
-      let newArticle = data.data.postInfo;
+      const newArticle = data.data.postInfo;
       setArticle(newArticle);
       setComments(newArticle.comments.reverse()); // 서버에서 받아온 커멘트 정렬에 최신이 아래로 가 있어서 reverse 함
     });
   }, []);
 
   return (
-    <Container>
-      <TeamName>{sessionStorage.getItem("name")}</TeamName>
-      <Content>
-        <ContentTitle>{article.title}</ContentTitle>
-        <ContentContent>{article.content}</ContentContent>
-      </Content>
+    <Container className="flex">
+      <ArticleWrap className="mx-7">
+        <TeamName>{sessionStorage.getItem("name")}</TeamName>
+        <Content className="rounded-lg shadow-sm shadow-sky-600/50">
+          <ContentTitle className="text-base">제목 | {article.title}</ContentTitle>
+          <ContentContent>{article.content}</ContentContent>
+        </Content>
+      </ArticleWrap>
       <CommentWrap>
-        <Comments fetchComments={comments} postCommentHandler={postComment} />
+        <Comments className="flex" fetchComments={comments} postCommentHandler={postComment} />
       </CommentWrap>
     </Container>
   );

@@ -12,7 +12,7 @@ const Container = styled.div`
   margin: 120px auto 0 auto;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 `;
 const TeamName = styled.div`
   width: 100%;
@@ -42,7 +42,9 @@ const BoardWrap = styled.div`
   height: 20%;
   display: flex;
   justify-content: space-around;
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 `;
 const BoardNum = styled.div`
   width: 10%;
@@ -53,11 +55,11 @@ const BoardNum = styled.div`
 `;
 const BoardTitle = styled.div`
   width: 50%;
-  height:30%;
+  height: 30%;
   text-align: center;
   margin: auto;
-  font-size: 20px ;
-  font-weight: bold ;
+  font-size: 20px;
+  font-weight: bold;
   cursor: pointer;
 `;
 const BoardCreatedDate = styled.div`
@@ -65,7 +67,7 @@ const BoardCreatedDate = styled.div`
   height: 30%;
   text-align: center;
   margin: auto;
-  font-size : 18px;
+  font-size: 18px;
 `;
 const BoardButton = styled.button`
   font-size: 17px;
@@ -74,21 +76,22 @@ const BoardButton = styled.button`
   cursor: pointer;
 `;
 const ButtonWrap = styled.div`
-
-width:100%;
-display:flex;
-justify-content: flex-end;
-`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
 const TitleWrap = styled.div`
   width: 100%;
-  height: 10% ;
+  height: 10%;
   display: flex;
   justify-content: space-around;
   margin-top: 15px;
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   background-color: whitesmoke;
-  font-weight: bold ;
-  font-size : 25px;
+  font-weight: bold;
+  font-size: 25px;
 `;
 
 const TopNum = styled.div`
@@ -105,11 +108,9 @@ const TopDate = styled.div`
   width: 20%;
   text-align: center;
   margin: auto;
-`
+`;
 
 function Team({ setEntry, setWriteDefault }) {
-
-
   const [teamData, setTeamData] = useState([]);
 
   const { id } = useParams();
@@ -122,14 +123,10 @@ function Team({ setEntry, setWriteDefault }) {
       day = "" + d.getDate(),
       hour = d.getHours(),
       minute = d.getMinutes();
-    return `${month < 10 ? `0${month}` : month}월 ${day < 10 ? `0${day}` : day}일 ${hour < 10 ? `0${hour}` : hour}:${
-      minute < 10 ? `0${minute}` : minute
-    }`;
+    return `${month < 10 ? `0${month}` : month}월 ${day < 10 ? `0${day}` : day}일 ${
+      hour < 10 ? `0${hour}` : hour
+    }:${minute < 10 ? `0${minute}` : minute}`;
   };
-
-  
-
-
 
   const changePageToWrite = () => {
     setEntry("teamClick");
@@ -154,21 +151,19 @@ function Team({ setEntry, setWriteDefault }) {
     fetchData();
   }, []);
 
-
   return (
     <Container>
       <TeamName>{teamData[0]?.team_name}</TeamName>
       <TeamIntro>{teamData[0]?.team_description}</TeamIntro>
       <ContentsPage>
-
-      <TitleWrap>
-              <TopNum>번호</TopNum>
-              <TopTitle>제목</TopTitle>
-              <TopDate>날짜</TopDate>
-            </TitleWrap>
+        <TitleWrap>
+          <TopNum>번호</TopNum>
+          <TopTitle>제목</TopTitle>
+          <TopDate>날짜</TopDate>
+        </TitleWrap>
         {teamData[0]?.posts.map((teamPost, i) => {
           return (
-            <BoardWrap key={i}>
+            <BoardWrap className="shadow-sm shadow-sky-600/50" key={i}>
               <BoardNum>{i + 1}</BoardNum>
               <BoardTitle onClick={changePageToArticle}>{teamPost.title}</BoardTitle>
               <BoardCreatedDate>{formatDate(teamPost.createdAt)}</BoardCreatedDate>
@@ -177,7 +172,12 @@ function Team({ setEntry, setWriteDefault }) {
         })}
       </ContentsPage>
       <ButtonWrap>
-        <BoardButton onClick={changePageToWrite}>글쓰기</BoardButton>
+        <BoardButton
+          className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          onClick={changePageToWrite}
+        >
+          글쓰기
+        </BoardButton>
       </ButtonWrap>
     </Container>
   );

@@ -194,13 +194,13 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
       <Content placeholder="내용을 작성하세요" onChange={(e) => setText(e.target.value)} />
       <ButtonWrap>
         <Button
-          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
           onClick={handleCancelButton}
         >
           취소
         </Button>
         <Button
-          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
           onClick={handleSubmitButton}
         >
           등록
