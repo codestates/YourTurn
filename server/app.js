@@ -24,14 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
     origin: true,
-    methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
     credentials: true,
-    cookie: {
-      maxAge: 24 * 6 * 60 * 10000,
-      httpOnly: false,
-      secure: true,
-      sameSite: "None",
-    },
+    optionsSuccessStatus: 200,
   })
 );
 
@@ -57,7 +51,7 @@ if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
   const credentials = { key: privateKey, cert: certificate };
 
   server = http.createServer(credentials, app);
-  server.listen(HTTPS_PORT, () => console.log("http server runnning"));
+  server.listen(HTTPS_PORT, () => console.log("https server runnning"));
 } else {
   server = app.listen(HTTPS_PORT, () => console.log("http server runnning"));
 }
