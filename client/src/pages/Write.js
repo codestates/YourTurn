@@ -4,6 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,7 +29,7 @@ const Title = styled.input`
   &:focus {
     outline: none;
   }
-  font-size: 25px;
+  font-size: 30px;
 `;
 const Content = styled.textarea`
   height: 500px;
@@ -36,11 +37,12 @@ const Content = styled.textarea`
   &:focus {
     outline: none;
   }
+  font-size : 25px;
 `;
 
 const TeamWrap = styled.div``;
 const Team = styled.select`
-  font-size: 20px;
+  font-size: 25px;
   width: 100%;
 `;
 const ButtonWrap = styled.div`
@@ -61,9 +63,12 @@ const TeamNameDefault = styled.div`
 const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const navigate = useNavigate();
 
-  let postTeamName;
-  let clickEntry = sessionStorage.getItem("entry");
-  console.log("접근하는곳", clickEntry);
+  let postTeamId;
+  let clickEntry = sessionStorage.getItem("entry")
+  console.log("접근하는곳", clickEntry)
+
+ 
+
 
   // console.log("entry", entry);
   const TeamData = [
@@ -120,22 +125,24 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [choice, setChoice] = useState("");
+  const [text, setText] = useState("");
 
   const options = TeamData.map((TeamData, i) => {
     return (
-      <option key={i} value={TeamData.name}>
+      <option key={i} value={TeamData.id}>
         {TeamData.name}
       </option>
     );
   });
 
   if (clickEntry === "teamClick") {
-    postTeamName = sessionStorage.getItem("name");
+    postTeamId = sessionStorage.getItem("team_id");
   } else {
-    postTeamName = choice;
+    postTeamId = choice;
+
   }
 
-  console.log("postTeam네임", postTeamName);
+  console.log("postTeamId", postTeamId);
 
   const selectTeam = (event) => {
     setChoice(event.target.value);
@@ -153,7 +160,8 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     let data = await axios.post(
       "http://localhost:80/team/write-article",
 
-      { title: title, content: text, team_name: postTeamName },
+      { title: title, content: text, team_id: postTeamId },
+
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
@@ -161,6 +169,8 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     );
     if (data.data) {
       navigate(-1);
+      // 현재 글 목록에 추가되는 로직은 없음
+
     }
   };
 

@@ -18,24 +18,28 @@ const Intro = styled.div`
   display:flex;
   justify-content: space-around ;
 `
+const TextSwitch1 = styled.div`
+`
+const TextSwitch2 = styled.div`
+margin-top : 10px;
+`
+const TextSwitch3 = styled.div`
+margin-top: 10px;
+`
+const TextSwitch4 = styled.div`
+margin-top: 10px;
+`
 const IntroText = styled.pre`
-  font-size: 20px;
-  display:flex;
-  flex-direction: row ;
-  border:1px solid pink;
-  z-index: 999 ;
-  top: 15%;
-  left: 15%;
+  font-size: 30px;
+  top: 10%;
   margin: 10px auto 10px auto;
   position: absolute;
-  transform: translate( -50%, -50% );
-  word-wrap:break-word;
+  left: 3%;
 `
 const IntroImgWrap = styled.div`
 `
 const IntroImg = styled.img`
   width:100%;
-  border:1px solid pink;
 `
 const Interest = styled.div`
   display:flex;
@@ -60,6 +64,7 @@ const TeamInfo = styled.div`
   margin:40px;
   padding: 32px;
   cursor: pointer;
+  word-break: break-all;
 `
 const TeamInfoTitle = styled.div`
  font-size : 19px;
@@ -86,6 +91,12 @@ const InterestImg = styled.img`
   width: 200px;
   height: 200px;
 `
+const YourTurn = styled.span`
+  font-weight: bold;
+  font-style: italic ;
+  font-size: 30px ;
+  `
+
 
 function Home({setShowModal}) {
 
@@ -180,11 +191,11 @@ function Home({setShowModal}) {
     <Container>
       <Intro>
         <IntroText>
-          `면접 기출 질문은 많고 모든 답변을 다 준비하기는 어려운가요?
-          토익스피킹 답변 아이디어가 고갈되었나요?
-          YourTurn의 집단 지성을 이용하세요!
-          돌아가며 기여하고 다같이 잘 되는 그룹, YourTurn 입니다.`
-          </IntroText>
+          <TextSwitch1>면접 기출 질문은 많고 모든 답변을 다 준비하기는 어려운가요?</TextSwitch1>
+          <TextSwitch2>토익스피킹 답변 아이디어가 고갈되었나요?</TextSwitch2>
+          <TextSwitch3><YourTurn>YourTurn </YourTurn>의 집단 지성을 이용하세요!</TextSwitch3>
+          <TextSwitch4>돌아가며 기여하고 다같이 잘 되는 그룹, <YourTurn>YourTurn </YourTurn> 입니다.</TextSwitch4>
+        </IntroText>
         <IntroImgWrap>
           <IntroImg src={MainImg}></IntroImg>
         </IntroImgWrap>
