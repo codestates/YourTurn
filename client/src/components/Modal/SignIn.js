@@ -73,6 +73,7 @@ function Signin({ setShowModal }) {
         }
       )
       .then((response) => {
+        console.log("login res::", response);
         if (response.accessToken) {
           localStorage.setItem("user", JSON.stringify(response));
         }

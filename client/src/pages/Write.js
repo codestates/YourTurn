@@ -38,8 +38,7 @@ const Content = styled.textarea`
   }
 `;
 
-const TeamWrap = styled.div`
-`;
+const TeamWrap = styled.div``;
 const Team = styled.select`
   font-size: 20px;
   width: 100%;
@@ -63,10 +62,8 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const navigate = useNavigate();
 
   let postTeamName;
-  let clickEntry = sessionStorage.getItem("entry")
-  console.log("접근하는곳", clickEntry)
-
- 
+  let clickEntry = sessionStorage.getItem("entry");
+  console.log("접근하는곳", clickEntry);
 
   // console.log("entry", entry);
   const TeamData = [
@@ -121,6 +118,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     },
   ];
   const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
   const [choice, setChoice] = useState("");
 
   const options = TeamData.map((TeamData, i) => {
@@ -131,10 +129,10 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     );
   });
 
-  if(clickEntry === 'teamClick'){
-    postTeamName = sessionStorage.getItem('name')
-  }else{
-    postTeamName = choice
+  if (clickEntry === "teamClick") {
+    postTeamName = sessionStorage.getItem("name");
+  } else {
+    postTeamName = choice;
   }
 
   console.log("postTeam네임", postTeamName);
@@ -142,8 +140,6 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const selectTeam = (event) => {
     setChoice(event.target.value);
   };
-  //본문을 위한 로직
-  const [text, setText] = useState("");
 
   useEffect(() => {
     if (writeDefault === "") {
@@ -154,27 +150,24 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const handleSubmitButton = async () => {
     console.log("event:::");
 
-    let data = await axios
-      .post(
-        "http://localhost:80/team/write-article",
+    let data = await axios.post(
+      "http://localhost:80/team/write-article",
 
-        { title: title, content: text, team_name: postTeamName },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      )
-      if(data.data){
-        navigate(-1);
+      { title: title, content: text, team_name: postTeamName },
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+    if (data.data) {
+      navigate(-1);
     }
-
   };
 
   const handleCancelButton = () => {
     navigate(-1);
   };
   console.log("check", writeDefault);
-
 
   return (
     <Container>
