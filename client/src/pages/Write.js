@@ -4,7 +4,6 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,7 +36,7 @@ const Content = styled.textarea`
   &:focus {
     outline: none;
   }
-  font-size : 25px;
+  font-size: 25px;
 `;
 
 const TeamWrap = styled.div``;
@@ -66,7 +65,6 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   let postTeamId;
   let clickEntry = sessionStorage.getItem("entry");
   console.log("접근하는곳", clickEntry);
-
 
   // console.log("entry", entry);
   const TeamData = [
@@ -123,7 +121,6 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [choice, setChoice] = useState("");
-  const [text, setText] = useState("");
 
   const options = TeamData.map((TeamData, i) => {
     return (
@@ -137,7 +134,6 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     postTeamId = sessionStorage.getItem("team_id");
   } else {
     postTeamId = choice;
-
   }
 
   console.log("postTeamId", postTeamId);
@@ -168,7 +164,6 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     if (data.data) {
       navigate(-1);
       // 현재 글 목록에 추가되는 로직은 없음
-
     }
   };
 
@@ -198,8 +193,18 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
       </Head>
       <Content placeholder="내용을 작성하세요" onChange={(e) => setText(e.target.value)} />
       <ButtonWrap>
-        <Button onClick={handleCancelButton}>취소</Button>
-        <Button onClick={handleSubmitButton}>등록</Button>
+        <Button
+          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          onClick={handleCancelButton}
+        >
+          취소
+        </Button>
+        <Button
+          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          onClick={handleSubmitButton}
+        >
+          등록
+        </Button>
       </ButtonWrap>
     </Container>
   );

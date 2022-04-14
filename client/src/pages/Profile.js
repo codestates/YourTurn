@@ -22,38 +22,39 @@ const ProfileTitle = styled.div`
   padding: 10px;
   margin-bottom: 10px;
   font-weight: bold;
-  font-size : 30px;
+  font-size: 30px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 `;
 
 // const ProfileImg = styled.div``;
 
-const NickNameContainer = styled.div`
-  `
+const NickNameContainer = styled.div``;
 
 const CurrentNickName = styled.div`
-font-size : 30px;
-margin : 30px 0 30px 20px;`
+  font-size: 30px;
+  margin: 30px 0 30px 20px;
+`;
 
 const NickNameChange = styled.button`
-font-size:20px;`
+  font-size: 20px;
+`;
 
 const NickNameInput = styled.input`
-margin-right : 20px;
-font-size:20px;`
-
+  margin-right: 20px;
+  font-size: 20px;
+`;
 
 const ButtonWrap = styled.div`
   display: flex;
-  justify-content: flex-end; ;`;
+  justify-content: flex-end; ;
+`;
 
 const Button = styled.button`
   font-size: 17px;
   margin: 10px;
   padding: 5px;
-  cursor: pointer;`;
-
-
+  cursor: pointer;
+`;
 
 function Profile() {
   const navigate = useNavigate();
@@ -116,17 +117,32 @@ function Profile() {
         <CurrentNickName>현재 닉네임</CurrentNickName>
 
         <NickNameInput
+          className="ml-5 border-2"
           onChange={handleChangeNickname}
           type="text"
           placeholder="변경할 닉네임"
         ></NickNameInput>
 
-        <NickNameChange onClick={handleModifyButtonClick}>닉네임 변경</NickNameChange>
-
+        <NickNameChange
+          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          onClick={handleModifyButtonClick}
+        >
+          닉네임 변경
+        </NickNameChange>
       </NickNameContainer>
       <ButtonWrap>
-        <Button onClick={handlePermanentDeletion}>회원 탈퇴</Button>
-        <Button onClick={handleCompletion}>수정 완료</Button>
+        <Button
+          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          onClick={handlePermanentDeletion}
+        >
+          회원 탈퇴
+        </Button>
+        <Button
+          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          onClick={handleCompletion}
+        >
+          수정 완료
+        </Button>
       </ButtonWrap>
     </Container>
   );

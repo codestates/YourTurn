@@ -21,13 +21,16 @@ const CommentForm = ({
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <button className="comment-form-button" disabled={isTextareaDisabled}>
+      <button
+        className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+        disabled={isTextareaDisabled}
+      >
         {submitLabel}
       </button>
       {hasCancelButton && (
         <button
           type="button"
-          className="comment-form-button comment-form-cancel-button"
+          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
           onClick={handleCancel}
         >
           Cancel
