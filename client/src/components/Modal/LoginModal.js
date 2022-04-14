@@ -6,7 +6,7 @@ const ModalContiaer = styled.div`
   width: 100%;
   height: 100%;
   display: ${(props) => (props.showModal ? "block" : "none")};
-  border: 10px solid red;
+  /* border: 10px solid red; */
 `;
 
 const ModalBackdrop = styled.div`
@@ -41,7 +41,7 @@ const CloseButton = styled.div`
   display: flex;
   width: 100%;
   cursor: pointer;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   z-index: 9999;
 `;
 const Icon = styled.i`

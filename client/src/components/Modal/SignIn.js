@@ -145,7 +145,11 @@ function Signin({ setShowModal }) {
               <Link to="/signup">아직 아이디가 없으신가요?</Link>
             </InputWrap>
             <ButtonWrap>
-              <button className="btn btn-login" type="submit" onClick={handleLogin}>
+              <button
+                className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+                type="submit"
+                onClick={handleLogin}
+              >
                 로그인
               </button>
             </ButtonWrap>

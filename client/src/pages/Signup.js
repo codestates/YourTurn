@@ -134,7 +134,11 @@ const Signup = () => {
             />
           </InputWrap>
           <ButtonWrap>
-            <button type="submit" disabled={isTextareaDisabled}>
+            <button
+              className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+              type="submit"
+              disabled={isTextareaDisabled}
+            >
               등록
             </button>
           </ButtonWrap>
