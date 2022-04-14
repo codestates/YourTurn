@@ -42,14 +42,14 @@ function MyArticle() {
   const navigate = useNavigate();
   const [articles, setArticles] = useState([]);
 
-  const changePageToArticle = () => {
-    navigate(`/article/1`);
+  const changePageToArticle = (article) => {
+    navigate(`/article/${article.id}`);
   };
   console.log("articles data:: ", articles);
 
   useEffect(() => {
     async function fetchArticles() {
-      let { data } = await axios.get(`http://localhost:4000/user/mypost`);
+      let { data } = await axios.get(`http://localhost:80/user/mypost`);
 
       setArticles(data.data);
     }
@@ -63,7 +63,7 @@ function MyArticle() {
         return (
           <BoardWrap key={i}>
             <BoardNum>{i + 1}</BoardNum>
-            <BoardTitle onClick={changePageToArticle}>{article.title}</BoardTitle>
+            <BoardTitle onClick={()=>{changePageToArticle(article)}}>{article.title}</BoardTitle>
             <BoardCreatedDate>{article.createdAt}</BoardCreatedDate>
           </BoardWrap>
         );

@@ -11,7 +11,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  border: 1px solid green;
   height: 500px;
   max-width: 1400px;
   align-items: center;
@@ -20,7 +19,6 @@ const Container = styled.div`
 
 const TeamName = styled.div`
   width: 100%;
-  border: 1px solid red;
   height: 100px;
   padding: 10px;
   margin-bottom: 10px;
@@ -67,7 +65,7 @@ function Article({ setWriteDefault }) {
   const [comments, setComments] = useState([]);
 
   const postComment = async (commentData) => {
-    let { data } = await axios.post(`http://localhost:4000/article/${id}`, commentData, {
+    let { data } = await axios.post(`http://localhost:80/article/${id}`, commentData, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     });
@@ -90,7 +88,7 @@ function Article({ setWriteDefault }) {
 
   useEffect(() => {
     async function fetchData() {
-      return await axios.get(`http://localhost:4000/article/${id}`);
+      return await axios.get(`http://localhost:80/article/${id}`);
       // console.log("data:::", data);
     }
     fetchData().then((data) => {

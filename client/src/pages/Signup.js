@@ -53,7 +53,7 @@ const Signup = () => {
   const signup = async (email, password, nickname) => {
     return await axios
       .post(
-        "http://localhost:4000/user/signup",
+        "http://localhost:80/user/signup",
         {
           email,
           password,
@@ -89,6 +89,10 @@ const Signup = () => {
     } catch (err) {
       console.log(err);
     }
+    // setSuccess(true);
+    // setEmail("");
+    // setPwd("");
+
   };
 
   return (
