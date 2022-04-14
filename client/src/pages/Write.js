@@ -61,7 +61,7 @@ const TeamNameDefault = styled.div`
 const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const navigate = useNavigate();
 
-  let postTeamName;
+  let postTeamId;
   let clickEntry = sessionStorage.getItem("entry");
   console.log("접근하는곳", clickEntry);
 
@@ -123,19 +123,19 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
 
   const options = TeamData.map((TeamData, i) => {
     return (
-      <option key={i} value={TeamData.name}>
+      <option key={i} value={TeamData.id}>
         {TeamData.name}
       </option>
     );
   });
 
   if (clickEntry === "teamClick") {
-    postTeamName = sessionStorage.getItem("name");
+    postTeamId = sessionStorage.getItem("team_id");
   } else {
-    postTeamName = choice;
+    postTeamId = choice;
   }
 
-  console.log("postTeam네임", postTeamName);
+  console.log("postTeamId", postTeamId);
 
   const selectTeam = (event) => {
     setChoice(event.target.value);
@@ -153,7 +153,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     let data = await axios.post(
       "http://localhost:80/team/write-article",
 
-      { title: title, content: text, team_name: postTeamName },
+      { title: title, content: text, team_id: postTeamId },
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
@@ -161,6 +161,7 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     );
     if (data.data) {
       navigate(-1);
+      // 현재 글 목록에 추가되는 로직은 없음
     }
   };
 

@@ -20,14 +20,14 @@ const TeamName = styled.div`
   padding: 10px;
   margin-bottom: 10px;
   font-weight: bold;
-  font-size : 30px;
+  font-size: 30px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 `;
 const TeamIntro = styled.div`
   width: 100%;
   height: 130px;
   padding: 10px;
-  font-size:25px;
+  font-size: 25px;
 `;
 
 const ContentsPage = styled.div`
@@ -40,7 +40,7 @@ const ContentsPage = styled.div`
 `;
 const BoardWrap = styled.div`
   width: 100%;
-  height: 20% ;
+  height: 20%;
   display: flex;
   justify-content: space-around;
   margin-top: 15px;
@@ -71,11 +71,10 @@ const BoardButton = styled.button`
   cursor: pointer;
 `;
 const ButtonWrap = styled.div`
-width:100%;
-display:flex;
-justify-content: flex-end;
-`
-
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
 
 function Team({ setEntry, setWriteDefault }) {
   const [teamData, setTeamData] = useState([]);
@@ -98,9 +97,11 @@ function Team({ setEntry, setWriteDefault }) {
     async function fetchData() {
       let { data } = await axios.get(`http://localhost:80/team/${id}`);
       setTeamData(data.teamData);
+      console.log("teamData:", data);
 
       setWriteDefault(data.teamData[0].team_name);
       sessionStorage.setItem("name", data.teamData[0].team_name);
+      sessionStorage.setItem("team_id", data.teamData[0].id);
     }
     fetchData();
   }, []);
@@ -110,11 +111,11 @@ function Team({ setEntry, setWriteDefault }) {
       <TeamName>{teamData[0]?.team_name}</TeamName>
       <TeamIntro>{teamData[0]?.team_description}</TeamIntro>
       <ContentsPage>
-      <BoardWrap>
-              <BoardNum>번호</BoardNum>
-              <BoardTitle>제목</BoardTitle>
-              <BoardCreatedDate>날짜</BoardCreatedDate>
-            </BoardWrap>
+        <BoardWrap>
+          <BoardNum>번호</BoardNum>
+          <BoardTitle>제목</BoardTitle>
+          <BoardCreatedDate>날짜</BoardCreatedDate>
+        </BoardWrap>
         {teamData[0]?.posts.map((teamPost, i) => {
           return (
             <BoardWrap key={i}>
@@ -126,8 +127,8 @@ function Team({ setEntry, setWriteDefault }) {
         })}
       </ContentsPage>
       <ButtonWrap>
-          <BoardButton onClick={changePageToWrite}>글쓰기</BoardButton>
-        </ButtonWrap>  
+        <BoardButton onClick={changePageToWrite}>글쓰기</BoardButton>
+      </ButtonWrap>
     </Container>
   );
 }

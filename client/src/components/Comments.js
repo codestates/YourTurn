@@ -40,38 +40,35 @@ const Comments = ({ fetchComments, postCommentHandler }) => {
     );
   };
 
-
   return (
     <>
-      <div className="CommentForm__container">
-        <div className="CommentForm__wrapper">
-          <div className="CommentForm__inputContainer">
-            <div className="CommentForm__inputWrapper">
-              <div className="CommentForm__input">
-                <textarea
-                  value={msg}
-                  onChange={handleChangeMsg}
-                  placeholder="댓글을 입력해주세요."
-                  className="CommentForm__input--message"
-                ></textarea>
-              </div>
-            </div>
-            <div className="CommentForm__submit">
-              <div className="CommentForm__submitIcon">
-                <button
-                  className="CommentForm__submitButton"
-                  disabled={isTextareaDisabled}
-                  onClick={handleButtonClick}
-                >
-                  입력
-                </button>
-              </div>
-            </div>
+      <div className="ml-6 max-w-lg rounded-lg shadow-sm shadow-sky-600/50">
+        <form className="w-full p4">
+          <div className="mb-2">
+            <lable className="text-lg text-gray-600">댓글 달기</lable>
+            <textarea
+              value={msg}
+              onChange={handleChangeMsg}
+              placeholder="Add a comment"
+              className="w-full h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
+            ></textarea>
           </div>
-        </div>
+
+          <div>
+            <button
+              className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+              disabled={isTextareaDisabled}
+              onClick={handleButtonClick}
+            >
+              입력
+            </button>
+          </div>
+        </form>
       </div>
 
-      <ul className="Comments">{comments?.map(CommentsRenderer)}</ul>
+      <ul className="ml-6 max-w-lg rounded-lg shadow-sm shadow-sky-600/50">
+        {comments?.map(CommentsRenderer)}
+      </ul>
     </>
   );
 };
