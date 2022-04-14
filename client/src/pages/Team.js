@@ -31,10 +31,9 @@ const TeamIntro = styled.div`
 `;
 
 const ContentsPage = styled.div`
-  border: 1px solid pink;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   height: 100%;
   margin: 0px auto;
 `;
@@ -43,26 +42,30 @@ const BoardWrap = styled.div`
   height: 20% ;
   display: flex;
   justify-content: space-around;
-  margin-top: 15px;
   border: 1px solid black;
 `;
 const BoardNum = styled.div`
-  border: 1px solid blueviolet;
-  width: 20%;
+  width: 10%;
+  height: 30%;
   text-align: center;
   margin: auto;
+  font-size: 20px;
 `;
 const BoardTitle = styled.div`
-  border: 1px solid red;
   width: 50%;
+  height:30%;
   text-align: center;
   margin: auto;
+  font-size: 20px ;
+  font-weight: bold ;
+  cursor: pointer;
 `;
 const BoardCreatedDate = styled.div`
-  border: 1px solid pink;
   width: 20%;
+  height: 30%;
   text-align: center;
   margin: auto;
+  font-size : 18px;
 `;
 const BoardButton = styled.button`
   font-size: 17px;
@@ -75,14 +78,57 @@ width:100%;
 display:flex;
 justify-content: flex-end;
 `
+const TitleWrap = styled.div`
+  width: 100%;
+  height: 10% ;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  border: 1px solid black;
+  background-color: whitesmoke;
+  font-weight: bold ;
+  font-size : 25px;
+`;
 
+const TopNum = styled.div`
+  width: 10%;
+  text-align: center;
+  margin: auto;
+`;
+const TopTitle = styled.div`
+  width: 50%;
+  text-align: center;
+  margin: auto;
+`;
+const TopDate = styled.div`
+  width: 20%;
+  text-align: center;
+  margin: auto;
+`
 
 function Team({ setEntry, setWriteDefault }) {
+
+
   const [teamData, setTeamData] = useState([]);
 
   const { id } = useParams();
 
   const navigate = useNavigate();
+
+  const formatDate = (date) => {
+    let d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      hour = d.getHours(),
+      minute = d.getMinutes();
+    return `${month < 10 ? `0${month}` : month}월 ${day < 10 ? `0${day}` : day}일 ${hour < 10 ? `0${hour}` : hour}:${
+      minute < 10 ? `0${minute}` : minute
+    }`;
+  };
+
+  
+
+
 
   const changePageToWrite = () => {
     setEntry("teamClick");
@@ -98,29 +144,32 @@ function Team({ setEntry, setWriteDefault }) {
     async function fetchData() {
       let { data } = await axios.get(`http://localhost:80/team/${id}`);
       setTeamData(data.teamData);
+      console.log("teamData:", data);
 
       setWriteDefault(data.teamData[0].team_name);
       sessionStorage.setItem("name", data.teamData[0].team_name);
+      sessionStorage.setItem("team_id", data.teamData[0].id);
     }
     fetchData();
   }, []);
+
 
   return (
     <Container>
       <TeamName>{teamData[0]?.team_name}</TeamName>
       <TeamIntro>{teamData[0]?.team_description}</TeamIntro>
       <ContentsPage>
-      <BoardWrap>
-              <BoardNum>번호</BoardNum>
-              <BoardTitle>제목</BoardTitle>
-              <BoardCreatedDate>날짜</BoardCreatedDate>
-            </BoardWrap>
+      <TitleWrap>
+              <TopNum>번호</TopNum>
+              <TopTitle>제목</TopTitle>
+              <TopDate>날짜</TopDate>
+            </TitleWrap>
         {teamData[0]?.posts.map((teamPost, i) => {
           return (
             <BoardWrap key={i}>
               <BoardNum>{i + 1}</BoardNum>
               <BoardTitle onClick={changePageToArticle}>{teamPost.title}</BoardTitle>
-              <BoardCreatedDate>{teamPost.createdAt}</BoardCreatedDate>
+              <BoardCreatedDate>{formatDate(teamPost.createdAt)}</BoardCreatedDate>
             </BoardWrap>
           );
         })}

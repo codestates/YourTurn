@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import YTLogo from "../assets/YTLogo.png"
 
 const Nav = styled.nav`
   display: flex;
@@ -14,17 +15,22 @@ const Nav = styled.nav`
   background-color: white;
   box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.1);
   height: 70px;
-`;
+`
 
 const LogoWrap = styled(Link)`
+  margin-left : 20px;
   text-decoration: none;
   color: black;
   font-weight: bold;
+  height:70px;
+  width:10%
 `;
 
-const Logo = styled.div`
-  margin: 15px;
-`;
+const Logo = styled.img`
+  width:100% ;
+  height:100% ;
+  padding : 5px;
+`
 
 const MenuWrap = styled.div`
   display: flex;
@@ -68,7 +74,7 @@ const Navbar = ({setNavDiv ,setShowModal, setShowMyModal, showMyModal }) => {
   return (
     <Nav ref={NavContainer}>
       <LogoWrap to="/">
-        <Logo>YourTurn</Logo>
+        <Logo src={YTLogo}></Logo>
       </LogoWrap>
       <MenuWrap>
         <Menu onClick={changePageToWrite}>새 글 쓰기</Menu>

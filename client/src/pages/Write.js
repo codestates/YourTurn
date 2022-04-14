@@ -4,6 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,7 +29,7 @@ const Title = styled.input`
   &:focus {
     outline: none;
   }
-  font-size: 25px;
+  font-size: 30px;
 `;
 const Content = styled.textarea`
   height: 500px;
@@ -36,12 +37,13 @@ const Content = styled.textarea`
   &:focus {
     outline: none;
   }
+  font-size : 25px;
 `;
 
 const TeamWrap = styled.div`
 `;
 const Team = styled.select`
-  font-size: 20px;
+  font-size: 25px;
   width: 100%;
 `;
 const ButtonWrap = styled.div`
@@ -62,7 +64,7 @@ const TeamNameDefault = styled.div`
 const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const navigate = useNavigate();
 
-  let postTeamName;
+  let postTeamId;
   let clickEntry = sessionStorage.getItem("entry")
   console.log("접근하는곳", clickEntry)
 
@@ -122,28 +124,27 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   ];
   const [title, setTitle] = useState("");
   const [choice, setChoice] = useState("");
+  const [text, setText] = useState("");
 
   const options = TeamData.map((TeamData, i) => {
     return (
-      <option key={i} value={TeamData.name}>
+      <option key={i} value={TeamData.id}>
         {TeamData.name}
       </option>
     );
   });
 
-  if(clickEntry === 'teamClick'){
-    postTeamName = sessionStorage.getItem('name')
-  }else{
-    postTeamName = choice
+  if (clickEntry === "teamClick") {
+    postTeamId = sessionStorage.getItem("team_id");
+  } else {
+    postTeamId = choice;
   }
 
-  console.log("postTeam네임", postTeamName);
+  console.log("postTeamId", postTeamId);
 
   const selectTeam = (event) => {
     setChoice(event.target.value);
   };
-  //본문을 위한 로직
-  const [text, setText] = useState("");
 
   useEffect(() => {
     if (writeDefault === "") {
@@ -154,25 +155,25 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
   const handleSubmitButton = async () => {
     console.log("event:::");
 
-    let data = await axios
-      .post(
-        "http://localhost:80/team/write-article",
-        { title: title, content: text, team_name: postTeamName },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      )
-      if(data.data){
-        navigate(-1);
-    }
+    let data = await axios.post(
+      "http://localhost:80/team/write-article",
 
+      { title: title, content: text, team_id: postTeamId },
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+    if (data.data) {
+      navigate(-1);
+      // 현재 글 목록에 추가되는 로직은 없음
+    }
   };
 
   const handleCancelButton = () => {
-    console.log("evebt");
     navigate(-1);
-  }
+  };
+  console.log("check", writeDefault);
 
   return (
     <Container>

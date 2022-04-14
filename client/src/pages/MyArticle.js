@@ -3,16 +3,26 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-// MyArticle Page
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  border: 1px solid green;
-  height: 500px;
+  margin-top: 100px;
   max-width: 1400px;
-  align-items: center;
-  margin: 100px auto 0 auto;
+  height: 800px;
+  margin: 120px auto 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 5px;
+`;
+
+const MyPost = styled.div`
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  margin-bottom: 0px;
+  font-weight: bold;
+  font-size : 30px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 `;
 
 const BoardWrap = styled.div`
@@ -37,6 +47,35 @@ const BoardCreatedDate = styled.div`
   width: 20%;
   text-align: center;
 `;
+const TitleWrap = styled.div`
+  width: 100%;
+  height: 10% ;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  border: 1px solid black;
+  background-color: whitesmoke;
+  font-weight: bold ;
+  font-size : 25px;
+`;
+
+const TopNum = styled.div`
+  width: 10%;
+  text-align: center;
+  margin: auto;
+`;
+const TopTitle = styled.div`
+  width: 50%;
+  text-align: center;
+  margin: auto;
+`;
+const TopDate = styled.div`
+  width: 20%;
+  text-align: center;
+  margin: auto;
+`
+
+
 
 function MyArticle() {
   const navigate = useNavigate();
@@ -58,7 +97,12 @@ function MyArticle() {
 
   return (
     <Container>
-      <h1>내 작성글</h1>
+      <MyPost>내 작성글</MyPost>
+      <TitleWrap>
+              <TopNum>번호</TopNum>
+              <TopTitle>제목</TopTitle>
+              <TopDate>날짜</TopDate>
+      </TitleWrap>
       {articles.map((article, i) => {
         return (
           <BoardWrap key={i}>

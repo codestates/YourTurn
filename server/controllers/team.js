@@ -34,8 +34,8 @@ module.exports = {
   },
 
   postArticle: async (req, res) => {
-    console.log("들어오니");
-    // console.log(req.body);
+
+    console.log("확인필요",req.body);
 
     console.log("위쪽");
     const userInfo = isAuthorized(req);
@@ -51,6 +51,7 @@ module.exports = {
           title: req.body.title,
           content: req.body.content,
           user_id: userInfo.id,
+          team_id: req.body.team_id, // 프론트에서 임의로 추가해놓음
         });
         return res.status(200).json({ postArticle });
       }

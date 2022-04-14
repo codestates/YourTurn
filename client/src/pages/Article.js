@@ -18,6 +18,7 @@ const Container = styled.div`
 `;
 
 const TeamName = styled.div`
+  font-size: 30px;
   width: 100%;
   height: 100px;
   padding: 10px;
@@ -101,7 +102,7 @@ function Article({ setWriteDefault }) {
 
   return (
     <Container>
-      <TeamName>팀네임</TeamName>
+      <TeamName>{sessionStorage.getItem("name")}</TeamName>
       <Content>
         <ContentTitle>{article.title}</ContentTitle>
         <ContentContent>{article.content}</ContentContent>
