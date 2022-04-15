@@ -152,9 +152,9 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     console.log("event:::");
 
     let data = await axios.post(
-      "http://localhost:80/team/write-article",
+      `${process.env.REACT_APP_API_URL}/team/write-article`,
 
-      { title: title, content: text, team_id: postTeamId },
+      { title: title, content: text, team_id: Number(postTeamId) },
 
       {
         headers: { "Content-Type": "application/json" },

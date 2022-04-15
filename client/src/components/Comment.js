@@ -21,7 +21,7 @@ const Comment = ({ comment, handleDeleteComment, idx }) => {
               <span className="px-3 py-3">{formatDate(comment.createdAt)}</span>
               <button
                 className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-gray-400 hover:bg-gray-400 rounded-md"
-                onClick={() => handleDeleteComment(comment.user_nickname, idx)}
+                onClick={() => handleDeleteComment(idx)}
               >
                 <i className="far fa-trash-alt"></i>
               </button>

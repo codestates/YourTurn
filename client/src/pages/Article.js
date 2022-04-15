@@ -62,7 +62,7 @@ function Article({ setWriteDefault }) {
   const [comments, setComments] = useState([]);
 
   const postComment = async (commentData) => {
-    let { data } = await axios.post(`http://localhost:80/article/${id}`, commentData, {
+    let { data } = await axios.post(`${process.env.REACT_APP_API_URL}/article/${id}`, commentData, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     });
@@ -85,7 +85,7 @@ function Article({ setWriteDefault }) {
 
   useEffect(() => {
     async function fetchArticle() {
-      return await axios.get(`http://localhost:80/article/${id}`);
+      return await axios.get(`${process.env.REACT_APP_API_URL}/article/${id}`);
       // console.log("data:::", data);
     }
     fetchArticle().then((data) => {

@@ -86,7 +86,7 @@ function MyArticle() {
 
   useEffect(() => {
     async function fetchArticles() {
-      let { data } = await axios.get(`http://localhost:80/user/mypost`);
+      let { data } = await axios.get(`${process.env.REACT_APP_API_URL}/user/mypost`);
 
       setArticles(data.data);
     }

@@ -61,7 +61,7 @@ function Profile({ setShowMyModal }) {
 
   useEffect(() => {
     async function getNickName() {
-      return await axios.get("http://localhost:80/user/profile/");
+      return await axios.get(`${process.env.REACT_APP_API_URL}/user/profile`);
     }
     getNickName().then((data) => {
       // console.log("data::", data);
@@ -80,7 +80,7 @@ function Profile({ setShowMyModal }) {
   const handleModifyButtonClick = async () => {
     try {
       const response = await axios.patch(
-        "http://localhost:80/user/profile/",
+        `${process.env.REACT_APP_API_URL}/user/profile`,
         {
           nickname: nickname,
         }

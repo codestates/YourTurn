@@ -1,4 +1,0 @@
-###
-GET http://localhost:80/team/article/1
-Content-Type: application/json
-
