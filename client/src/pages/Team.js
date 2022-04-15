@@ -43,8 +43,6 @@ const BoardWrap = styled.div`
   display: flex;
   justify-content: space-around;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
 `;
 const BoardNum = styled.div`
   width: 10%;
@@ -140,7 +138,7 @@ function Team({ setEntry, setWriteDefault }) {
 
   useEffect(() => {
     async function fetchData() {
-      let { data } = await axios.get(`http://localhost:80/team/${id}`);
+      let { data } = await axios.get(`${process.env.REACT_APP_API_URL}/team/${id}`);
       setTeamData(data.teamData);
       console.log("teamData:", data);
 

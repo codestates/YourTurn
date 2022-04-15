@@ -64,7 +64,7 @@ function Signin({ setShowModal }) {
   const login = (email, password) => {
     return axios
       .post(
-        "http://localhost:80/user/signin",
+        `${process.env.REACT_APP_API_URL}/user/signin`,
         {
           email,
           password,

@@ -25,11 +25,14 @@ app.use(
   cors({
     origin: true,
     credentials: true,
-    optionsSuccessStatus: 200,
+      optionsSuccessStatus: 200
+
   })
 );
 
+
 app.use(cookieParser());
+app.get("/", (req,res) => console.log("hello"));
 app.use("/user/auth", authRouter);
 app.use("/user/mypost", mypostRouter);
 app.use("/user/profile", profileRouter);
