@@ -44,6 +44,7 @@ module.exports = {
           title: req.body.title,
           content: req.body.content,
           user_id: userInfo.id,
+          team_id: req.body.team_id
         });
         return res.status(200).json({ postArticle });
       }
