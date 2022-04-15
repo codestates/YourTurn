@@ -17,8 +17,10 @@ import { useNavigate } from "react-router-dom";
 const Intro = styled.div`
   display: flex;
   justify-content: space-around;
+  /* border: 1px red solid; */
 `;
 const TextSwitch1 = styled.div``;
+const TextSwitch2 = styled.div``;
 // const TextSwitch2 = styled.div`
 //   margin-top: 10px;
 // `;
@@ -54,7 +56,7 @@ const TeamInfo = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
+  box-shadow: 0 5px 25px rgb(0 0 0 / 5%);
   background-color: #fff;
   width: 240px;
   height: 240px;
@@ -80,9 +82,13 @@ const InterestWrap = styled.div`
   margin: 20px 0px;
 `;
 const InterestName = styled.div`
-  font-size: 30px;
+  /* font-size: 30px; */
   font-weight: bold;
-  margin: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 3px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 `;
 
 const InterestImg = styled.img`
@@ -113,7 +119,7 @@ function Home({ setShowModal }) {
     },
     {
       id: 3,
-      name: "node.js",
+      name: "Node.js",
     },
     {
       id: 4,
@@ -121,7 +127,7 @@ function Home({ setShowModal }) {
     },
     {
       id: 5,
-      name: "mysql",
+      name: "MySQL",
     },
   ];
 
@@ -183,37 +189,38 @@ function Home({ setShowModal }) {
   };
 
   return (
-    <body className="font-sun">
+    <div className="font-sun text-bold">
       <Intro>
         <IntroText>
-          <TextSwitch1 className="text-2xl font-bold">
-            면접 기출 질문은 많고 모든 답변을 다 준비하기는 어려운가요? <br />
-            토익스피킹 답변 아이디어가 고갈되었나요?
+          <TextSwitch1 className="text-2xl font-bold  outline-2">
+            면접 질문은 넘쳐나는데 <br />
+            모든 답변을 다 준비하기는 어려운가요?
             <br />
-            <span>YourTurn </span>의 집단 지성을 이용하세요!
-            <br />
-            <br />
-            돌아가며 기여하고 다같이 잘 되는 그룹, <br />
-            <span>YourTurn </span> 입니다.
-            <br />
+            <span className="italic font-bold">YourTurn </span>의 집단 지성을 이용하세요!
           </TextSwitch1>
+          <TextSwitch2 className="mt-20 hidden ease-in-out md:block">
+            돌아가며 기여하고 다같이 잘 되는 그룹, <br />
+            <span className="italic font-bold">YourTurn </span> 입니다.
+          </TextSwitch2>
         </IntroText>
         <IntroImgWrap>
-          <IntroImg src={MainImg}></IntroImg>
+          <IntroImg className="" src={MainImg}></IntroImg>
         </IntroImgWrap>
       </Intro>
       <Interest>
         {interestList.map((interest, i) => {
           return (
             <InterestWrap key={i}>
-              <InterestName>{interest.name}</InterestName>
-              <InterestImg src={interest.src} />
+              <InterestName className="text-xl hidden ease-in-out sm:block">
+                {interest.name}
+              </InterestName>
+              <InterestImg className="object-scale-down" src={interest.src} />
             </InterestWrap>
           );
         })}
       </Interest>
 
-      <TeamWrap>
+      <TeamWrap className="sm:text-lg">
         {teamData.map((el, i) => {
           return (
             <TeamInfo
@@ -222,13 +229,13 @@ function Home({ setShowModal }) {
               }}
               key={i}
             >
-              <TeamInfoTitle>{el.name}</TeamInfoTitle>
-              <TeamInfoContent>{el.desc}</TeamInfoContent>
+              <TeamInfoTitle className="text-lg font-bold">{el.name}</TeamInfoTitle>
+              <TeamInfoContent className="hidden lg:block">{el.desc}</TeamInfoContent>
             </TeamInfo>
           );
         })}
       </TeamWrap>
-    </body>
+    </div>
   );
 }
 

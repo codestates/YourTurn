@@ -30,11 +30,6 @@ const ProfileTitle = styled.div`
 
 const NickNameContainer = styled.div``;
 
-const CurrentNickName = styled.div`
-  font-size: 30px;
-  margin: 30px 0 30px 20px;
-`;
-
 const NickNameChange = styled.button`
   font-size: 20px;
 `;
@@ -46,7 +41,7 @@ const NickNameInput = styled.input`
 
 const ButtonWrap = styled.div`
   display: flex;
-  justify-content: flex-end; ;
+  justify-content: flex-start; ;
 `;
 
 const Button = styled.button`
@@ -56,7 +51,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-function Profile() {
+function Profile({ setShowMyModal }) {
   const navigate = useNavigate();
 
   const [nickname, setNickname] = useState("");
@@ -66,7 +61,7 @@ function Profile() {
 
   useEffect(() => {
     async function getNickName() {
-      return await axios.get("http://localhost:80/user/profile/");
+      return await axios.get(`${process.env.REACT_APP_API_URL}/user/profile`);
     }
     getNickName().then((data) => {
       // console.log("data::", data);
@@ -85,7 +80,7 @@ function Profile() {
   const handleModifyButtonClick = async () => {
     try {
       const response = await axios.patch(
-        "http://localhost:80/user/profile/",
+        `${process.env.REACT_APP_API_URL}/user/profile`,
         {
           nickname: nickname,
         }
@@ -106,7 +101,9 @@ function Profile() {
     navigate("/");
   };
   const handlePermanentDeletion = () => {
+    sessionStorage.removeItem("isLogin");
     navigate("/");
+    setShowMyModal(false);
   };
 
   return (
@@ -114,10 +111,8 @@ function Profile() {
       <ProfileTitle>내 정보 수정</ProfileTitle>
       {/* <ProfileImg>이미지</ProfileImg> */}
       <NickNameContainer>
-        <CurrentNickName>현재 닉네임</CurrentNickName>
-
         <NickNameInput
-          className="ml-5 border-2"
+          className="ml-2"
           onChange={handleChangeNickname}
           type="text"
           placeholder="변경할 닉네임"
@@ -132,13 +127,13 @@ function Profile() {
       </NickNameContainer>
       <ButtonWrap>
         <Button
-          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
           onClick={handlePermanentDeletion}
         >
           회원 탈퇴
         </Button>
         <Button
-          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
           onClick={handleCompletion}
         >
           수정 완료

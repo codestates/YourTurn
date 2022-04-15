@@ -21,7 +21,7 @@ const MyPost = styled.div`
   padding: 10px;
   margin-bottom: 0px;
   font-weight: bold;
-  font-size : 30px;
+  font-size: 30px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 `;
 
@@ -30,7 +30,7 @@ const BoardWrap = styled.div`
   display: flex;
   justify-content: space-around;
   margin: 15px;
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 `;
 const BoardNum = styled.div`
   border: 1px solid blueviolet;
@@ -49,14 +49,14 @@ const BoardCreatedDate = styled.div`
 `;
 const TitleWrap = styled.div`
   width: 100%;
-  height: 10% ;
+  height: 10%;
   display: flex;
   justify-content: space-around;
   margin-top: 15px;
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: whitesmoke;
-  font-weight: bold ;
-  font-size : 25px;
+  font-weight: bold;
+  font-size: 25px;
 `;
 
 const TopNum = styled.div`
@@ -73,9 +73,7 @@ const TopDate = styled.div`
   width: 20%;
   text-align: center;
   margin: auto;
-`
-
-
+`;
 
 function MyArticle() {
   const navigate = useNavigate();
@@ -88,7 +86,7 @@ function MyArticle() {
 
   useEffect(() => {
     async function fetchArticles() {
-      let { data } = await axios.get(`http://localhost:80/user/mypost`);
+      let { data } = await axios.get(`${process.env.REACT_APP_API_URL}/user/mypost`);
 
       setArticles(data.data);
     }
@@ -99,15 +97,21 @@ function MyArticle() {
     <Container>
       <MyPost>내 작성글</MyPost>
       <TitleWrap>
-              <TopNum>번호</TopNum>
-              <TopTitle>제목</TopTitle>
-              <TopDate>날짜</TopDate>
+        <TopNum>번호</TopNum>
+        <TopTitle>제목</TopTitle>
+        <TopDate>날짜</TopDate>
       </TitleWrap>
       {articles.map((article, i) => {
         return (
           <BoardWrap key={i}>
             <BoardNum>{i + 1}</BoardNum>
-            <BoardTitle onClick={()=>{changePageToArticle(article)}}>{article.title}</BoardTitle>
+            <BoardTitle
+              onClick={() => {
+                changePageToArticle(article);
+              }}
+            >
+              {article.title}
+            </BoardTitle>
             <BoardCreatedDate>{article.createdAt}</BoardCreatedDate>
           </BoardWrap>
         );

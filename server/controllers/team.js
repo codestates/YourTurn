@@ -10,10 +10,7 @@ module.exports = {
       include: [
         {
           model: post,
-          attributes: ["id", "title", "content", "total_likes", "user_id", "createdAt"],
-          where: {
-            id: teamId,
-          },
+          attributes: ["id", "title", "content", "total_likes", "user_id", "createdAt"]
         },
       ],
       attributes: ["id", "team_name", "team_description", "createdAt"],
@@ -34,24 +31,20 @@ module.exports = {
   },
 
   postArticle: async (req, res) => {
+    console.log("들어오니");
 
-    console.log("확인필요",req.body);
-
-    console.log("위쪽");
     const userInfo = isAuthorized(req);
-    console.log("유저인포!",userInfo)
+
 
     try {
-      console.log("어디야")
       if (!userInfo) {
-        console.log("요놈")
         return res.status(404).send("error");
       } else {
         const postArticle = await post.create({
           title: req.body.title,
           content: req.body.content,
           user_id: userInfo.id,
-          team_id: req.body.team_id, // 프론트에서 임의로 추가해놓음
+          team_id: req.body.team_id
         });
         return res.status(200).json({ postArticle });
       }

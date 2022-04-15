@@ -1,28 +1,37 @@
 import React from "react";
 
 const Comment = ({ comment, handleDeleteComment, idx }) => {
+  const formatDate = (date) => {
+    let d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      hour = d.getHours(),
+      minute = d.getMinutes();
+    return `${month < 10 ? `0${month}` : month}월 ${day < 10 ? `0${day}` : day}일 ${
+      hour < 10 ? `0${hour}` : hour
+    }:${minute < 10 ? `0${minute}` : minute}`;
+  };
   return (
-    <body className="font-sun">
+    <div className="font-sun">
       <li className="comment" id={comment.id}>
         <div className="comment__content">
           <div className="comment__userInfo">
-            <div className="comment__userInfo--wrapper">
-              <span className="comment__nickname">{comment.user_nickname}</span>
-              <span className="comment__createdAt">{comment.createdAt}</span>
-            </div>
-            <div className="comment__userInfo--buttonWrapper">
+            <div className="flex justify-start">
+              <span className="pl-3 py-3">{comment.user_nickname} |</span>
+              <span className="px-3 py-3">{formatDate(comment.createdAt)}</span>
               <button
-                className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
-                onClick={() => handleDeleteComment(comment.user_nickname, idx)}
+                className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-gray-400 hover:bg-gray-400 rounded-md"
+                onClick={() => handleDeleteComment(idx)}
               >
                 <i className="far fa-trash-alt"></i>
               </button>
             </div>
+            <div className="comment__userInfo--buttonWrapper"></div>
           </div>
-          <div className="comment__message">{comment.content}</div>
+          <div className="p-3">{comment.content}</div>
         </div>
       </li>
-    </body>
+    </div>
   );
 };
 

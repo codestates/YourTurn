@@ -7,7 +7,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
-  border: 1px solid green;
+  /* border: 1px solid green; */
   height: 500px;
   max-width: 1400px;
   align-items: center;
@@ -56,7 +56,7 @@ const Signup = () => {
   const signup = async (email, password, nickname) => {
     return await axios
       .post(
-        "http://localhost:80/user/signup",
+        `${process.env.REACT_APP_API_URL}/user/signup`,
         {
           email,
           password,
@@ -104,7 +104,7 @@ const Signup = () => {
       <SignupContainer>
         <form onSubmit={handleSignup}>
           <Title>
-            <h3 className="font">Sign up</h3>
+            <h3 className="underline">Sign up</h3>
           </Title>
           <InputWrap>
             <Text>이메일</Text>
@@ -135,7 +135,7 @@ const Signup = () => {
           </InputWrap>
           <ButtonWrap>
             <button
-              className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+              className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
               type="submit"
               disabled={isTextareaDisabled}
             >

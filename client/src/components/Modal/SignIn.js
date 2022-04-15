@@ -64,7 +64,7 @@ function Signin({ setShowModal }) {
   const login = (email, password) => {
     return axios
       .post(
-        "http://localhost:80/user/signin",
+        `${process.env.REACT_APP_API_URL}/user/signin`,
         {
           email,
           password,
@@ -141,12 +141,12 @@ function Signin({ setShowModal }) {
               />
             </InputWrap>
 
-            <InputWrap onClick={closeModal}>
+            <InputWrap className="underline" onClick={closeModal}>
               <Link to="/signup">아직 아이디가 없으신가요?</Link>
             </InputWrap>
             <ButtonWrap>
               <button
-                className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+                className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
                 type="submit"
                 onClick={handleLogin}
               >

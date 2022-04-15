@@ -22,7 +22,7 @@ const CommentForm = ({
         onChange={(e) => setText(e.target.value)}
       />
       <button
-        className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+        className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
         disabled={isTextareaDisabled}
       >
         {submitLabel}
@@ -30,7 +30,7 @@ const CommentForm = ({
       {hasCancelButton && (
         <button
           type="button"
-          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
           onClick={handleCancel}
         >
           Cancel

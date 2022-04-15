@@ -152,9 +152,9 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
     console.log("event:::");
 
     let data = await axios.post(
-      "http://localhost:80/team/write-article",
+      `${process.env.REACT_APP_API_URL}/team/write-article`,
 
-      { title: title, content: text, team_id: postTeamId },
+      { title: title, content: text, team_id: Number(postTeamId) },
 
       {
         headers: { "Content-Type": "application/json" },
@@ -194,13 +194,13 @@ const Write = ({ entry, writeDefault, setWriteDefault }) => {
       <Content placeholder="내용을 작성하세요" onChange={(e) => setText(e.target.value)} />
       <ButtonWrap>
         <Button
-          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
           onClick={handleCancelButton}
         >
           취소
         </Button>
         <Button
-          className="px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
+          className="cursor-pointer px-3 py-2 text-sm text-blue-100 bg-sky-500 rounded hover:bg-sky-400"
           onClick={handleSubmitButton}
         >
           등록
