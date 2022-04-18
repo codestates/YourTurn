@@ -1,4 +1,7 @@
 # 프로젝트 소개
+## 🌟 About
+여러 개발자 사이트를 전전하지 않고 본인의 스택과 지망 기업에 맞는 인터뷰를 여러 사람과 그룹으로 준비할 수 있는 웹서비스입니다.
+
 ## 🅰 Logo
 
 ![Screen Shot 2022-04-13 at 3 09 32 PM](https://user-images.githubusercontent.com/79065544/163737525-8a13c95f-d865-4217-b6e4-a77f65783218.png)
