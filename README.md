@@ -21,20 +21,23 @@ YourTurn의 집단 지성을 이용하세요!
 
 **돌아가며 기여하고 다같이 잘 되는 그룹, *YourTurn* 입니다.**
 
-### ✨ [배포주소](https://yourturnn.ml/)
+#### 🔗 [배포주소](https://yourturnn.ml/)
 
-## Tech Stack
+## ✨ Tech Stack
 
 ![Screen Shot 2022-04-14 at 6 27 39 PM](https://user-images.githubusercontent.com/79065544/163508698-44b779a3-6c96-421c-8cc0-e7bbdc7deece.png)
-## Final Web View
-#### Main page
-<img width="1440" alt="Main1" src="https://user-images.githubusercontent.com/74578453/163509557-fea66ad6-d41c-427c-96f6-9bb10162ac9b.png">
-<img width="1440" alt="main2" src="https://user-images.githubusercontent.com/74578453/163509586-62f5b122-5b36-4a32-b454-7dfba24b7b4d.png">
+
+## ✨ Final Web View
+
+![회원가입 로그인](https://user-images.githubusercontent.com/79065544/163737920-b04ad9f5-966f-42fe-99d4-48d3c129a65e.gif)
+![글쓰기   취소](https://user-images.githubusercontent.com/79065544/163737933-a9981a5d-06ed-459a-a83d-57865381570b.gif)
+![팀 누르고 댓글 작성](https://user-images.githubusercontent.com/79065544/163737934-fd1590d7-c4c4-481f-ad7c-3d25a8c9a56f.gif)
 
 
-## Contributors
+## 🏅 Contributors
 
-|전소미|이성혁|엄태영|이승호|
+||전소미|이성혁|엄태영|이승호|
 |--|--|--|--|--|
-|FrontEnd|FrontEnd|BackEnd|BackEnd|
+|Position|FrontEnd|FrontEnd|BackEnd|BackEnd|
+|Stack|JavaScript, React, axios, styled-components, Tailwind CSS|JavaScript, React, axios, styled-components|JavaScript, Nodejs, Express, JWT, AWS|JavaScript, Nodejs, Express, JWT, AWS|
 
